@@ -1,17 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { product } from 'src/app/shared/models/models';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-fruits',
+  templateUrl: './fruits.component.html',
+  styleUrls: ['./fruits.component.css']
 })
-export class HomeComponent implements OnInit {
-  isBanner:Boolean=true;
-  constructor() {}
-  ngOnInit() {
-
-  }
+export class FruitsComponent {
   products: any = [
     {
       id: '2',
@@ -49,4 +43,5 @@ export class HomeComponent implements OnInit {
       img: '../../../assets/images/products/grapes.png',
     },
   ];
+
 }

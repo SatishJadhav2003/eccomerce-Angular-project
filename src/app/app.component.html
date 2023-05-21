@@ -1,1 +1,4 @@
-<app-navbar></app-navbar>
+<div class="conatiner">
+  <app-navbar *ngIf="!mobile" ></app-navbar>
+  <app-mobile-view-navbar *ngIf="mobile" ></app-mobile-view-navbar>
+</div>

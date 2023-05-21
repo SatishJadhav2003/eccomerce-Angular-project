@@ -9,6 +9,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home/home.component';
 import { SideNavComponent } from './navbar/side-nav/side-nav.component';
+import { HomeBannerComponent } from './home/home-banner/home-banner.component';
+import { FruitsComponent } from './sample-products/fruits/fruits.component';
+import { FashionComponent } from './sample-products/fashion/fashion.component';
+import { MobileViewNavbarComponent } from './navbar/mobile-view-navbar/mobile-view-navbar.component';
+import { ElectronicsComponent } from './sample-products/electronics/electronics.component';
 
 
 @NgModule({
@@ -16,7 +21,12 @@ import { SideNavComponent } from './navbar/side-nav/side-nav.component';
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    SideNavComponent
+    SideNavComponent,
+    HomeBannerComponent,
+    FruitsComponent,
+    FashionComponent,
+    MobileViewNavbarComponent,
+    ElectronicsComponent
   ],
   imports: [
     BrowserModule,

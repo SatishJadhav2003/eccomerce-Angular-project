@@ -14,24 +14,26 @@
 
   <button class="btn" style="color: white">
     <mat-icon>add_shopping_cart</mat-icon>
+    <sup>2</sup>
   </button>
-  <button class="btn" style="color: white">
+  <!-- <button class="btn" style="color: white">
     <mat-icon>favorite</mat-icon>
-  </button>
-  <button class="btn" style="color: white">
+  </button> -->
+  <!-- <button class="btn" style="color: white">
     <mat-icon>notifications</mat-icon>
-  </button>
-  <button
+  </button> -->
+  <!-- <button
     class="btn"
     style="color: white"
     [matMenuTriggerFor]="userAccountMenu"
   >
     <mat-icon>account_circle</mat-icon>
-  </button>
+  </button> -->
   <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
     <button mat-menu-item routerLink="#">
       <mat-icon>person</mat-icon><span>My Account</span>
     </button>
+
     <button mat-menu-item routerLink="#">
       <mat-icon>settings</mat-icon><span>Settings</span>
     </button>
