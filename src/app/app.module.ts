@@ -14,6 +14,8 @@ import { FruitsComponent } from './sample-products/fruits/fruits.component';
 import { FashionComponent } from './sample-products/fashion/fashion.component';
 import { MobileViewNavbarComponent } from './navbar/mobile-view-navbar/mobile-view-navbar.component';
 import { ElectronicsComponent } from './sample-products/electronics/electronics.component';
+import { BooksComponent } from './sample-products/books/books.component';
+import { SportsComponent } from './sample-products/sports/sports.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { ElectronicsComponent } from './sample-products/electronics/electronics.
     FruitsComponent,
     FashionComponent,
     MobileViewNavbarComponent,
-    ElectronicsComponent
+    ElectronicsComponent,
+    BooksComponent,
+    SportsComponent
   ],
   imports: [
     BrowserModule,

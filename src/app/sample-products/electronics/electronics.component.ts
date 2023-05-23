@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./electronics.component.css']
 })
 export class ElectronicsComponent {
+
+constructor(){}
+ // get sample products
   products: any = [
     {
       id: '2',

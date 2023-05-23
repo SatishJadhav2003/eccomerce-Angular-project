@@ -1,4 +1,11 @@
 
+.section{
+  /* box-shadow: 0 3px 4px 0 rgba(0,0,0,.08); */
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+  background-color: #fff;
+  border-radius: 2px;
+ }
+
 .cards
 {
   /* padding: 25px 15px; */
@@ -57,9 +64,9 @@ a,.product-img{
 }
 
 .view-all {
-  padding: 15px 25px;
+  padding: 12px 15px;
   border: unset;
-  border-radius: 15px;
+  border-radius: 5px;
   color: white;
   z-index: 1;
   background: crimson;

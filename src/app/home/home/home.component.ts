@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
 
   }
+ // get sample products
   products: any = [
     {
       id: '2',

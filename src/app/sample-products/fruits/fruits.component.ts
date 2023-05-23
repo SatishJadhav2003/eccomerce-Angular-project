@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./fruits.component.css']
 })
 export class FruitsComponent {
+ // get sample products
   products: any = [
     {
       id: '2',
