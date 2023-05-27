@@ -1,0 +1,49 @@
+<div *ngIf="category" >
+  <div class="row">
+    <div class="col-md-12">
+    <div class="heading">{{ category.name }}</div>
+    <div class="pcount">{{ subCategories.length }} Items</div>
+  </div>
+</div>
+<div class="p-2 pt-2">
+  <div class="row">
+    <div class="" *ngFor="let category of subCategories">
+      <div class="cards">
+        <a href="#">
+          <img
+            class="product-img"
+            src="{{ category.img }}"
+            alt="{{ category.name }}"
+          />
+          <div class="info">
+            <p style="font-weight: bold">
+              {{ category.name | titlecase }}
+            </p>
+            <p style="color: #388e3c">{{ category.highlightMsg }}</p>
+            <p>{{ category.price | currency : "INR" }}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<br />
+<br /><br />
+<!-- <div class="section">
+    <div class="row">
+      <div class="products">
+        <div>
+          <a href="" class="product">
+            <div class="img-section">
+              <img src="" alt="" class="img">
+            </div>
+            <div class="title"></div>
+            <div class="heading"></div>
+            <div class="text"></div>
+            <div class="space"></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div> -->

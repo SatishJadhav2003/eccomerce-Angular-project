@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { product } from 'src/app/shared/models/models';
 
 @Component({
   selector: 'app-home',

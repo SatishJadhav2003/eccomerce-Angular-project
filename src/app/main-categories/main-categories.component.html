@@ -1,0 +1,38 @@
+<div class="row p-0 m-0">
+  <div class="col-md-2 p-0">
+    <div class="section">
+      <div class="row">
+        <div class="col-md-12">
+          <p class="header">Main Categories</p>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="row">
+        <div class="col-md-12">
+          <mat-list>
+            <mat-list-item *ngFor="let categories of category; let i = index">
+              <a
+                (click)="onChangeCategory(i)"
+                class="side-nav-item"
+                [ngClass]="{ highlighted: currentCate === i }"
+              >
+                {{ categories.name }}
+              </a>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-10 p-0">
+    <div class="section">
+      <div class="row">
+        <div class="col-md-12">
+          <!-- <router-outlet></router-outlet> -->
+          <app-subcategories></app-subcategories>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

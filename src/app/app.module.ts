@@ -16,6 +16,8 @@ import { MobileViewNavbarComponent } from './navbar/mobile-view-navbar/mobile-vi
 import { ElectronicsComponent } from './sample-products/electronics/electronics.component';
 import { BooksComponent } from './sample-products/books/books.component';
 import { SportsComponent } from './sample-products/sports/sports.component';
+import { MainCategoriesComponent } from './main-categories/main-categories.component';
+import { SubcategoriesComponent } from './main-categories/subcategories/subcategories.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { SportsComponent } from './sample-products/sports/sports.component';
     MobileViewNavbarComponent,
     ElectronicsComponent,
     BooksComponent,
-    SportsComponent
+    SportsComponent,
+    MainCategoriesComponent,
+    SubcategoriesComponent
   ],
   imports: [
     BrowserModule,
