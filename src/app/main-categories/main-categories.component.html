@@ -1,5 +1,5 @@
 <div class="row p-0 m-0">
-  <div class="col-md-2 p-0">
+  <div class="col-md-2 p-1">
     <div class="section">
       <div class="row">
         <div class="col-md-12">
@@ -13,9 +13,9 @@
           <mat-list>
             <mat-list-item *ngFor="let categories of category; let i = index">
               <a
-                (click)="onChangeCategory(i)"
+                (click)="onChangeCategory(categories.id)"
                 class="side-nav-item"
-                [ngClass]="{ highlighted: currentCate === i }"
+                [ngClass]="{ highlighted: currentCate === categories.id }"
               >
                 {{ categories.name }}
               </a>
@@ -30,7 +30,7 @@
       <div class="row">
         <div class="col-md-12">
           <!-- <router-outlet></router-outlet> -->
-          <app-subcategories></app-subcategories>
+          <app-subcategories ></app-subcategories>
         </div>
       </div>
     </div>

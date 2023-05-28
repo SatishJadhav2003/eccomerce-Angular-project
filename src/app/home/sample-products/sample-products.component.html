@@ -1,0 +1,51 @@
+<div *ngFor="let categories of category">
+  <div class="section p-2">
+    <div class="row">
+      <div class="col-md-2">
+        <mat-grid-list cols="1" rowHeight="1:1" class="products-header">
+          <mat-grid-tile>
+            <div class="cards">
+              <div class="background"></div>
+              <a href="#">
+                <div class="text">
+                  <h1>{{ categories.name }}</h1>
+                  <a
+                    routerLink="/main-categories/{{ categories.id }}"
+                    class="view-all"
+                    >View All</a
+                  >
+                </div>
+              </a>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+      <div
+        class="col-md-2 my-1"
+        *ngFor="let subcategories of categories.subCategories.slice(0, 5)"
+      >
+        <mat-grid-list cols="1" rowHeight="1:1">
+          <mat-grid-tile>
+            <div class="cards">
+              <a href="#">
+                <img
+                  class="product-img"
+                  src="{{ subcategories.img }}"
+                  alt="{{ subcategories.name }}"
+                />
+                <div class="info">
+                  <p style="font-weight: bold">
+                    {{ subcategories.name | titlecase }}
+                  </p>
+                  <p style="color: #388e3c">{{ subcategories.highlightMsg }}</p>
+                  <!-- <p>{{ "1999" | currency : "INR" }}</p> -->
+                </div>
+              </a>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>

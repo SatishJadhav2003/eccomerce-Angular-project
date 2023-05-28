@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonService } from '../shared/common.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../shared/models/models';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main-categories',
@@ -10,20 +11,26 @@ import { Category } from '../shared/models/models';
 })
 export class MainCategoriesComponent {
   category: Category[];
-  index: number;
+  index: string;
   currentCate: any;
+  subcription: Subscription;
+
   constructor(
     private service: CommonService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.service.getCategoriesFromServer();
+    this.service.categories.subscribe((cate) => {
+      this.category = cate;
+    });
+  }
 
   ngOnInit(): void {
-    this.category = this.service.getCategory();
     this.route.paramMap.subscribe((paramMap) => {
-      // + sign converts string to int
-      this.index = +paramMap.get('id');
+      this.index = paramMap.get('id');
       this.currentCate = this.index;
+      console.log(this.index);
       this.service.getCategoriesByIndex(this.index);
     });
   }

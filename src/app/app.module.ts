@@ -10,14 +10,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home/home.component';
 import { SideNavComponent } from './navbar/side-nav/side-nav.component';
 import { HomeBannerComponent } from './home/home-banner/home-banner.component';
-import { FruitsComponent } from './sample-products/fruits/fruits.component';
-import { FashionComponent } from './sample-products/fashion/fashion.component';
 import { MobileViewNavbarComponent } from './navbar/mobile-view-navbar/mobile-view-navbar.component';
-import { ElectronicsComponent } from './sample-products/electronics/electronics.component';
-import { BooksComponent } from './sample-products/books/books.component';
-import { SportsComponent } from './sample-products/sports/sports.component';
 import { MainCategoriesComponent } from './main-categories/main-categories.component';
 import { SubcategoriesComponent } from './main-categories/subcategories/subcategories.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SampleProductsComponent } from './home/sample-products/sample-products.component';
 
 
 @NgModule({
@@ -27,14 +24,10 @@ import { SubcategoriesComponent } from './main-categories/subcategories/subcateg
     HomeComponent,
     SideNavComponent,
     HomeBannerComponent,
-    FruitsComponent,
-    FashionComponent,
     MobileViewNavbarComponent,
-    ElectronicsComponent,
-    BooksComponent,
-    SportsComponent,
     MainCategoriesComponent,
-    SubcategoriesComponent
+    SubcategoriesComponent,
+    SampleProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +35,8 @@ import { SubcategoriesComponent } from './main-categories/subcategories/subcateg
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

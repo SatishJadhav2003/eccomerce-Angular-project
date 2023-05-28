@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
     if (this.screenWidth < 900) {
       this.mobile = true;
       this.service.mobile = true;
+      this.service.getCategoriesFromServer();
     }
   }
   ngOnInit() {

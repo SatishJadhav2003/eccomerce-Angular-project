@@ -12,7 +12,7 @@ import { Category } from 'src/app/shared/models/models';
 export class SubcategoriesComponent implements OnInit, DoCheck,OnDestroy {
   subCategories: any[] = [];
   public category: Category;
-  index = '4';
+  index:number;
   subcription: Subscription;
 
   constructor(private service: CommonService, private route: ActivatedRoute) {
