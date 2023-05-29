@@ -1,22 +1,25 @@
-import { Category } from "./models";
 
 export class Product {
   id: string;
   name: string;
+  title:string;
   description: string;
   price: number;
-  images: string[]; // Assuming an array of image URLs
-  category: Category;
+  actual_price:number;
+  images: string; // Assuming an array of image URLs
+  category_id:string ;
   brand: string;
-  availability: boolean;
+  availability: number;
+  offer:string;
   rating: number;
   reviews: Review[];
   specifications: Specification[];
   variants: Variant[];
+  highlights:string[];
+  keywords:string[];
   additionalInfo: any; // Placeholder for additional custom fields
 
   constructor() {
-    this.images = [];
     this.reviews = [];
     this.specifications = [];
     this.variants = [];
@@ -46,13 +49,13 @@ export class Specification {
 
 export class Variant {
   id: string;
-  name: string;
+  title: string;
   price: number;
-  availability: boolean;
+  availability: number;
 
-  constructor(id: string, name: string, price: number, availability: boolean) {
+  constructor(id: string, title: string, price: number, availability: number) {
     this.id = id;
-    this.name = name;
+    this.title = title;
     this.price = price;
     this.availability = availability;
   }

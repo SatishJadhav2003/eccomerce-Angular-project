@@ -1,0 +1,166 @@
+.section {
+  box-shadow: 0 5px 9px 0 rgba(0, 0, 0, .08);
+  /* box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px; */
+  background-color: #fff;
+  border-radius: 2px;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  height: auto;
+  display: block;
+}
+
+.heading {
+  font-weight: 500;
+  font-size: 18px;
+  margin: 0;
+}
+
+.pcount {
+  margin-top: 8px;
+  opacity: .5;
+}
+
+a,
+.product-img {
+  text-decoration: none;
+  color: inherit;
+  border: none;
+  height: auto;
+  max-width: 180px;
+  transition: transform .2s;
+}
+
+.product-img:hover {
+  transform: scale(1.08);
+}
+
+a {
+  cursor: pointer;
+}
+
+.header {
+  font-weight: bold;
+  font-size: large;
+}
+
+
+/* Side nav */
+
+.side-nav-item {
+  cursor: pointer;
+}
+
+.side-nav-item:hover {
+  color: crimson;
+  font-weight: bold;
+}
+
+
+.info {
+  text-align: left;
+  padding-left: 32px;
+}
+
+.info-price {
+  text-align: left;
+  padding-left: 25px;
+}
+
+.decription {
+  margin-top: 5px;
+  color: #212121;
+  line-height: 22px;
+  display: table;
+}
+
+.decription li {
+  list-style: none;
+  text-align: -webkit-match-parent;
+}
+
+.description-row::before {
+  content: "•";
+  color: rgb(194, 194, 194);
+  padding-right: 8px;
+}
+
+
+.price {
+
+  font-size: 25px;
+  display: block;
+  font-weight: 500;
+  color: #212121;
+}
+
+.info-sub {
+  display: inline-block;
+  margin-top: -1px;
+  padding-right: 10px;
+}
+
+.actual-price {
+  margin-left: 0;
+  text-decoration: line-through;
+  font-size: 14px;
+  color: #878787;
+}
+
+.offer-percentage {
+  color: #388e3c;
+  font-size: 13px;
+  letter-spacing: -.2px;
+  font-weight: 500;
+  margin-left: 8px;
+  display: inline-block;
+}
+
+.delivery {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.delivery-content {
+  color: rgb(0, 0, 0);
+  font-size: 12px;
+  font-weight: 400;
+  display: inline;
+  white-space: pre-wrap;
+}
+
+.offer-text {
+  color: rgb(38, 165, 65);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.available {
+  color: rgb(199, 0, 85);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.rating {
+  line-height: normal;
+  display: inline-block;
+  color: #fff;
+  padding: 2px 4px 2px 6px;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 12px;
+  vertical-align: middle;
+
+}
+
+.rating-background-green{
+  background-color: #388e3c!important;
+}
+.rating-background-red{
+  background-color: #ff6161!important;
+}
+
+.rating-background-yellow{
+  background-color: #ff9f00!important;
+}

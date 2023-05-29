@@ -15,6 +15,9 @@ import { MainCategoriesComponent } from './main-categories/main-categories.compo
 import { SubcategoriesComponent } from './main-categories/subcategories/subcategories.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SampleProductsComponent } from './home/sample-products/sample-products.component';
+import { ProductsListComponent } from './products/products-list/products-list.component';
+import { BrandsComponent } from './products/brands/brands.component';
+import { ProductsComponent } from './products/products.component';
 
 
 @NgModule({
@@ -27,7 +30,10 @@ import { SampleProductsComponent } from './home/sample-products/sample-products.
     MobileViewNavbarComponent,
     MainCategoriesComponent,
     SubcategoriesComponent,
-    SampleProductsComponent
+    SampleProductsComponent,
+    ProductsListComponent,
+    BrandsComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,25 @@
+
+<app-brands></app-brands>
+<div class="row p-0 m-0">
+  <div class="col-md-2 p-1">
+    <div class="section">
+      <div class="row">
+        <div class="col-md-12">
+          <mat-list>
+            <mat-list-item *ngFor="let cate of products_type; let i = index">
+              <a
+                class="side-nav-item"
+              >
+              {{ cate.name }}
+              <img src="{{cate.img}}" class="cat-img" alt="not found">
+              </a>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-10 p-1">
+      <app-products-list></app-products-list>
+    </div>
+</div>
