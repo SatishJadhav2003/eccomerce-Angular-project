@@ -1,17 +1,38 @@
-
-<app-brands></app-brands>
+<!-- <app-brands></app-brands> -->
 <div class="row p-0 m-0">
-  <div class="col-md-2 p-1">
+  <!-- Types -->
+  <div class="col-md-2 p-2">
     <div class="section">
       <div class="row">
         <div class="col-md-12">
+          <mat-accordion>
+            <mat-expansion-panel
+              hideToggle
+              *ngFor="let type of types; let i = index"
+            >
+              <mat-expansion-panel-header (click)="onChangeType(type)">
+                <mat-panel-title style="display: block !important">
+                  {{ type | titlecase }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+    <br />
+    <!-- Subcategories -->
+    <div class="section" *ngIf="subCategories.length > 0">
+      <div class="row">
+        <div class="col-md-12">
           <mat-list>
-            <mat-list-item *ngFor="let cate of products_type; let i = index">
+            <mat-list-item *ngFor="let cate of subCategories; let i = index">
               <a
                 class="side-nav-item"
+                (click)="changeSubCategory(cate.name)"
+                [ngClass]="{ highlighted: currSubCate === cate.name }"
               >
-              {{ cate.name }}
-              <img src="{{cate.img}}" class="cat-img" alt="not found">
+                {{ cate.name | titlecase }}
               </a>
             </mat-list-item>
           </mat-list>
@@ -20,6 +41,6 @@
     </div>
   </div>
   <div class="col-md-10 p-1">
-      <app-products-list></app-products-list>
-    </div>
+    <app-products-list></app-products-list>
+  </div>
 </div>

@@ -21,6 +21,7 @@ export class MainCategoriesComponent {
     private router: Router
   ) {
     this.service.getCategoriesFromServer();
+    // this.service.getMongoCate();
     this.service.categories.subscribe((cate) => {
       this.category = cate;
     });
@@ -36,7 +37,7 @@ export class MainCategoriesComponent {
   }
 
   // on clicking sidenavbar item this function will call to navigate
-  onChangeCategory(index: any) {
-    this.router.navigate(['/main-categories', index]);
+  onChangeCategory(name: any) {
+    this.router.navigate(['/main-categories', name]);
   }
 }

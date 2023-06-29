@@ -5,10 +5,21 @@ import { MainCategoriesComponent } from './main-categories/main-categories.compo
 import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'main-categories/:id', component: MainCategoriesComponent },
-  {path:'products',component:ProductsComponent}
+  {
+    path: 'products',
+    component: ProductsComponent,
+    children: [
+      {
+        path: ':category/:subcategory',
+        component: ProductsComponent,
+      }
+    ],
+  },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' },
+
 ];
 
 @NgModule({

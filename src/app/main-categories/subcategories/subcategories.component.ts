@@ -1,5 +1,5 @@
 import { Component, DoCheck, Input, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommonService } from 'src/app/shared/common.service';
 import { Category } from 'src/app/shared/models/models';
@@ -9,13 +9,13 @@ import { Category } from 'src/app/shared/models/models';
   templateUrl: './subcategories.component.html',
   styleUrls: ['./subcategories.component.css'],
 })
-export class SubcategoriesComponent implements OnInit, DoCheck,OnDestroy {
+export class SubcategoriesComponent implements OnInit, DoCheck, OnDestroy {
   subCategories: any[] = [];
   public category: Category;
-  index:number;
+  index: number;
   subcription: Subscription;
 
-  constructor(private service: CommonService, private route: ActivatedRoute) {
+  constructor(private service: CommonService, private route: ActivatedRoute,private router:Router) {
     this.subcription = this.service.currCateChanged.subscribe((cate) => {
       this.category = cate;
       this.extractSubCategories();
@@ -32,8 +32,12 @@ export class SubcategoriesComponent implements OnInit, DoCheck,OnDestroy {
     }
   }
 
-  ngOnDestroy()
-  {
+  onSubcategory(parent: string,sub:string) {
+    this.router.navigate(['/products/'+parent+"/"+sub]);
+    console.log(parent+"/"+sub);
+  }
+
+  ngOnDestroy() {
     this.subcription.unsubscribe();
   }
 }

@@ -5,6 +5,11 @@ export class Subcategory {
   description: string;
   img: string;
   highlightMsg: string;
+  types:[
+    {
+      name:string;
+    }
+  ]
 }
 export class Category {
   id: string;

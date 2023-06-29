@@ -59,10 +59,10 @@
         <div class="col-md-3 info-price">
           <div class="info-sub">
             <div class="price">
-              {{ product.price | currency : "INR" : true : "2.0" }}
+              {{ product.price | currency : "INR" : 'symbol' : "2.0" }}
             </div>
             <div class="actual-price">
-              {{ product.actual_price | currency : "INR" : true : "2.0" }}
+              {{ product.actual_price | currency : "INR" : 'symbol': "2.0" }}
               <span class="offer-percentage">
                 {{
                   100 - (product.price / product.actual_price) * 100

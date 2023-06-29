@@ -11,6 +11,7 @@ export class CommonService {
   tempCategory: Category[];
   currCateChanged = new Subject<Category>();
   categories = new Subject<Category[]>();
+  cateByName = new Subject<Category>();
 
   temp: Category;
 
@@ -42,6 +43,9 @@ export class CommonService {
         console.log(res);
         return this.temp;
       });
-
   }
+
+
+
+
 }

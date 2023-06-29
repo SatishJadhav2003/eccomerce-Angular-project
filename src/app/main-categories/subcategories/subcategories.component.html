@@ -7,20 +7,19 @@
 </div>
 <div class="p-2 pt-2">
   <div class="row">
-    <div class="" *ngFor="let category of subCategories">
+    <div class="" *ngFor="let subcategory of subCategories">
       <div class="cards">
-        <a href="#">
+        <a (click)="onSubcategory(category.name,subcategory.id)">
           <img
             class="product-img"
-            src="{{ category.img }}"
-            alt="{{ category.name }}"
+            src="{{ subcategory.img }}"
+            alt="{{ subcategory.name }}"
           />
           <div class="info">
             <p style="font-weight: bold">
-              {{ category.name | titlecase }}
+              {{ subcategory.name | titlecase }}
             </p>
-            <p style="color: #388e3c">{{ category.highlightMsg }}</p>
-            <p>{{ category.price | currency : "INR" }}</p>
+            <p style="color: #388e3c">{{ subcategory.highlightMsg }}</p>
           </div>
         </a>
       </div>
