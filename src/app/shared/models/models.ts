@@ -14,5 +14,6 @@ export class Subcategory {
 export class Category {
   id: string;
   name: string;
+  image:string;
   subCategories: Subcategory[];
 }

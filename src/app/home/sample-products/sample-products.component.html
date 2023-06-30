@@ -39,17 +39,18 @@
           </mat-grid-tile>
         </mat-grid-list>
       </div> -->
-      <div class=" my-1" style="width: 20%;text-align:center;align-items:center;vertical-align:middle" >
-          <a href="#">
+      <div class=" my-2" style="width: 20%;text-align:center;align-items:center;vertical-align:middle" >
+          <a routerLink="/main-categories/{{ categories.id }}" >
             <div class="cat-header">
-              <h1>{{ categories.name }}</h1>
+              <img class="category-img rounded" src="{{categories.image}}" alt="img" />
+              <h1 class="pb-1" >{{ categories.name }}</h1>
               <a routerLink="/main-categories/{{ categories.id }}" class="view-all">View All</a>
             </div>
           </a>
       </div>
-      <div class=" my-1" style="width: 20%;" *ngFor="let subcategories of categories.subCategories.slice(0, 4)">
+      <div class=" my-1" style="width: 16%;" *ngFor="let subcategories of categories.subCategories.slice(0, 5)">
         <div class="cards">
-          <a href="#">
+          <a routerLink="/products/{{categories.name}}/{{subcategories.id}}">
             <img class="product-img" src="{{ subcategories.img }}" alt="{{ subcategories.name }}" />
             <div class="info">
               <p style="font-weight: bold">

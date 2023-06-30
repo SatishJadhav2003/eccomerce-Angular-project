@@ -31,6 +31,17 @@ a,.product-img{
   transform: scale(1.2);
 }
 
+.category-img
+{
+  text-decoration: none;
+  color: inherit;
+  border: none;
+  height: 5rem;
+  width: auto;
+  transition: transform .2s;
+  opacity: 80%;
+  margin: 2px;
+}
 
 .info
 {
