@@ -10,34 +10,27 @@ import { ProductService } from 'src/app/shared/product.service';
   styleUrls: ['./products-list.component.css'],
 })
 export class ProductsListComponent implements OnInit {
-  currType: string;
+
   products: Product[];
-  category: string;
   subcategory: string;
-  currProducts:Product[];
-  subCategoryName:string;
+  subCategoryName: string;
+  productsCount:number;
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute,
-
+    private route: ActivatedRoute
   ) {
-    this.route.firstChild.params.subscribe((params) => {
-    this.subCategoryName = params['subcategory'];
-    this.productService
-    .getProductsBasedOnSubcategory(this.subCategoryName);
-    this.productService.products.subscribe((res) => {
-      console.log("from products list component",res);
-      this.products = res.sort((a, b) => b.rating - a.rating);
-
-    });
-  })
-    // this.productService.getProducts();
-
   }
 
   ngOnInit() {
-    this.productService.currType.subscribe((res) => {
-      console.log(res);
+    this.route.firstChild.params.subscribe((params) => {
+      this.subCategoryName = params['subcategory'];
+      this.productService.getProductsBasedOnSubcategory(this.subCategoryName);
+      this.productService.products.subscribe((res) => {
+        console.log('from products list component', res);
+        this.products = res;
+        this.productsCount = this.products.length;
+        this.productService.productfound.next(this.productsCount);
+      });
     });
   }
 

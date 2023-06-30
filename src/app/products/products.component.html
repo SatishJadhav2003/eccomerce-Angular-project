@@ -1,41 +1,22 @@
 <!-- <app-brands></app-brands> -->
 <div class="row p-0 m-0">
-  <!-- Types -->
-  <div class="col-md-2 p-2">
+  <div class="col-md-2 p-2" >
     <div class="section">
       <div class="row">
         <div class="col-md-12">
-          <mat-accordion>
-            <mat-expansion-panel
-              hideToggle
-              *ngFor="let type of types; let i = index"
-            >
-              <mat-expansion-panel-header (click)="onChangeType(type)">
-                <mat-panel-title style="display: block !important">
-                  {{ type | titlecase }}
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-            </mat-expansion-panel>
-          </mat-accordion>
+          <div class="pcount">{{ totalProducts }} Products found </div>
         </div>
       </div>
-    </div>
-    <br />
-    <!-- Subcategories -->
-    <div class="section" *ngIf="subCategories.length > 0">
-      <div class="row">
+      <hr class="my-1 p-0">
+      <div class="row" *ngIf="totalProducts>0" >
         <div class="col-md-12">
-          <mat-list>
-            <mat-list-item *ngFor="let cate of subCategories; let i = index">
-              <a
-                class="side-nav-item"
-                (click)="changeSubCategory(cate.name)"
-                [ngClass]="{ highlighted: currSubCate === cate.name }"
-              >
-                {{ cate.name | titlecase }}
-              </a>
-            </mat-list-item>
-          </mat-list>
+          <p style="font-weight: bold;
+          font-size: large;">Sort By</p>
+        </div>
+        <div class="col-md-12 a-sorting mb-3"  *ngFor="let sorting of sortingMethods" >
+          <div [ngClass]="{highlighted: currSort==sorting.value}" >
+            <a  (click)="onSort(sorting.value)" >{{sorting.name}}</a>
+          </div>
         </div>
       </div>
     </div>

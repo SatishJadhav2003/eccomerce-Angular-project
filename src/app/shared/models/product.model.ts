@@ -6,6 +6,7 @@ export class Product {
   description: string;
   price: number;
   actual_price:number;
+  discount?:any;
   images: string; // Assuming an array of image URLs
   category_id:string ;
   brand: string;
@@ -18,6 +19,7 @@ export class Product {
   highlights:string[];
   keywords:string[];
   additionalInfo: any; // Placeholder for additional custom fields
+  sellUnit:number;
 
   constructor() {
     this.reviews = [];
