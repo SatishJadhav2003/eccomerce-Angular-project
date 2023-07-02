@@ -1,0 +1,156 @@
+<div class="section mb-3" *ngIf="product">
+  <div class="row">
+    <div class="col-md-6 mt-3">
+      <img src="{{product.images}}" alt="{{product.name}}" class="product-img">
+      <div class="action-button mt-5">
+        <ul class="row m-0 p-0">
+          <li class="w-50">
+            <button class="buy-now action">
+              Buy Now
+            </button>
+          </li>
+          <li class="w-50">
+            <button class="buy-now action" style="background-color: #fb641b;">
+              Add to cart
+            </button>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="col-md-6 mt-3">
+      <div style="text-align: left;">
+        <div class="col-md-12">
+          <h4 class="title text-dark">
+            {{product.title}}
+          </h4>
+          <div class="d-flex flex-row ">
+            <span class="text-succes ms-2">Special Price</span>
+          </div>
+
+          <div class="price">
+            <div class="selling-price">
+              {{ product.price | currency : "INR" : 'symbol' : "2.0" }}
+            </div>
+            <div class="actual-price">
+              {{ product.actual_price | currency : "INR" : 'symbol': "2.0" }}
+            </div>
+            <div class="discount">
+              {{
+              100 - (product.price / product.actual_price) * 100
+              | number : "1.0-2"
+              }}% off
+            </div>
+          </div>
+          <div class="row m-0 p-0">
+            <div class="delivery mx-1">
+              <div class="delivery-content">Free delivery</div>
+            </div>
+            <div class="available mx-1" *ngIf="product.availability < 19 && product.availability >= 10">
+              Only few left
+            </div>
+            <div class="available mx-1" *ngIf="product.availability < 10 && product.availability > 0">
+              Only {{ product.availability }} left
+            </div>
+            <div class="available mx-1" *ngIf="product.availability <= 0">
+              Out of stock
+            </div>
+            <div class="offer-text mx-1">bank offer</div>
+          </div>
+          <div class="mb-3 mt-1">
+            <span style="position: relative">
+              <div class="rating" [ngClass]="
+                  product.rating > 3
+                    ? 'rating-background-green'
+                    : product.rating > 1
+                    ? 'rating-background-yellow'
+                    : 'rating-background-red'
+                ">
+                {{ product.rating }}
+                <img
+                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg=="
+                  alt="*" style="height: 12px; vertical-align: top" />
+              </div>
+              <span style="padding-left: 8px; font-weight: 500; color: #878787">
+                {{ product.reviews.length }} ratings & reviews
+              </span>
+            </span>
+          </div>
+
+          <p>
+            {{product.description}}
+          </p>
+          <div class="my-3"><span style="font-weight: bold;">
+              Specifications :-
+            </span>
+          </div>
+          <div class="row" *ngFor="let specification of product.specifications.slice(0,5) ">
+            <dd class="col-3">{{specification.name}}</dd>
+            <dd class="col-9">{{specification.value}}</dd>
+          </div>
+
+
+          <div class="view-all-details" *ngIf="!viewMore">
+            <hr />
+            <a (click)="viewMoreDetails()">View all details </a>
+            <hr>
+          </div>
+          <div class="more-details" *ngIf="viewMore">
+            <div class="row" *ngFor="let specification of product.specifications.slice(5) ">
+              <dd class="col-3">{{specification.name}}</dd>
+              <dd class="col-9">{{specification.value}}</dd>
+            </div>
+
+            <div class="my-3">
+              <p> <span style="font-weight: bold;">
+                  Brand :-
+                </span> {{product.brand}}</p>
+            </div>
+            <div class="my-3">
+              <p> <span style="font-weight: bold;">
+                  Additional Information :-
+                </span> {{product.additionalInfo}}</p>
+
+            </div>
+            <div>
+              <p style="font-weight: bold;">Variants :-</p>
+              <table class="table table-bordered">
+                <thead>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Available</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let variants of product.variants ">
+                    <td>
+                      {{variants.title}}
+                    </td>
+                    <td>
+                      {{variants.price | currency : "INR" : 'symbol': "2.0"}}
+                    </td>
+                    <td *ngIf="variants.availability >0">
+                      {{"Yes"}}
+                    </td>
+                    <td *ngIf="!(variants.availability >0)">
+                      {{"No"}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="view-all-details" *ngIf="viewMore" >
+              <hr />
+              <a (click)="viewMoreDetails()" >View Less </a>
+              <hr>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+
+

@@ -18,6 +18,7 @@ import { SampleProductsComponent } from './home/sample-products/sample-products.
 import { ProductsListComponent } from './products/products-list/products-list.component';
 import { BrandsComponent } from './products/brands/brands.component';
 import { ProductsComponent } from './products/products.component';
+import { ProductDetailsComponent } from './products/product-details/product-details.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ProductsComponent } from './products/products.component';
     SampleProductsComponent,
     ProductsListComponent,
     BrandsComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
