@@ -159,8 +159,10 @@ li {
 }
 
 
-.view-all-details:hover{
-  color: #ff6161;
+.view-all-details:hover {
+  cursor: pointer;
+  color: white;
+  background-color: #ff4081;
 }
 
 .rating-headline {
@@ -183,9 +185,35 @@ li {
   font-size: 20px;
 }
 
+.total-rating {
+  padding: 4px 8px;
+  border-radius: 7px;
+  font-size: 20px;
+  line-height: normal;
+  display: inline-block;
+  vertical-align: baseline;
+}
 
+.rating-star {
+  height: 16px;
+  vertical-align: top;
+  margin: 2px 0 0 2px;
+}
 
+.rating-review-count {
+  padding-left: 8px;
+  font-weight: 500;
+  color: #878787;
+  font-size: 20px;
+}
 
+.comment{
+
+  font-size: 20px;
+  font-weight: 450;
+  text-align: left;
+
+}
 
 @media only screen and (max-width: 600px) {
   .buy-now {
@@ -197,6 +225,59 @@ li {
     float: left;
     background: #ff9f00;
     color: white;
+  }
 
+
+  .rating-headline {
+    padding: 1px;
+    font-weight: 500;
+    font-size: 16px;
+    margin: 1px;
+  }
+
+  .rating-count {
+    padding: 1px;
+    margin: 0;
+    -ms-flex-positive: 3;
+    flex-grow: 3;
+    font-size: 16px;
+  }
+
+  .total-rating {
+    padding: 4px 5px 4px;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: normal;
+    display: inline-block;
+    vertical-align: baseline;
+  }
+
+  .rating-star {
+    height: 14px;
+    vertical-align: top;
+    margin: 2px 0 0 2px;
+  }
+
+  .rating-review-count {
+    padding-left: 8px;
+    font-weight: 500;
+    color: #878787;
+    font-size: 14px;
+  }
+
+  .sorting-functions {
+    padding:  1px ;
+    font-weight: 300;
+    font-size: 14px;
+  }
+
+  .comment{
+text-align: left;
+    font-size: 12px;
+    font-weight: 450;
+  }
+
+  .username{
+    font-size: 12px;
   }
 }

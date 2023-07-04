@@ -14,6 +14,7 @@ export class ProductDetailsComponent implements OnInit {
   id1: string;
   product:Product;
   viewMore:Boolean = false;
+  viewAllComments:Boolean=false;
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute
@@ -38,5 +39,10 @@ export class ProductDetailsComponent implements OnInit {
   viewMoreDetails()
   {
     this.viewMore = !this.viewMore;
+  }
+
+  viewAllComment()
+  {
+    this.viewAllComments = !this.viewAllComments;
   }
 }

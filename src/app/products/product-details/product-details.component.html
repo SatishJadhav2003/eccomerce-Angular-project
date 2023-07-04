@@ -16,7 +16,6 @@
           </li>
         </ul>
       </div>
-
     </div>
     <div class="col-md-6 mt-3">
       <div style="text-align: left;">
@@ -90,9 +89,9 @@
           </div>
 
 
-          <div class="view-all-details" *ngIf="!viewMore">
+          <div (click)="viewMoreDetails()" class="view-all-details" style="text-align: center;" *ngIf="!viewMore">
             <hr />
-            <a (click)="viewMoreDetails()">View all details </a>
+            <a>View all details </a>
             <hr>
           </div>
           <div class="more-details" *ngIf="viewMore">
@@ -112,7 +111,7 @@
                 </span> {{product.additionalInfo}}</p>
 
             </div>
-            <div>
+            <div *ngIf="product.variants.length >0">
               <p style="font-weight: bold;">Variants :-</p>
               <table class="table table-bordered">
                 <thead>
@@ -138,9 +137,9 @@
                 </tbody>
               </table>
             </div>
-            <div class="view-all-details" *ngIf="viewMore" >
+            <div (click)="viewMoreDetails()" class="view-all-details" style="text-align: center;" *ngIf="viewMore">
               <hr />
-              <a (click)="viewMoreDetails()" >View Less </a>
+              <a>View Less </a>
               <hr>
             </div>
           </div>
@@ -154,3 +153,124 @@
 </div>
 
 
+<div class="section mb-3" *ngIf="product">
+  <div class="reviews-section">
+    <div class="row m-0 p-0 w-100" style="text-align: center;">
+      <div style="width: 33.33%; ">
+        <div class="rating-headline">
+          Rating and reviews
+        </div>
+      </div>
+      <div style="width: 33.33%; ">
+        <div class="rating-count">
+          <span style="position: relative">
+            <div class="rating total-rating" [ngClass]="
+            product.rating > 3
+              ? 'rating-background-green'
+              : product.rating > 1
+              ? 'rating-background-yellow'
+              : 'rating-background-red'
+          ">
+              {{ product.rating }}
+              <img
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg=="
+                alt="*" class="rating-star" />
+            </div>
+            <p class="rating-review-count">
+              {{ product.reviews.length }} ratings & reviews
+            </p>
+          </span>
+        </div>
+      </div>
+      <div style="width: 33.33%;overflow:hidden; " *ngIf="viewAllComments">
+        <div class="sorting-functions">
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Sort Reviews </option>
+            <option value="1">Recent</option>
+            <option value="2">Most Positive First</option>
+            <option value="3">Most Negative First</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="product.reviews.length >0">
+      <div class="row mx-0 p-0 w-100 my-3" *ngFor="let review of product.reviews.slice(1,5)">
+        <div class="col-md-12">
+          <hr>
+        </div>
+        <div style="width: 20%;">
+          <span style="position: relative">
+            <div class="rating total-rating" [ngClass]="
+            review.rating > 3.5
+              ? 'rating-background-green'
+              : review.rating >= 2
+              ? 'rating-background-yellow'
+              : 'rating-background-red'
+          ">
+              {{ review.rating }}
+              <img
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg=="
+                alt="*" class="rating-star" />
+            </div>
+          </span>
+        </div>
+        <div style="width: 60%;">
+          <div class="comment pl-1">
+            {{review.comment}}
+          </div>
+        </div>
+        <div style="width: 20%; font-weight:300">
+          <div class="username" >
+            {{review.user_name}}
+          </div>
+        </div>
+
+      </div>
+      <div (click)="viewAllComment()" class="view-all-details" *ngIf="!viewAllComments">
+        <hr>
+        <a>View More </a>
+        <hr>
+      </div>
+
+      <!-- all comments -->
+      <div *ngIf="viewAllComments">
+        <div class="row mx-0 p-0 w-100 my-3" *ngFor="let review of product.reviews.slice(5,15)">
+          <div class="col-md-12">
+            <hr>
+          </div>
+          <div style="width: 20%;">
+            <span style="position: relative">
+              <div class="rating total-rating" [ngClass]="
+            review.rating > 3.5
+              ? 'rating-background-green'
+              : review.rating >= 2
+              ? 'rating-background-yellow'
+              : 'rating-background-red'
+          ">
+                {{ review.rating }}
+                <img
+                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg=="
+                  alt="*" class="rating-star" />
+              </div>
+            </span>
+          </div>
+          <div style="width: 60%;">
+            <div class="comment pl-1">
+              {{review.comment}}
+            </div>
+          </div>
+          <div style="width: 20%; font-weight:300">
+            <div class="username">
+              {{review.user_name}}
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div (click)="viewAllComment()" class="view-all-details" *ngIf="viewAllComments">
+        <hr>
+        <a>View Less </a>
+        <hr>
+      </div>
+    </div>
+  </div>

@@ -30,10 +30,14 @@ export class Product {
 }
 
 export class Review {
+  userId:string;
+  user_name:string;
   rating: number;
   comment: string;
 
-  constructor(rating: number, comment: string) {
+  constructor(userId:string,user_name:string,rating: number, comment: string) {
+    this.userId=userId;
+    this.user_name = user_name;
     this.rating = rating;
     this.comment = comment;
   }
