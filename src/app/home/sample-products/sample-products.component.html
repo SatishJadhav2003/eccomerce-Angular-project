@@ -39,7 +39,7 @@
           </mat-grid-tile>
         </mat-grid-list>
       </div> -->
-      <div class="pl-2 pb-0 " style="width: 20%;text-align:center;align-items:center;vertical-align:middle">
+      <div class="pl-2 pb-0 my-1" style="width: 20%;text-align:center;align-items:center;vertical-align:middle">
         <a class="p-0" routerLink="/main-categories/{{ categories.id }}">
           <div class="cat-header">
             <img class="category-img rounded" src="{{categories.image}}" alt="img" />
@@ -48,7 +48,7 @@
           </div>
         </a>
       </div>
-      <div class="px-1 pb-0 " style="width: 16%;" *ngFor="let subcategories of categories.subCategories.slice(0, 5)">
+      <div class="px-1 pb-0 my-1" style="width: 16%;" *ngFor="let subcategories of categories.subCategories.slice(0, 5)">
         <div class="cards">
           <a routerLink="/products/{{categories.name}}/{{subcategories.id}}">
             <img class="product-img" src="{{ subcategories.img }}" alt="{{ subcategories.name }}" />

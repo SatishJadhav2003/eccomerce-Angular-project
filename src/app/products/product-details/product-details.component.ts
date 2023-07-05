@@ -15,6 +15,7 @@ export class ProductDetailsComponent implements OnInit {
   product:Product;
   viewMore:Boolean = false;
   viewAllComments:Boolean=false;
+  relatedProducts:Product[];
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute
@@ -27,10 +28,15 @@ export class ProductDetailsComponent implements OnInit {
     this.route.firstChild.paramMap.subscribe((res) => {
       this.id = res.get('id');
       console.log(this.id);
+      // get product by id
      this.productService.getProductById(this.id);
      this.productService.cuuProduct.subscribe((product)=>{
       this.product = product;
-      console.log(this.product);
+      // getting related products
+      this.productService.getRelatedProducts(this.product.category_id).subscribe((res)=>{
+        console.log("related products",res);
+        this.relatedProducts = res;
+      });
      })
     });
   }

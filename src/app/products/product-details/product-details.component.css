@@ -12,11 +12,7 @@
   margin-right: 6%;
 }
 
-.product-back {
-  background-color: rgb(255, 255, 255);
-  padding: 16px;
-  display: flex;
-}
+
 
 .img-section {
 
@@ -169,6 +165,7 @@ li {
   padding: 32px 32px 32px 24px;
   font-weight: 500;
   font-size: 24px;
+  color: crimson;
 }
 
 .rating-count {
@@ -221,8 +218,34 @@ li {
 
 .related-product-img
 {
-  max-width: 100%;
-  height: auto;
+  max-width: 80%;
+  height: 8rem;
+  object-fit: contain;
+}
+
+.related-product-headline
+{
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.related-product-price
+{
+  font-size: 16px;
+  vertical-align: sub;
+  display: inline-block;
+  font-weight: 600;
+  color: #212121;
+}
+
+.related-product-card{
+  border: gray solid 1px;
+  transition: transform .2s;
+}
+
+.related-product-card:hover
+{
+  transform: scale(1.05);
 }
 
 
