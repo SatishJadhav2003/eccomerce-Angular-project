@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/shared/models/product.model';
 import { ProductService } from 'src/app/shared/product.service';
 
@@ -11,14 +11,15 @@ import { ProductService } from 'src/app/shared/product.service';
 export class ProductDetailsComponent implements OnInit {
 
   id: string;
-  id1: string;
+  category: string;
   product:Product;
   viewMore:Boolean = false;
   viewAllComments:Boolean=false;
   relatedProducts:Product[];
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router:Router
   ) {
 
   }
@@ -26,6 +27,7 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit()
   {
     this.route.firstChild.paramMap.subscribe((res) => {
+      this.category = res.get('category');
       this.id = res.get('id');
       console.log(this.id);
       // get product by id
@@ -50,5 +52,11 @@ export class ProductDetailsComponent implements OnInit {
   viewAllComment()
   {
     this.viewAllComments = !this.viewAllComments;
+  }
+
+  viewProduct(subcategory:string,id:string)
+  {
+    this.router.navigate(['/product',this.category,subcategory,id]);
+    window.scrollTo(0,0);
   }
 }

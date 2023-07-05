@@ -283,36 +283,38 @@
     <p>
   </div>
   <div class="row p-1 justify-content-center">
-    <a class="col-md-2 related-product-card m-2" *ngFor="let related of relatedProducts">
-      <div class="py-3">
-        <img class="related-product-img" src="{{related.images}}" alt="img">
-        <h4 class="related-product-headline pt-3">
-          {{related.title}}
-        </h4>
-        <div class="related-product-rating">
-          <div class="rating" [ngClass]="
-                  product.rating > 3
+    <div class="col-md-2 related-product-card m-2" *ngFor="let related of relatedProducts">
+      <a (click)="viewProduct(related.category_id,related.id)">
+        <div class="py-3">
+          <img class="related-product-img" src="{{related.images}}" alt="img">
+          <h4 class="related-product-headline pt-3">
+            {{related.title}}
+          </h4>
+          <div class="related-product-rating">
+            <div class="rating" [ngClass]="
+                  related.rating > 3
                     ? 'rating-background-green'
-                    : product.rating > 1
+                    : related.rating > 1
                     ? 'rating-background-yellow'
                     : 'rating-background-red'
                 ">
-            {{ related.rating }}
-            <img
-              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg=="
-              alt="*" style="height: 12px; vertical-align: top" />
+              {{ related.rating }}
+              <img
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg=="
+                alt="*" style="height: 12px; vertical-align: top" />
+            </div>
+            <div class="discount">
+              {{
+              100 - (related.price / related.actual_price) * 100
+              | number : "1.0-2"
+              }}% off
+            </div>
           </div>
-          <div class="discount">
-            {{
-            100 - (related.price / related.actual_price) * 100
-            | number : "1.0-2"
-            }}% off
+          <div class="related-product-price">
+            {{ related.price | currency : "INR" : 'symbol' : "2.0" }}
           </div>
         </div>
-        <div class="related-product-price">
-          {{ related.price | currency : "INR" : 'symbol' : "2.0" }}
-        </div>
-      </div>
-    </a>
+      </a>
+    </div>
   </div>
 </div>
