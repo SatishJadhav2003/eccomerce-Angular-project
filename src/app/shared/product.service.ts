@@ -14,37 +14,25 @@ export class ProductService {
   api = 'http://localhost:3000/products';
   constructor(private http: HttpClient) {}
 
-  //Getting all products
-  getProducts() {
-    this.http.get<Product[]>(`${this.api}`).subscribe((res) => {
-      this.products.next(res.sort((a, b) => b.rating - a.rating));
-    });
-  }
-
-
   //Getting products based on category id
-  getProductsBasedOnSubcategory(subCategory: string) {
-    this.http
-      .get<any>(`${this.api}?category_id=${subCategory}`)
-      .subscribe((res) => {
-        this.products.next(res.sort((a, b) => b.rating - a.rating));
-      });
+
+
+  getProductsBasedOnSubcategory(subCategory: string): Observable<Product[]> {
+    return this.http
+      .get<any>(`${this.api}?category_id=${subCategory}`);
   }
 
   //get Product by id
-  getProductById(id:string)
-  {
-    this.http
-      .get<any>(`${this.api}/${id}`)
-      .subscribe((res) => {
-        this.cuuProduct.next(res);
-      });
+  getProductById(id: string) {
+    this.http.get<any>(`${this.api}/${id}`).subscribe((res) => {
+      this.cuuProduct.next(res);
+    });
   }
 
   // to get random 5 products from server
-  getRelatedProducts(subCategory_id:string): Observable<any[]> {
+  getRelatedProducts(subCategory_id: string): Observable<any[]> {
     return this.http.get<any>(`${this.api}?category_id=${subCategory_id}`).pipe(
-      map(products => {
+      map((products) => {
         // Shuffle the array randomly
         const shuffled = products.sort(() => 0.5 - Math.random());
         // Return the first 'count' products

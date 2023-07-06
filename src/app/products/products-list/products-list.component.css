@@ -164,3 +164,12 @@ a {
 .rating-background-yellow{
   background-color: #ff9f00!important;
 }
+
+.product-row{
+  transition: transform .2s;
+}
+
+.product-row:hover
+{
+  transform: scale(1.01);
+}

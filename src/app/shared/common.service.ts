@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Category } from './models/models';
-import { Subject } from 'rxjs';
+import { Category, Subcategory } from './models/models';
+import { Observable, Subject, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -8,44 +8,37 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CommonService {
   mobile: boolean = false;
-  tempCategory: Category[];
   currCateChanged = new Subject<Category>();
   categories = new Subject<Category[]>();
-  cateByName = new Subject<Category>();
-
   temp: Category;
 
-  constructor(private http: HttpClient) {
-  }
+  api: string = 'http://localhost:3000/categories';
+
+  constructor(private http: HttpClient) {}
 
   // getting all categories and their component from server
   getCategoriesFromServer() {
-    return this.http
-      .get<Category[]>('http://localhost:3000/categories')
-      .subscribe((res: any) => {
-        console.log(res);
-        this.tempCategory = res;
-        this.categories.next(res);
-        return res;
-      });
-  }
-  // Getting category
-  getCategory() {
-    return this.categories;
+    return this.http.get<Category[]>(this.api).subscribe((res: any) => {
+      console.log("From service",res);
+      this.categories.next(res);
+      return res;
+    });
   }
 
   // Getting categories by id
   getCategoriesByIndex(id: string) {
-    this.http
-      .get<Category[]>('http://localhost:3000/categories/'+id)
-      .subscribe((res: any) => {
-        this.currCateChanged.next(res);
-        console.log(res);
-        return this.temp;
-      });
+    this.http.get<Category[]>(this.api + '/' + id).subscribe((res: any) => {
+      this.currCateChanged.next(res);
+      console.log("From service",res);
+      return this.temp;
+    });
   }
 
-
-
-
+  //getting Subcategories by category name
+  getSubcategories(cateName: string):Observable<Subcategory[]> {
+   return this.http
+      .get<Category[]>(`${this.api}?name=${cateName}`).pipe(map((res)=>{
+        return res[0].subCategories;
+      }));
+  }
 }

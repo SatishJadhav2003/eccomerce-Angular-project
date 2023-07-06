@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../shared/product.service';
 import { Product } from '../shared/models/product.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonService } from '../shared/common.service';
+import { Subcategory } from '../shared/models/models';
 
 @Component({
   selector: 'app-products',
@@ -10,6 +13,7 @@ import { Product } from '../shared/models/product.model';
 export class ProductsComponent {
   totalProducts: Number;
   products: Product[];
+  subCategories:Subcategory[];
   sortingMethods = [
     {
       id: '5',
@@ -33,7 +37,9 @@ export class ProductsComponent {
     }
   ];
   currSort: string = this.sortingMethods[0].value;
-  constructor(private prodctService: ProductService) {
+  currCate:string;
+  currSubCate:string;
+  constructor(private prodctService: ProductService,private route:ActivatedRoute,private service:CommonService,private router:Router) {
     //Getting products from service
     this.prodctService.products.subscribe((res) => {
       this.products = res;
@@ -43,28 +49,40 @@ export class ProductsComponent {
     this.prodctService.productfound.subscribe((res) => {
       this.totalProducts = res;
     });
+
+    // geting subcategories of category
+    this.route.firstChild.paramMap.subscribe((params)=>{
+      this.currCate = params.get('category');
+      this.currSubCate = params.get('subcategory');
+      this.service.getSubcategories(params.get('category')).subscribe
+      ((res)=>{
+        console.log(res);
+        this.subCategories = res;
+      });
+    })
   }
 
+
+  // Sorting logic
   onSort(event: any) {
     this.currSort = event;
     switch (event) {
       case 'rating': {
-        console.log(event);
+        console.log("rating",event);
         this.prodctService.products.next(
           this.products.sort((a, b) => b.rating - a.rating)
         );
         break;
       }
-
       case 'high': {
-        console.log(event);
+        console.log("high",event);
         this.prodctService.products.next(
           this.products.sort((a, b) => b.price - a.price)
         );
         break;
       }
       case 'low': {
-        console.log(event);
+        console.log("low",event);
         this.prodctService.products.next(
           this.products.sort((a, b) => a.price - b.price)
         );
@@ -72,7 +90,7 @@ export class ProductsComponent {
       }
 
       case 'popularity': {
-        console.log(event);
+        console.log("popularity",event);
         this.prodctService.products.next(
           this.products.sort((a, b) => {
             if (b.sellUnit === a.sellUnit) {
@@ -88,5 +106,12 @@ export class ProductsComponent {
         break;
       }
     }
+  }
+
+
+  onChangeSubCate(subCateId:string)
+  {
+    console.log(subCateId);
+    this.router.navigate(['/products',this.currCate,subCateId]);
   }
 }
