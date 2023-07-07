@@ -1,37 +1,54 @@
 <!-- <app-brands></app-brands> -->
 <div class="row p-0 m-0">
-
-  <div class="col-md-10 p-1">
-    <app-products-list></app-products-list>
-  </div>
-  <div class="col-md-2 p-2">
-    <div class="section mb-3">
+  <div class="col-md-2 p-2 m-0">
+    <div class="section pb-2">
       <div class="row">
         <div class="col-md-12">
           <div class="pcount">{{ totalProducts }} Products found </div>
         </div>
       </div>
       <hr class="my-1 p-0">
-      <div class="row" *ngIf="totalProducts>0">
+      <div class="row" >
         <div class="col-md-12">
-          <p style="font-weight: bold;
-          font-size: large;">Sort By</p>
-        </div>
-        <div class="col-md-12 a-sorting mb-3" *ngFor="let sorting of sortingMethods">
-          <div [ngClass]="{highlighted: currSort==sorting.value}">
-            <a (click)="onSort(sorting.value)">{{sorting.name}}</a>
+          <div class="col-md-6 mb-2 mw-100" *ngIf="totalProducts>0">
+            <mat-accordion>
+              <mat-expansion-panel [expanded]="panelOpenState?'true':'false'" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Sort By
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="col-md-12 a-sorting mb-3" *ngFor="let sorting of sortingMethods">
+                  <div [ngClass]="{highlighted: currSort==sorting.value}">
+                    <a (click)="onSort(sorting.value)" >{{sorting.name}}</a>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+          <div class="col-md-6 mw-100">
+            <mat-accordion>
+              <mat-expansion-panel [expanded]="panelOpenState2?'true':'false'" (opened)="panelOpenState2 = true" (closed)="panelOpenState2 = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Categories
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="col-md-12 a-sorting mb-3" *ngFor="let subCategory of subCategories">
+                  <div [ngClass]="{highlighted: currSubCate==subCategory.id}">
+                    <a (click)="onChangeSubCate(subCategory.id)">{{subCategory.name}}</a>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="section mb-3">
-        <div class="row">
-          <div class="col-md-12 a-sorting mb-3" *ngFor="let subCategory of subCategories">
-            <div [ngClass]="{highlighted: currSubCate==subCategory.id}">
-              <a (click)="onChangeSubCate(subCategory.id)">{{subCategory.name}}</a>
-            </div>
-          </div>
       </div>
     </div>
   </div>
+  <div class="col-md-10 p-1 m-0">
+    <app-products-list></app-products-list>
+  </div>
+
 </div>

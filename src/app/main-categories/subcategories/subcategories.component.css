@@ -31,13 +31,14 @@
   margin: 20px;
 }
 
-a,.product-img{
+.product-img {
   text-decoration: none;
   color: inherit;
   border: none;
-  height: 10rem;
-  width: auto;
+  height: 9rem;
+  max-width: 80%;
   transition: transform .2s;
+  cursor: pointer;
 }
 
 .product-img:hover{
@@ -69,4 +70,17 @@ a{
   font-size: 24px;
   font-family: Arial, sans-serif;
   text-align: center;
+}
+
+@media only screen and (max-width:1000px)
+{
+  .product-img {
+    text-decoration: none;
+    color: inherit;
+    border: none;
+    height: 7rem;
+    max-width: 80%;
+    transition: transform .2s;
+    cursor: pointer;
+  }
 }

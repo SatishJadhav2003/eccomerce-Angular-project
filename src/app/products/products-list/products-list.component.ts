@@ -29,7 +29,7 @@ export class ProductsListComponent implements OnInit {
       this.productService.getProductsBasedOnSubcategory(this.subCategoryName).subscribe
       ((res)=>{
         console.log('from products list component', res);
-        this.products = res;
+        this.products = res.sort((a,b)=>b.sellUnit-a.sellUnit);
         this.productsCount = this.products.length;
 
         // Passing products for parent component

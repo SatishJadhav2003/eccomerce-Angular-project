@@ -27,5 +27,13 @@ a{
 .highlighted {
   color: crimson;
   font-weight: bold;
-  /* Add your desired highlighted styles here */
+}
+
+@media only screen and (max-width:1000px)
+{
+  .pcount {
+    font-size: 14px;
+    margin-top: 4px;
+    opacity: .5;
+  }
 }

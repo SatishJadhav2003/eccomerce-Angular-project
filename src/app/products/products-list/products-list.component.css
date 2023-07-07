@@ -154,22 +154,59 @@ a {
 
 }
 
-.rating-background-green{
-  background-color: #388e3c!important;
-}
-.rating-background-red{
-  background-color: #ff6161!important;
+.rating-background-green {
+  background-color: #388e3c !important;
 }
 
-.rating-background-yellow{
-  background-color: #ff9f00!important;
+.rating-background-red {
+  background-color: #ff6161 !important;
 }
 
-.product-row{
+.rating-background-yellow {
+  background-color: #ff9f00 !important;
+}
+
+.product-row {
   transition: transform .2s;
 }
 
-.product-row:hover
-{
+.product-row:hover {
   transform: scale(1.01);
+}
+
+.rating-reviews-count {
+  padding-left: 8px;
+  font-weight: 500;
+  color: #878787;
+}
+
+@media only screen and (max-width: 600px) {
+
+  .heading {
+    font-weight: 500;
+    font-size: 16px;
+    margin: 0;
+  }
+  .info-price {
+    padding-left: 40px;
+  }
+
+  .actual-price {
+    display: inline-flex;
+  }
+
+  .available {
+    display: inline-flex;
+  }
+
+  .offer-text {
+    display: none;
+  }
+
+  .rating-reviews-count {
+    padding-left: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #878787;
+  }
 }

@@ -10,6 +10,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./main-categories.component.css'],
 })
 export class MainCategoriesComponent {
+  panelOpenState=false;
+  isMobile=false;
   category: Category[];
   index: string;
   currentCate: any;
@@ -20,6 +22,10 @@ export class MainCategoriesComponent {
     private route: ActivatedRoute,
     private router: Router
   ) {
+    if(window.innerWidth < 1000)
+    {
+    this.isMobile = true;
+    }
     this.service.getCategoriesFromServer();
     // this.service.getMongoCate();
     this.service.categories.subscribe((cate) => {
@@ -38,6 +44,8 @@ export class MainCategoriesComponent {
 
   // on clicking sidenavbar item this function will call to navigate
   onChangeCategory(name: any) {
+    this.panelOpenState = false;
+    console.log(this.panelOpenState)
     this.router.navigate(['/main-categories', name]);
   }
 }
