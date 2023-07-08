@@ -9,7 +9,6 @@ import { Observable, Subject, map } from 'rxjs';
 export class ProductService {
   products = new Subject<Product[]>();
   productfound = new Subject<number>();
-  cuuProduct = new Subject<Product>();
 
   api = 'http://localhost:3000/products';
   constructor(private http: HttpClient) {}
@@ -23,10 +22,8 @@ export class ProductService {
   }
 
   //get Product by id
-  getProductById(id: string) {
-    this.http.get<any>(`${this.api}/${id}`).subscribe((res) => {
-      this.cuuProduct.next(res);
-    });
+  getProductById(id: string):Observable<Product> {
+  return  this.http.get<any>(`${this.api}/${id}`);
   }
 
   // to get random 5 products from server

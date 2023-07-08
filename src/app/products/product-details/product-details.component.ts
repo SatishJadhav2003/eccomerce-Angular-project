@@ -9,54 +9,54 @@ import { ProductService } from 'src/app/shared/product.service';
   styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent implements OnInit {
-
   id: string;
   category: string;
-  product:Product;
-  viewMore:Boolean = false;
-  viewAllComments:Boolean=false;
-  relatedProducts:Product[];
+  product: Product;
+  viewMore: Boolean;
+  viewAllComments: Boolean;
+  relatedProducts: Product[];
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
-    private router:Router
+    private router: Router
   ) {
 
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.route.firstChild.paramMap.subscribe((res) => {
+      // view more disabled
+      this.viewMore = false;
+    this.viewAllComments = false;
+
+    // getting params
       this.category = res.get('category');
       this.id = res.get('id');
       console.log(this.id);
       // get product by id
-     this.productService.getProductById(this.id);
-     this.productService.cuuProduct.subscribe((product)=>{
-      this.product = product;
-      // getting related products
-      this.productService.getRelatedProducts(this.product.category_id).subscribe((res)=>{
-        console.log("related products",res);
-        this.relatedProducts = res;
+      this.productService.getProductById(this.id).subscribe((product) => {
+        this.product = product;
+        // getting related products
+        this.productService
+          .getRelatedProducts(this.product.category_id)
+          .subscribe((res) => {
+            console.log('related products', res);
+            this.relatedProducts = res;
+          });
       });
-     })
     });
   }
 
-
-  viewMoreDetails()
-  {
+  viewMoreDetails() {
     this.viewMore = !this.viewMore;
   }
 
-  viewAllComment()
-  {
+  viewAllComment() {
     this.viewAllComments = !this.viewAllComments;
   }
 
-  viewProduct(subcategory:string,id:string)
-  {
-    this.router.navigate(['/product',this.category,subcategory,id]);
-    window.scrollTo(0,0);
+  viewProduct(subcategory: string, id: string) {
+    this.router.navigate(['/product', this.category, subcategory, id]);
+    window.scrollTo(0, 0);
   }
 }
