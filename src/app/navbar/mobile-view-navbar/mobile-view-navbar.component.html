@@ -1,19 +1,19 @@
 
-<mat-toolbar color="accent">
+<mat-toolbar color="accent" class="sticky-top">
   <button
     class="btn"
     style="color: white"
-    (click)="sidenav.toggle()"
+    (click)="sidenav.toggle() && top()"
     matTooltip="Menu"
   >
     <mat-icon>menu</mat-icon>
   </button>
-  <span>Farmer's Market</span>
+  <span routerLink="/home" >Farmer's Market</span>
 
   <span class="toolbar-item-spacer"></span>
 
   <button class="btn" style="color: white">
-    <mat-icon>add_shopping_cart</mat-icon>
+    <mat-icon  routerLink="/cart">add_shopping_cart</mat-icon>
     <sup>2</sup>
   </button>
   <!-- <button class="btn" style="color: white">

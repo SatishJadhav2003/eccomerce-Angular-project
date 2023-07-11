@@ -5,15 +5,24 @@ export class Subcategory {
   description: string;
   img: string;
   highlightMsg: string;
-  types:[
+  types: [
     {
-      name:string;
+      name: string;
     }
-  ]
+  ];
 }
 export class Category {
   id: string;
   name: string;
-  image:string;
+  image: string;
   subCategories: Subcategory[];
+}
+
+export class CartProducts {
+  product_id: string;
+  quantity: number;
+  title: string;
+  price: number;
+  MRP:number;
+  image: string;
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from './models/product.model';
 import { Observable, Subject, map } from 'rxjs';
+import { CartProducts } from './models/models';
 
 @Injectable({
   providedIn: 'root',
@@ -36,5 +37,18 @@ export class ProductService {
         return shuffled.slice(0, 5);
       })
     );
+  }
+
+  //Get Products from cart
+  getCartProducts():Observable<any>{
+    return this.http.get<any>("http://localhost:3000/cartProducts/1");
+  }
+
+  //Update cart
+  updateCart(products:CartProducts[])
+  {
+    this.http.put<CartProducts[]>("http://localhost:3000/cartProducts/1",products).subscribe((res)=>{
+      console.log("Update succesfull",res);
+    });
   }
 }

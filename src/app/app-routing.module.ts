@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home/home.component';
 import { MainCategoriesComponent } from './main-categories/main-categories.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { ShoppingCartComponent } from './order/shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -30,7 +31,8 @@ const routes: Routes = [
       },
     ],
   },
-  { path: '**', redirectTo: '/home', pathMatch: 'full' },
+  {path:'cart',component:ShoppingCartComponent},
+  { path: '**', redirectTo: '/cart', pathMatch: 'full' },
 ];
 
 @NgModule({

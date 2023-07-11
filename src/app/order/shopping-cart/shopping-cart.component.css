@@ -1,0 +1,185 @@
+.section {
+  box-shadow: 0 5px 9px 0 rgba(0, 0, 0, .08);
+  /* box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px; */
+  background-color: #fff;
+  border-radius: 2px;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  height: auto;
+  display: block;
+}
+
+.heading {
+  font-weight: 500;
+  font-size: 24px;
+}
+
+
+/* width style */
+.title {
+  width: 30%;
+}
+
+.image {
+  width: 25%;
+}
+
+.form {
+  width: 15%;
+}
+
+.total-amount {
+  width: 20%;
+}
+
+.remove-button {
+  width: 10%;
+}
+
+
+/* Common style */
+
+.img {
+  width: 100%;
+  height: 7rem;
+  object-fit: contain;
+}
+.image:hover
+{
+  cursor: pointer;
+}
+.products-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.remove-button {
+  color: red;
+  cursor: pointer;
+}
+
+.decrement-btn {
+  border-radius: 50%;
+  width: 35px;
+  color: black;
+}
+
+.decrement-btn:hover {
+  background-color: red;
+}
+
+.increment-btn {
+  border-radius: 50%;
+  width: 35px;
+  color: black;
+}
+
+.increment-btn:hover {
+  background-color: green;
+}
+
+.quantity-input {
+  border: none;
+  text-align: center;
+}
+
+.total-amount {
+  color: black;
+  font-weight: 600;
+}
+
+.calculation {
+  padding: 0 24px;
+  font-size: var(--font-size-16);
+  border-top: 2px dashed #e0e0e0;
+}
+
+.point {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin: 20px 0;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.total {
+  border-top: 1px dashed #e0e0e0;
+  border-bottom: 1px dashed #e0e0e0;
+
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.place-order {
+  box-shadow: 0 5px 9px 0 rgba(0, 0, 0, .08);
+  /* box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px; */
+  border-radius: 2px;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  height: auto;
+  display: block;
+  font-weight: 500;
+  font-size: 24px;
+  background-color: #fb641b;
+  color: white;
+  cursor: pointer;
+}
+
+.place-order:hover {
+  transform: scale(0.95);
+  color: black;
+}
+
+@media only screen and (max-width: 1000px) {
+
+  .title {
+    width: 70%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  .image {
+    width: 30%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+
+  .form {
+    width: 50%;
+  }
+
+  .total-amount {
+    width: 40%;
+  }
+
+  .remove-button {
+    width: 10%;
+  }
+
+  .decrement-btn:hover {
+    background-color: transparent;
+  }
+
+  .increment-btn:hover {
+    background-color: transparent;
+  }
+
+  .products-row {
+    padding-bottom: 12px;
+    border-top: 1px dashed #e0e0e0;
+  }
+
+  .heading {
+    margin-bottom: 0px;
+  }
+}

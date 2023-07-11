@@ -1,0 +1,72 @@
+<div class="row w-100 m-0 p-0" *ngIf="productsInCart && productsInCart.length>0">
+  <div class="col-md-8">
+    <div class="section" *ngIf="productsInCart">
+      <div class="heading">
+        Your Basket is Here
+      </div>
+      <hr *ngIf="!isMobile" >
+      <div class="row mx-0 my-4 p-0 products-row" *ngFor="let product of productsInCart;let i = index">
+        <div class="image" (click)="onProduct(product.product_id)">
+          <img src="{{product.image}}" alt="{{product.title}}" class="img">
+        </div>
+        <a (click)="onProduct(product.product_id)" class="title">
+          {{product.title}}
+        </a>
+        <div class="form">
+          <div class="input-group">
+            <button [disabled]="quantity<=0" class="btn btn-outline-secondary decrement-btn mx-1" (click)="decrement(i)"
+              type="button">--</button>
+            <input type="price" class="form-control quantity-input " (mouseout)="valueChanged(i)"  [(ngModel)]="product.quantity" min="0">
+            <button class="btn btn-outline-secondary increment-btn mx-1" (click)="increment(i)" type="button">+</button>
+          </div>
+        </div>
+        <div class=" total-amount">
+          {{product.price*product.quantity | currency:'INR':'symbol':'1.0'}}
+        </div>
+        <div class=" remove-button" (click)="removeProduct(i)">
+          <mat-icon>delete_forever</mat-icon>
+        </div>
+      </div>
+      <div class="place-order mb-0 mt-2">
+        <div class="">
+          PLACE ORDER
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="section">
+      <div class="heading mb-3">
+        SubTotal
+      </div>
+      <div class="calculation">
+        <div class="point">
+          <span style="max-width: 68%;">Price({{productsInCart.length}} items) </span> {{selling_total_price |
+          currency:'INR':'symbol':'1.0'}}
+        </div>
+        <div class="point">
+          <span style="max-width: 68%;"> Discount </span> <span style="color: #388e3c;">
+            -- {{(selling_total_price-Total_Amount)| currency:'INR':'symbol':'1.0'}}
+          </span>
+        </div>
+        <div class="point">
+          Delivery Charges <span style="color: #388e3c;">Free</span>
+        </div>
+        <div class="total point py-3">
+          <span style="max-width: 68%;">Total Amount</span> {{Total_Amount | currency:'INR':'symbol':'1.0'}}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="section" *ngIf="productsInCart && productsInCart.length<=0">
+  <div class="col-md-12 heading mb-3" style="color: red;">
+    Your Basket is Empty !!
+  </div>
+  <div class="col-md-12" routerLink="/home">
+    <button class="btn btn-primary">
+      Continue Shopping
+    </button>
+  </div>
+</div>

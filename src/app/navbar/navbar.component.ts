@@ -7,15 +7,8 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
   searchTerm:String='';
-  // opened!: boolean;
-
-  // navItems = [
-  //   { name: 'Home', icon: 'home' },
-  //   { name: 'About', icon: 'info' },
-  //   { name: 'Contact', icon: 'mail' }
-  // ];
-  // toggleSidebar()
-  // {
-
-  // }
+  top()
+  {
+    window.scrollTo(0,0);
+  }
 }

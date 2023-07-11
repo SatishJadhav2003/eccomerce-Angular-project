@@ -19,6 +19,7 @@ import { ProductsListComponent } from './products/products-list/products-list.co
 import { BrandsComponent } from './products/brands/brands.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { ShoppingCartComponent } from './order/shopping-cart/shopping-cart.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
     ProductsListComponent,
     BrandsComponent,
     ProductsComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,

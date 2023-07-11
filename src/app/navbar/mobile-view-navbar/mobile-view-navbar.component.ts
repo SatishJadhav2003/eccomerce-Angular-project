@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./mobile-view-navbar.component.css']
 })
 export class MobileViewNavbarComponent {
-
+  top()
+  {
+    window.scrollTo(0,0);
+  }
 }
