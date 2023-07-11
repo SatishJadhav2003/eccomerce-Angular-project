@@ -56,7 +56,13 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   viewProduct(subcategory: string, id: string) {
-    this.router.navigate(['/product', this.category, subcategory, id]);
+    if (this.category) {
+      this.router.navigate(['/product', this.category, subcategory, id]);
+    } else {
+      // This is write for when we comes from cart component thei is category id is not available so for that we can use directly :id route
+      this.router.navigate(['/product', id]);
+    }
+
     window.scrollTo(0, 0);
   }
 }
