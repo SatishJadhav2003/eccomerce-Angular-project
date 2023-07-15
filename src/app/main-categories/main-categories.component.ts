@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonService } from '../shared/common.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../shared/models/models';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main-categories',
@@ -15,7 +14,6 @@ export class MainCategoriesComponent {
   category: Category[];
   index: string;
   currentCate: any;
-  subcription: Subscription;
 
   constructor(
     private service: CommonService,
@@ -26,11 +24,17 @@ export class MainCategoriesComponent {
     {
     this.isMobile = true;
     }
-    this.service.getCategoriesFromServer();
-    // this.service.getMongoCate();
-    this.service.categories.subscribe((cate) => {
-      this.category = cate;
-    });
+
+    if (!this.service.category) {
+      this.service.getCategoriesFromServer();
+      this.service.categories.subscribe((cate) => {
+        this.category = cate;
+        console.log(this.category);
+      });
+    } else {
+      this.category = this.service.category;
+      console.log('from else in main categories components');
+    }
   }
 
   ngOnInit(): void {

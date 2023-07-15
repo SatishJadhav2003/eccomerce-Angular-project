@@ -9,9 +9,14 @@
               Buy Now
             </button>
           </li>
-          <li class="w-50">
+          <li *ngIf="!existInCart" class="w-50">
             <button class="buy-now action" style="background-color: #fb641b;">
               Add to cart
+            </button>
+          </li>
+          <li *ngIf="existInCart" routerLink="/cart"  class="w-50">
+            <button class="buy-now action" style="background-color: #fb641b;">
+              Go to cart
             </button>
           </li>
         </ul>

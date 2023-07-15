@@ -18,15 +18,25 @@ export class ShoppingCartComponent {
   isChanged:Boolean=false;
   isMobile:Boolean=false;
   constructor(private productService: ProductService,private router:Router) {
-    this.productService.getCartProducts().subscribe((res) => {
-      this.cartItems = res;
-      console.log(this.cartItems);
-      this.productsInCart = res.products;
-      res.products.forEach((item) => {
+    if (!this.productService.cartProducts) {
+      this.productService.getCartProducts().subscribe((res) => {
+        this.cartItems = res;
+        console.log(this.cartItems);
+        this.productsInCart = res.products;
+        res.products.forEach((item) => {
+          this.Total_Amount += item.price * item.quantity;
+          this.selling_total_price += item.MRP * item.quantity;
+        });
+      });
+    } else {
+      this.cartItems = this.productService.cartProducts;
+      console.log("Hello from else in  cart",this.cartItems);
+      this.productsInCart = this.cartItems.products;
+      this.cartItems.products.forEach((item) => {
         this.Total_Amount += item.price * item.quantity;
         this.selling_total_price += item.MRP * item.quantity;
       });
-    });
+    }
   }
 
   ngOnInit() {

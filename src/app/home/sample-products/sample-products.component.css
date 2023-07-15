@@ -17,7 +17,7 @@
   display: inline-block;
   vertical-align: top;
   width: 100%;
-  max-height: 366px;
+  max-height: 170px;
   text-align: center;
   background: transparent;
 }
@@ -142,6 +142,9 @@ a,
 
 @media only screen and (max-width: 600px) {
 
+  .cards {
+    max-height: 100px;
+  }
 
 .category-img {
   text-decoration: none;

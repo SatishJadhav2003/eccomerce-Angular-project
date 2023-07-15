@@ -10,6 +10,7 @@ export class CommonService {
   mobile: boolean = false;
   currCateChanged = new Subject<Category>();
   categories = new Subject<Category[]>();
+  category:Category[];
   temp: Category;
 
   api: string = 'http://localhost:3000/categories';
@@ -21,6 +22,7 @@ export class CommonService {
     return this.http.get<Category[]>(this.api).subscribe((res: any) => {
       console.log("From service",res);
       this.categories.next(res);
+      this.category=res;
       return res;
     });
   }
