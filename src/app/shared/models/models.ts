@@ -19,6 +19,7 @@ export class Category {
 }
 
 export class CartProducts {
+  id:string;
   product_id: string;
   quantity: number;
   title: string;

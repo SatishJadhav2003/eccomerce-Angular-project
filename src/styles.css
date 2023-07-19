@@ -21,3 +21,59 @@ body {
   background-color: #f1f3f6;
 
 }
+
+
+/* Snackbar style */
+
+:root {
+  --primary-color: #153d77;
+  --secondary-color: #6c757d;
+  --white-color: #fff;
+  --success-color: #198754;
+  --delete-color: #dc3545;
+  --background-color: #f2f2f2;
+}
+
+.cdk-overlay-pane{
+  max-width: 90%!important;
+}
+.mat-mdc-snack-bar-handset{
+  flex: unset!important;
+}
+
+.success-snackbar {
+  color: white;
+  --mdc-snackbar-container-color: var(--success-color);
+  .mat-simple-snackbar-action {
+    color: white;
+  }
+}
+
+
+.error-snackbar {
+  color: white;
+  --mdc-snackbar-container-color: var(--delete-color);
+  border-color: #f5c6cb;
+
+  .mat-simple-snackbar-action {
+    color: white;
+  }
+}
+/*
+.light-success-snackbar {
+  color: #155724;
+  --mdc-snackbar-container-color: #d4edda;
+
+  .mat-simple-snackbar-action {
+    color: darkgreen;
+  }
+}
+
+.light-error-snackbar {
+  color: #721c24;
+  --mdc-snackbar-container-color: #f8d7da;
+  border-color: #f5c6cb;
+  .mat-simple-snackbar-action {
+    color: darkred;
+  }
+} */

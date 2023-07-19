@@ -20,6 +20,7 @@ import { BrandsComponent } from './products/brands/brands.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { ShoppingCartComponent } from './order/shopping-cart/shopping-cart.component';
+import { GreenSnackbarComponent } from './shared/snackbar/green-snackbar.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ShoppingCartComponent } from './order/shopping-cart/shopping-cart.compo
     BrandsComponent,
     ProductsComponent,
     ProductDetailsComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    GreenSnackbarComponent
   ],
   imports: [
     BrowserModule,

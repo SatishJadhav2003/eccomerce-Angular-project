@@ -38,31 +38,41 @@ export class ProductService {
     );
   }
 
-  //Get Products from cart
-  getCartProducts(): Observable<any> {
-    return this.http.get<any>('http://localhost:3000/cartProducts/1').pipe(
-      map((res) => {
-        this.cartProducts = res;
-        return res;
-      })
-    );
+  //Cart section
+
+  //Get cart products
+  getCartProducts(): Observable<CartProducts[]> {
+    return this.http
+      .get<CartProducts[]>('http://localhost:3000/cartProducts')
+      .pipe(
+        map((res) => {
+          this.cartProducts = res;
+          return res;
+        })
+      );
   }
 
   //Update cart
-  updateCart(products: CartProducts[]) {
-    this.http
-      .put<CartProducts[]>('http://localhost:3000/cartProducts/1', products)
-      .subscribe((res) => {
-        console.log('Update succesfull', res);
-    this.cartProducts=products;
-      });
+  updateCart(product: CartProducts): Observable<CartProducts> {
+    //patch method use to update specific value
+    return this.http.patch<CartProducts>(
+      `http://localhost:3000/cartProducts/${product.id}`,
+      product
+    );
   }
 
-  addToCart(data: CartProducts) {
-    this.http
-      .post('http://localhost:3000/cartProducts/1/products', data)
-      .subscribe((res) => {
-        console.log(res);
-      });
+  // Adding to cart
+  addToCart(product: CartProducts): Observable<CartProducts> {
+    return this.http.post<CartProducts>(
+      'http://localhost:3000/cartProducts',
+      product
+    );
+  }
+
+  // delete product
+  deleteCartProduct(product_id: string): Observable<CartProducts> {
+    return this.http.delete<CartProducts>(
+      `http://localhost:3000/cartProducts/${product_id}`
+    );
   }
 }

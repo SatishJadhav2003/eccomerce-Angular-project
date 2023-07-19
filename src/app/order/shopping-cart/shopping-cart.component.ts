@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartProducts } from 'src/app/shared/models/models';
 import { ProductService } from 'src/app/shared/product.service';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,99 +12,142 @@ import { ProductService } from 'src/app/shared/product.service';
 export class ShoppingCartComponent {
   quantity: number = 1;
   productsInCart: CartProducts[];
-  cartItems: any;
-  selling_total_price: number = 0;
+  MRP: number = 0;
   Total_Amount: number = 0;
   Total_discount: number = 0;
-  isChanged:Boolean=false;
-  isMobile:Boolean=false;
-  constructor(private productService: ProductService,private router:Router) {
+  isMobile: Boolean = false;
+
+  constructor(private productService: ProductService, private router: Router,public snackbar:SnackBarService) {
+    // getting carts all products
     if (!this.productService.cartProducts) {
       this.productService.getCartProducts().subscribe((res) => {
-        this.cartItems = res;
-        console.log(this.cartItems);
-        this.productsInCart = res.products;
-        res.products.forEach((item) => {
+        this.productsInCart = res;
+        this.productsInCart.forEach((item) => {
           this.Total_Amount += item.price * item.quantity;
-          this.selling_total_price += item.MRP * item.quantity;
+          this.MRP += item.MRP * item.quantity;
         });
       });
     } else {
-      this.cartItems = this.productService.cartProducts;
-      console.log("Hello from else in  cart",this.cartItems);
-      this.productsInCart = this.cartItems.products;
-      this.cartItems.products.forEach((item) => {
+      this.productsInCart = this.productService.cartProducts;
+      console.log('from else in shopping cart', this.productsInCart);
+      this.productsInCart.forEach((item) => {
         this.Total_Amount += item.price * item.quantity;
-        this.selling_total_price += item.MRP * item.quantity;
+        this.MRP += item.MRP * item.quantity;
       });
     }
   }
 
   ngOnInit() {
-    if(window.innerWidth<1000)
-    {
-      this.isMobile=true;
+    if (window.innerWidth < 1000) {
+      this.isMobile = true;
     }
   }
+
+  // incrementing quantity
   increment(i: number) {
     this.productsInCart[i].quantity++;
-    this.selling_total_price += this.productsInCart[i].MRP;
+    this.MRP += this.productsInCart[i].MRP;
     this.Total_Amount += this.productsInCart[i].price;
-    this.isChanged = true;
+    this.updateProduct(this.productsInCart[i]);
   }
 
+  // reduncing quantity
   decrement(i: number) {
     this.productsInCart[i].quantity--;
-    this.selling_total_price += this.productsInCart[i].MRP;
-    this.Total_Amount += this.productsInCart[i].price;
+
+    // cheking for if there quantity is zero then user want to remove product or not
     if (this.productsInCart[i].quantity == 0) {
       if (confirm('Do you want to remove this item from cart')) {
-        this.productsInCart.splice(i, 1);
+        this.productService
+          .deleteCartProduct(this.productsInCart[i].id)
+          .subscribe((res) => {
+            console.log('removed');
+            this.MRP -= this.productsInCart[i].MRP;
+            this.Total_Amount -= this.productsInCart[i].price;
+            this.productsInCart.splice(i, 1);
+            this.productService.cartProducts = this.productsInCart;
+          });
       } else {
         this.productsInCart[i].quantity++;
-        this.selling_total_price -= this.productsInCart[i].MRP;
-        this.Total_Amount -= this.productsInCart[i].price;
-
       }
+    } else {
+      // if product quiantity is not zero  || greater than 1
+      this.updateProduct(this.productsInCart[i]);
+      this.MRP -= this.productsInCart[i].MRP;
+      this.Total_Amount -= this.productsInCart[i].price;
     }
-    this.isChanged = true;
   }
 
+  // for removing product from cart
   removeProduct(index: number) {
     if (confirm('Do you want to remove this item from cart')) {
-      this.productsInCart.splice(index, 1);
-      this.isChanged = true;
+      this.productService
+        .deleteCartProduct(this.productsInCart[index].id)
+        .subscribe((res) => {
+          console.log('removed');
+        this.snackbar.redSnackBar("Deleted successfully","ok","delete")
+          // calculating total price after removed item
+          this.Total_Amount -=
+            this.productsInCart[index].price *
+            this.productsInCart[index].quantity;
+          this.MRP -=
+            this.productsInCart[index].MRP *
+            this.productsInCart[index].quantity;
+          this.productsInCart.splice(index, 1);
+          this.productService.cartProducts = this.productsInCart;
+        });
     }
   }
 
-  valueChanged(i:number)
-  {
-    this.isChanged =true;
-    if(this.productsInCart[i].quantity<=0)
-    {
+  //on changing input value checks for zero quantity
+  valueChanged(index: number) {
+    if (this.productsInCart[index].quantity <= 0) {
       if (confirm('Do you want to remove this item from cart')) {
-        this.productsInCart.splice(i, 1);
+        this.productService
+          .deleteCartProduct(this.productsInCart[index].id)
+          .subscribe((res) => {
+            console.log('removed');
+            this.Total_Amount -=
+              this.productsInCart[index].price *
+              this.productsInCart[index].quantity;
+            this.MRP -=
+              this.productsInCart[index].MRP *
+              this.productsInCart[index].quantity;
+            this.productsInCart.splice(index, 1);
+            this.productService.cartProducts = this.productsInCart;
+          });
+      } else {
+        this.productsInCart[index].quantity = 1;
+        this.updateProduct(this.productsInCart[index]);
+        this.Total_Amount = 0;
+        this.MRP = 0;
+        this.productsInCart.forEach((item) => {
+          this.Total_Amount += item.price * item.quantity;
+          this.MRP += item.MRP * item.quantity;
+        });
       }
-      else{
-        this.productsInCart[i].quantity =1
-      }
+    } else {
+      this.updateProduct(this.productsInCart[index]);
+      this.Total_Amount = 0;
+      this.MRP = 0;
+      this.productsInCart.forEach((item) => {
+        this.Total_Amount += item.price * item.quantity;
+        this.MRP += item.MRP * item.quantity;
+      });
     }
   }
 
-  onProduct(id:string)
-  {
+  // navigating toward different related product
+  onProduct(id: string) {
     console.log(id);
-    this.router.navigate(['/product',id]);
+    this.router.navigate(['/product', id]);
   }
 
-  ngOnDestroy() {
-    if(this.isChanged)
-    {
-      console.log('hello');
-      this.cartItems.products = this.productsInCart;
-      console.log(this.cartItems);
-      this.productService.updateCart(this.cartItems);
-    }
-
+  // updating cart item
+  updateProduct(product: CartProducts) {
+    this.productService.updateCart(product).subscribe((res) => {
+      console.log(res);
+      this.productService.cartProducts = this.productsInCart;
+    });
   }
 }

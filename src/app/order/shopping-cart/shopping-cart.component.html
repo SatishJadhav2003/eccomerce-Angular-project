@@ -4,7 +4,7 @@
       <div class="heading">
         Your Basket is Here
       </div>
-      <hr *ngIf="!isMobile" >
+      <hr *ngIf="!isMobile">
       <div class="row mx-0 my-4 p-0 products-row" *ngFor="let product of productsInCart;let i = index">
         <div class="image" (click)="onProduct(product.product_id)">
           <img src="{{product.image}}" alt="{{product.title}}" class="img">
@@ -14,10 +14,14 @@
         </a>
         <div class="form">
           <div class="input-group">
-            <button [disabled]="quantity<=0" class="btn btn-outline-secondary decrement-btn mx-1" (click)="decrement(i)"
-              type="button">--</button>
-            <input type="price" class="form-control quantity-input " (mouseout)="valueChanged(i)"  [(ngModel)]="product.quantity" min="0">
-            <button class="btn btn-outline-secondary increment-btn mx-1" (click)="increment(i)" type="button">+</button>
+            <div class="input-group-prepend ml-2">
+              <button [disabled]="quantity<=0" (click)="decrement(i)" class="btn btn-outline-primary"
+                type="button">-</button>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="product.quantity" min="0" (change)="valueChanged(i)" />
+            <div class="input-group-prepend">
+              <button class="btn btn-outline-primary" (click)="increment(i)" type="button">+</button>
+            </div>
           </div>
         </div>
         <div class=" total-amount">
@@ -41,12 +45,12 @@
       </div>
       <div class="calculation">
         <div class="point">
-          <span style="max-width: 68%;">Price({{productsInCart.length}} items) </span> {{selling_total_price |
+          <span style="max-width: 68%;">Price({{productsInCart.length}} items) </span> {{MRP |
           currency:'INR':'symbol':'1.0'}}
         </div>
         <div class="point">
           <span style="max-width: 68%;"> Discount </span> <span style="color: #388e3c;">
-            -- {{(selling_total_price-Total_Amount)| currency:'INR':'symbol':'1.0'}}
+            -- {{(MRP-Total_Amount)| currency:'INR':'symbol':'1.0'}}
           </span>
         </div>
         <div class="point">

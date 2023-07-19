@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs';
+import { CartProducts } from 'src/app/shared/models/models';
 import { Product } from 'src/app/shared/models/product.model';
 import { ProductService } from 'src/app/shared/product.service';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 
 @Component({
   selector: 'app-product-details',
@@ -16,12 +17,13 @@ export class ProductDetailsComponent implements OnInit {
   viewMore: Boolean;
   viewAllComments: Boolean;
   relatedProducts: Product[];
-  cartItem:any[];
-  existInCart:Boolean=false;
+  cartItem: any[];
+  existInCart: Boolean;
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar:SnackBarService
   ) {}
 
   ngOnInit() {
@@ -29,6 +31,7 @@ export class ProductDetailsComponent implements OnInit {
       // view more disabled
       this.viewMore = false;
       this.viewAllComments = false;
+      this.existInCart = false;
 
       // getting params
       this.category = res.get('category');
@@ -47,24 +50,16 @@ export class ProductDetailsComponent implements OnInit {
       });
 
       // Checking whether product is present in cart or not
-      this.productService
-        .getCartProducts()
-        .pipe(
-          map((res) => {
-            this.cartItem=res;
-            return res.products;
-          })
-        )
-        .subscribe((cartProducts) => {
-          console.log(cartProducts);
-          cartProducts.forEach(item => {
-            if(item.product_id==this.id)
-            {
-              this.existInCart=true;
-              console.log("Exist")
-            }
-          });
+      this.productService.getCartProducts().subscribe((cartProducts) => {
+        this.cartItem = cartProducts;
+        console.log(cartProducts);
+        cartProducts.forEach((item) => {
+          if (item.product_id == this.id) {
+            this.existInCart = true;
+            console.log('Exist');
+          }
         });
+      });
     });
   }
 
@@ -86,8 +81,21 @@ export class ProductDetailsComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
-  addToCart()
-  {
-
+  addToCart() {
+    const data: CartProducts = {
+      id: null,
+      product_id: this.product.id,
+      quantity: 1,
+      title: this.product.title,
+      price: this.product.price,
+      MRP: this.product.actual_price,
+      image: this.product.images,
+    };
+    this.productService.addToCart(data).subscribe((res) => {
+      console.log(res);
+      this.productService.cartProducts.push(res);
+      this.snackBar.greenSnackBar("Added to cart","ok","done");
+    });
+    this.existInCart = true;
   }
 }

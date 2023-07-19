@@ -1,0 +1,20 @@
+.custom-snackbar {
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.snackbar-message {
+  text-align: center;
+  flex-grow: 1;
+}
+
+.snackbar-action{
+  text-align: right;
+}
+
+.action-button{
+  color: white!important;
+}
+
+
