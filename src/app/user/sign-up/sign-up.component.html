@@ -1,0 +1,79 @@
+<section class="gradient-custom ">
+  <div class="container py-2">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Sign Up</h3>
+            <form [formGroup]="signUpForm" (ngSubmit)="onSubmit(signUpForm)">
+              <div class="row">
+                <div class="col-md-12 mb-4">
+                  <div class="form-outline">
+                    <input formControlName="name" type="text" placeholder="Name" class="form-control form-control-lg" />
+                  </div>
+                  <span *ngIf="!signUpForm.controls['name'].valid && signUpForm.controls['name'].touched"
+                    class="error px-1">Name is required.</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                    <input formControlName="email" type="email" class="form-control form-control-lg"
+                      placeholder="Email" />
+                  </div>
+                  <span *ngIf="!signUpForm.controls['email'].valid && signUpForm.controls['email']?.touched"
+                    class="error px-1">Please Enter valid email.</span>
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                    <input formControlName="mobile" type="tel" class="form-control form-control-lg"
+                      placeholder="Phone Number" pattern="[7-9]{1}[0-9]{9}" />
+                      <span *ngIf="!signUpForm.controls['mobile'].valid && signUpForm.controls['mobile']?.touched"
+                  class="error px-1">Please Enter valid number </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 mb-4 pb-2">
+                  <div class="form-outline">
+                    <input formControlName="address" type="text" class="form-control form-control-lg"
+                      placeholder="Address" />
+                  </div>
+                  <span *ngIf="!signUpForm.controls['address'].valid && signUpForm.controls['address'].touched"
+                  class="error px-1">Address is required.</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                    <input formControlName="password" type="password" class="form-control form-control-lg"
+                      placeholder="Password" minlength="4" />
+                  </div>
+                  <span *ngIf="!signUpForm.controls['password'].valid && signUpForm.controls['password'].touched"
+                  class="error px-1">Password is required.</span>
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                    <input formControlName="confirmPassword" type="password" class="form-control form-control-lg"
+                      placeholder="Confirm Password" minlength="4" />
+                  </div>
+                  <span *ngIf="!signUpForm.controls['confirmPassword'].valid && signUpForm.controls['confirmPassword'].touched" class="error px-1">Password and Confirm Password must be match.</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <input [disabled]="!signUpForm.valid" [ngClass]="!signUpForm.valid?'grayButton':'crimsonButton'"
+                    class="btn btn-primary form-control form-control-lg" type="submit" value="Create Account" />
+                </div>
+                <div class="col-md-6 login ">
+                  <a routerLink="/user/login" style="color: black;">Alredy have an account <span
+                      style="color: blue;">Login Here</span> </a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

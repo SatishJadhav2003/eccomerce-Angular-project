@@ -5,6 +5,8 @@ import { MainCategoriesComponent } from './main-categories/main-categories.compo
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { ShoppingCartComponent } from './order/shopping-cart/shopping-cart.component';
+import { SignUpComponent } from './user/sign-up/sign-up.component';
+import { LoginComponent } from './user/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -31,8 +33,18 @@ const routes: Routes = [
       },
     ],
   },
-  {path:'cart',component:ShoppingCartComponent},
-  { path: '**', redirectTo: '/cart', pathMatch: 'full' },
+  {
+    path: 'user',
+    children: [
+      { path: 'signup', component: SignUpComponent },
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+    ],
+  },
+  { path: 'cart', component: ShoppingCartComponent },
+  { path: '**', redirectTo: '/user/signup', pathMatch: 'full' },
 ];
 
 @NgModule({
