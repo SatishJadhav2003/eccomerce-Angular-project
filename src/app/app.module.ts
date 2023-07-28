@@ -23,6 +23,9 @@ import { ShoppingCartComponent } from './order/shopping-cart/shopping-cart.compo
 import { GreenSnackbarComponent } from './shared/snackbar/green-snackbar.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { LoginComponent } from './user/login/login.component';
+import { CheckoutComponent } from './order/checkout/checkout.component';
+import { DialogComponent } from './shared/dialog/dialog.component';
+import { OrderConfirmedComponent } from './order/order-confirmed/order-confirmed.component';
 
 
 @NgModule({
@@ -43,7 +46,10 @@ import { LoginComponent } from './user/login/login.component';
     ShoppingCartComponent,
     GreenSnackbarComponent,
     SignUpComponent,
-    LoginComponent
+    LoginComponent,
+    CheckoutComponent,
+    DialogComponent,
+    OrderConfirmedComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,8 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
 import { ShoppingCartComponent } from './order/shopping-cart/shopping-cart.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { LoginComponent } from './user/login/login.component';
+import { CheckoutComponent } from './order/checkout/checkout.component';
+import { OrderConfirmedComponent } from './order/order-confirmed/order-confirmed.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -44,7 +46,9 @@ const routes: Routes = [
     ],
   },
   { path: 'cart', component: ShoppingCartComponent },
-  { path: '**', redirectTo: '/user/signup', pathMatch: 'full' },
+  {path:'checkout',component:CheckoutComponent},
+  {path:'order-confirmed',component:OrderConfirmedComponent},
+  { path: '**', redirectTo: '/order-confirmed', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -1,0 +1,115 @@
+<div class="section pb-5" *ngIf="productService.productOrdered">
+  <!-- header -->
+  <div class="row m-0 pt-2">
+    <div class="heading">Great news! Your order is in our system. We'll handle everything from here.
+
+    </div>
+    <div class="continue-shopping" routerLink="/home">
+      <button mat-stroked-button color="accent">Continue-Shopping</button>
+    </div>
+  </div>
+  <!--  -->
+  <div class="row mx-0 address-parent">
+    <div class="col-md-3 steper">
+      <mat-vertical-stepper linear>
+        <mat-step label="Order Comfirmed" completed="false" editable="false" state="done"></mat-step>
+        <mat-step label="Placed" state="none"></mat-step>
+        <mat-step label="Shipped" state="none"></mat-step>
+        <mat-step label="Delivered" state="none"></mat-step>
+      </mat-vertical-stepper>
+    </div>
+    <div class="col-md-9 address-section">
+      <div class="row">
+        <div class="col-md-6 p-5">
+          <div class="add-heading">
+            Order Placed
+          </div>
+          <div class="order-id">
+            Order ID {{id}}
+          </div>
+          <div class="arrives">
+            Arrives By : <span class="arrives-date">
+              {{arrival_date|date:'EEEE, MMMM d'}}
+            </span>
+          </div>
+          <div class="order-date">
+            Order Date : {{ordered_date|date:'EEEE, MMMM d'}}
+          </div>
+          <div class="sold-by">
+            Sold By VIP Group
+          </div>
+        </div>
+        <div class="col-md-6 p-5">
+          <div class="add-heading">
+            Shipping Address
+          </div>
+          <div class="name">
+            {{shippingAdd.name}}
+          </div>
+          <div class="mobile">
+            {{shippingAdd.mobile}}
+          </div>
+          <div class="address">
+            {{shippingAdd.address}}
+          </div>
+          <div class="city">
+            {{shippingAdd.city}} , {{shippingAdd.state}} {{shippingAdd.postalCode}}
+          </div>
+        </div>
+      </div>
+      <div class="greeting-message row">
+        Thank you for being our valued customer! Your support means the world to us. We're grateful for your trust and
+        look forward to serving you.
+      </div>
+    </div>
+  </div>
+  <div class="order-summary">
+    <div class="row m-0 pt-3 pl-2" style="border-top: 1px solid black;">
+      <h4>Order Summary</h4>
+    </div>
+    <div class="row">
+      <div class="col-md-4 p-2">
+        <div class="calculation">
+          <div class="point">
+            <span style="max-width: 68%;">Payment Mode : </span>  {{paymentMode}}
+          </div>
+          <div class="point">
+            <span style="max-width: 68%;">SubTotal({{productsQty.length}} items) </span> {{ total |
+            currency:'INR':'symbol':'1.0'}}
+          </div>
+          <div class="point">
+            Delivery Charges <span style="color: #388e3c;">Free</span>
+          </div>
+          <div class="total point py-3">
+            <span style="max-width: 68%;">Total </span> {{ total|
+            currency:'INR':'symbol':'1.0'}}
+          </div>
+          <div class="point">
+            <span class="discount"> Your Total Savings on this order <span>{{(totalMRP - total)|
+                currency:'INR':'symbol':'1.0'}}</span>
+            </span>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-8 products">
+        <div class="row product-row px-3" routerLink="/product/{{product.id}}" *ngFor="let product of products;let i = index">
+          <div class="col-md-4 img">
+            <img class="product-img" src="{{product.images}}" alt="">
+          </div>
+          <div class="col-md-3 p-0 title">
+            <div class="product-title">
+              {{product.title}}
+            </div>
+          </div>
+          <div class="col-md-2 product-qty">
+            Qty  - {{productsQty[i].qty}}
+          </div>
+          <div class="col-md-3 product-price">
+            {{ (productsQty[i].qty *productsQty[i].price ) | currency:'INR':'symbol':'1.0'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

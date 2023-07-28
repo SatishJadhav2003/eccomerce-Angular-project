@@ -35,7 +35,7 @@ body {
 }
 
 .cdk-overlay-pane{
-  max-width: 90%!important;
+  max-width: 90%;
 }
 .mat-mdc-snack-bar-handset{
   flex: unset!important;

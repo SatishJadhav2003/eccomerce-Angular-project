@@ -88,7 +88,7 @@ export class ProductDetailsComponent implements OnInit {
       quantity: 1,
       title: this.product.title,
       price: this.product.price,
-      MRP: this.product.actual_price,
+      MRP: this.product.MRP,
       image: this.product.images,
     };
     this.productService.addToCart(data).subscribe((res) => {

@@ -11,6 +11,7 @@ export class ProductService {
   products = new Subject<Product[]>();
   productfound = new Subject<number>();
   cartProducts: CartProducts[];
+  productOrdered: any;
 
   api = 'http://localhost:3000/products';
   constructor(private http: HttpClient) {}
@@ -74,5 +75,10 @@ export class ProductService {
     return this.http.delete<CartProducts>(
       `http://localhost:3000/cartProducts/${product_id}`
     );
+  }
+
+  // Order products
+  orderProducts(products: any): Observable<any> {
+    return this.http.post('http://localhost:3000/orders', products);
   }
 }

@@ -56,10 +56,10 @@
 
           </div>
           <div class="actual-price">
-            {{ product.actual_price | currency : "INR" : 'symbol': "2.0" }}
+            {{ product.MRP | currency : "INR" : 'symbol': "2.0" }}
             <span class="offer-percentage">
               {{
-              100 - (product.price / product.actual_price) * 100
+              100 - (product.price / product.MRP) * 100
               | number : "1.0-2"
               }}
               % off

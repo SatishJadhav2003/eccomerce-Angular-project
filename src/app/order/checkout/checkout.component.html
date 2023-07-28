@@ -1,0 +1,252 @@
+<div class="row m-0 p-0" *ngIf="products && products.length > 0">
+  <div class="col-md-8">
+    <div class="section">
+      <mat-horizontal-stepper linear>
+        <mat-step completed="true" label="Order Summary">
+          <div class="heading pt-3" style="border-top: 2px dashed #e0e0e0; color:brown">
+            ORDER SUMMARY
+          </div>
+          <div class="row product-row px-3" *ngFor="let product of products;let i = index">
+            <div class="col-md-4 img">
+              <img class="product-img" src="{{product.image}}" alt="">
+            </div>
+            <div class="col-md-3 p-0 title">
+              <div class="product-title">
+                {{product.title}}
+              </div>
+              <div class="product-brand">
+                Brand : {{"Apple"}}
+              </div>
+            </div>
+            <div class="col-md-2 product-qty">
+              Qty - {{product.quantity}}
+            </div>
+            <div class="col-md-2 product-price">
+              {{product.price*product.quantity| currency:'INR':'symbol':'1.0'}}
+            </div>
+            <div class="col-md-1  remove-button" (click)="removeProduct(i)">
+              <mat-icon>delete_forever</mat-icon>
+            </div>
+          </div>
+          <div class="row continue-button">
+            <button class="btn btn-primary" matStepperNext>Continue</button>
+          </div>
+        </mat-step>
+
+        <!-- Second step : Address -->
+        <mat-step [completed]="addressForm.valid"  label="Delivery Address">
+          <p class="heading pt-3 mb-0" style="border-top: 2px dashed #e0e0e0; color:brown">Delivery Address</p>
+          <div class="row  m-0">
+            <div class="col-md-12 p-0">
+              <form [formGroup]="addressForm" novalidate >
+                <mat-card class="shipping-card">
+                  <mat-card-content>
+                    <div class="row">
+                      <div class="col">
+                        <mat-form-field class="full-width">
+                          <input matInput placeholder="Name" formControlName="name">
+                          <mat-error *ngIf="addressForm.controls['name'].hasError('required')">
+                            First name is <strong>required</strong>
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col">
+                        <mat-form-field class="full-width">
+                          <input matInput placeholder="Mobile" formControlName="mobile" >
+                          <mat-error *ngIf="addressForm.controls['mobile'].hasError('required') ">
+                            Mobile is <strong>required</strong>
+                          </mat-error>
+                          <mat-error *ngIf="addressForm.controls['mobile'].hasError('pattern') ">
+                            Enter <strong>valid</strong> mobile Number
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <mat-form-field class="full-width">
+                          <textarea matInput placeholder="Address" formControlName="address"></textarea>
+                          <mat-error *ngIf="addressForm.controls['address'].hasError('required')">
+                            Address is <strong>required</strong>
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <mat-form-field class="full-width">
+                          <input matInput placeholder="City" formControlName="city">
+                          <mat-error *ngIf="addressForm.controls['city'].hasError('required')">
+                            City is <strong>required</strong>
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col">
+                        <mat-form-field class="full-width">
+                          <mat-select placeholder="State" formControlName="state">
+                            <mat-option *ngFor="let state of states" [value]="state.name">
+                              {{ state.name }}
+                            </mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="addressForm.controls['state'].hasError('required')">
+                            State is <strong>required</strong>
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <mat-form-field class="full-width">
+                          <input matInput #postalCode maxlength="6" placeholder="Postal Code" type="string"
+                            formControlName="postalCode" pattern=^[1-9][0-9]{5}$>
+                            <mat-error *ngIf="addressForm.controls['postalCode'].hasError('required')">
+                              Postal code is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="addressForm.controls['postalCode'].hasError('minlength')">
+                              Enter valid <strong>Postal Code</strong>
+                            </mat-error>
+                          <mat-hint align="end">{{postalCode.value.length}} / 6</mat-hint>
+                        </mat-form-field>
+                      </div>
+                      <div class="col" align="start">
+                        <mat-radio-group formControlName="shipping">
+                          <mat-radio-button value="home">Home (All Day Delivery)</mat-radio-button>
+                          <mat-radio-button value="office">Office (Delivery between 10 AM to 5
+                            PM)</mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </form>
+              <!-- <form>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="tel" class="form-control" placeholder="Mobile Number">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Postal Code">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Locality">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <textarea type="text" class="form-control"
+                        placeholder="Address (Area/Street/Landmark)"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="City/District/Town">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="State">
+                    </div>
+                  </div>
+                </div>
+                <div class="row px-3">
+                  <div class="col-md-12" style="text-align: start;">
+                    <label>Address Type</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioInline1">Home (All Day Delivery)</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioInline2">Office (Delivery between 10 AM to 5
+                      PM)</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <button class="btn btn-primary">Deliver Here</button>
+                  </div>
+                </div>
+              </form> -->
+            </div>
+          </div>
+          <div class="row continue-button">
+            <button class="btn btn-primary" (click)="onSubmitAddressForm()" [disabled]="!addressForm.valid" matStepperNext>DELIVER HERE</button>
+          </div>
+          </mat-step>
+
+        <!-- Third step : payment -->
+        <mat-step completed="false" label="Payment">
+          <div class="heading pt-3" style="border-top: 2px dashed #e0e0e0; color:brown">
+            Payment
+          </div>
+          <div class="row">
+            <div class="col" align="center">
+              <mat-radio-group [(ngModel)]="payment">
+                <mat-radio-button value="cod">COD (Cash On Delivery)</mat-radio-button>
+                <br>
+                <mat-radio-button value="paid">Alredy Paid Online</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div class="row continue-button">
+            <button class="btn btn-primary"  (click)="confirmOrder()">Confirm Order</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="section-pricedetails mt-2">
+      <div class="heading mb-3">
+        Price Details
+      </div>
+      <div class="calculation">
+        <div class="point">
+          <span style="max-width: 68%;">Price({{products.length}} items) </span> {{total_amount |
+          currency:'INR':'symbol':'1.0'}}
+        </div>
+        <div class="point">
+          Delivery Charges <span style="color: #388e3c;">Free</span>
+        </div>
+        <!-- <div class="point">
+          <span style="max-width: 68%;"> Discount </span> <span style="color: #388e3c;">
+            -- {{"2999"| currency:'INR':'symbol':'1.0'}}
+          </span>
+        </div> -->
+        <div class="total point py-3">
+          <span style="max-width: 68%;">Total Payable</span> {{total_amount|
+          currency:'INR':'symbol':'1.0'}}
+        </div>
+        <div class="point">
+          <span class="discount"> Your Total Savings on this order <span>{{(total_MRP-total_amount)|
+              currency:'INR':'symbol':'1.0'}}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="message">
+      <div class="security-img">
+        <mat-icon>security</mat-icon>
+      </div>
+      Safe and Secure Payments. Easy returns. 100% Authentic products.
+    </div>
+  </div>
+</div>

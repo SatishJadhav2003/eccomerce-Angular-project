@@ -5,7 +5,7 @@ export class Product {
   title:string;
   description: string;
   price: number;
-  actual_price:number;
+  MRP:number;
   discount?:any;
   images: string; // Assuming an array of image URLs
   category_id:string ;
