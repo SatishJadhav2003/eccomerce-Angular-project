@@ -41,13 +41,17 @@ const routes: Routes = [
       { path: 'signup', component: SignUpComponent },
       {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
       },
     ],
   },
   { path: 'cart', component: ShoppingCartComponent },
-  {path:'checkout',component:CheckoutComponent},
-  {path:'order-confirmed',component:OrderConfirmedComponent},
+  {
+    path: 'checkout',
+    component: CheckoutComponent
+  },
+  { path: 'checkout/:id', component: CheckoutComponent },
+  { path: 'order-confirmed', component: OrderConfirmedComponent },
   { path: '**', redirectTo: '/order-confirmed', pathMatch: 'full' },
 ];
 

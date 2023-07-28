@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { CartProducts } from 'src/app/shared/models/models';
 import { ProductService } from 'src/app/shared/product.service';
@@ -12,14 +12,14 @@ import { ProductService } from 'src/app/shared/product.service';
   styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent {
+  productId: string;
   address = false;
-  products: CartProducts[];
+  products: CartProducts[] = [];
   total_amount: number = 0;
   total_MRP: number = 0;
   productsInfo: any[] = [];
   pattern = '[7-9]{1}[0-9]{9}';
   payment = 'cod';
-
   addressForm = this.fb.group({
     name: ['satish jadhav', Validators.required],
     mobile: [
@@ -44,25 +44,50 @@ export class CheckoutComponent {
     private productService: ProductService,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    public router: Router
+    public router: Router,
+    private route: ActivatedRoute
   ) {
-    if (productService.cartProducts) {
-      console.log(productService.cartProducts);
-      this.products = productService.cartProducts;
-      this.products.forEach((item) => {
-        this.total_MRP += item.MRP * item.quantity;
-        this.total_amount += item.price * item.quantity;
-      });
-    } else {
-      this.productService.getCartProducts().subscribe((res) => {
-        console.log('getting from server ', res);
-        this.products = res;
-        this.products.forEach((item) => {
-          this.total_MRP += item.MRP * item.quantity;
-          this.total_amount += item.price * item.quantity;
+    this.route.params.subscribe((params) => {
+
+      // if product from view component this code will execute
+      if (params['id']) {
+        this.productId = params['id'];
+        this.productService.getProductById(this.productId).subscribe((res) => {
+          const product: CartProducts = {
+            id: null,
+            product_id: this.productId,
+            quantity: 1,
+            title: res.title,
+            price: res.price,
+            MRP: res.MRP,
+            image: res.images,
+          };
+          this.products.push(product);
+          this.total_MRP = res.MRP;
+          this.total_amount = res.price;
         });
-      });
-    }
+      } else {
+
+        // if products from cart this code will wxecute
+        if (productService.cartProducts) {
+          console.log(productService.cartProducts);
+          this.products = productService.cartProducts;
+          this.products.forEach((item) => {
+            this.total_MRP += item.MRP * item.quantity;
+            this.total_amount += item.price * item.quantity;
+          });
+        } else {
+          this.productService.getCartProducts().subscribe((res) => {
+            console.log('getting from server ', res);
+            this.products = res;
+            this.products.forEach((item) => {
+              this.total_MRP += item.MRP * item.quantity;
+              this.total_amount += item.price * item.quantity;
+            });
+          });
+        }
+      }
+    });
   }
 
   removeProduct(index: number) {
@@ -158,14 +183,52 @@ export class CheckoutComponent {
       // getting auto generated order id from res
       orderInfo.id = res.id;
       this.productService.productOrdered = orderInfo;
-    // Removing all ordered products from cart
-    this.products.forEach((item) => {
-      this.productService.deleteCartProduct(item.id).subscribe((res) => {
-        console.log('product removed', res);
-      });
+      // Removing all ordered products from cart
+      if (!this.productId) {
+        this.products.forEach((item) => {
+          this.productService.deleteCartProduct(item.id).subscribe((res) => {
+            console.log('product removed', res);
+          });
+        });
+      }
+      this.router.navigate(['/order-confirmed']);
     });
-    this.router.navigate(['/order-confirmed']);
-    });
+  }
 
+  increment() {
+    this.products[0].quantity++;
+    this.total_MRP += this.products[0].MRP;
+    this.total_amount += this.products[0].price;
+  }
+  decrement() {
+    this.products[0].quantity--;
+    this.total_MRP -= this.products[0].MRP;
+    this.total_amount -= this.products[0].price;
+  }
+
+  valueChanged() {
+    if (this.products[0].quantity <= 0) {
+      this.dialog
+        .open(DialogComponent, {
+          data: {
+            heading: 'Remove Item',
+            msg: 'Do you want to remove this item ?',
+            action: 'REMOVE',
+          },
+        })
+        .afterClosed()
+        .subscribe((res) => {
+          if (res) {
+            this.router.navigate(['/product', this.productId]);
+          } else {
+            this.products[0].quantity = 1;
+            this.total_MRP = this.products[0].MRP;
+            this.total_amount = this.products[0].price;
+          }
+        });
+    } else {
+      this.total_MRP = this.products[0].quantity * this.products[0].MRP;
+      this.total_amount = this.products[0].quantity * this.products[0].price;
+    }
   }
 }

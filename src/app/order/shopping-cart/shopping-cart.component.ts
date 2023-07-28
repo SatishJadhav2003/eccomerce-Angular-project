@@ -26,22 +26,13 @@ export class ShoppingCartComponent {
     public dialog: MatDialog
   ) {
     // getting carts all products
-    if (!this.productService.cartProducts) {
-      this.productService.getCartProducts().subscribe((res) => {
-        this.productsInCart = res;
-        this.productsInCart.forEach((item) => {
-          this.Total_Amount += item.price * item.quantity;
-          this.MRP += item.MRP * item.quantity;
-        });
-      });
-    } else {
-      this.productsInCart = this.productService.cartProducts;
-      console.log('from else in shopping cart', this.productsInCart);
+    this.productService.getCartProducts().subscribe((res) => {
+      this.productsInCart = res;
       this.productsInCart.forEach((item) => {
         this.Total_Amount += item.price * item.quantity;
         this.MRP += item.MRP * item.quantity;
       });
-    }
+    });
   }
 
   ngOnInit() {
@@ -101,7 +92,6 @@ export class ShoppingCartComponent {
   removeProduct(index: number) {
     this.dialog
       .open(DialogComponent, {
-        width: '600px',
         data: {
           heading: 'Remove Item',
           msg: 'Do you want to remove this item from cart ?',
@@ -133,30 +123,41 @@ export class ShoppingCartComponent {
   //on changing input value checks for zero quantity
   valueChanged(index: number) {
     if (this.productsInCart[index].quantity <= 0) {
-      if (confirm('Do you want to remove this item from cart')) {
-        this.productService
-          .deleteCartProduct(this.productsInCart[index].id)
-          .subscribe((res) => {
-            console.log('removed');
-            this.Total_Amount -=
-              this.productsInCart[index].price *
-              this.productsInCart[index].quantity;
-            this.MRP -=
-              this.productsInCart[index].MRP *
-              this.productsInCart[index].quantity;
-            this.productsInCart.splice(index, 1);
-            this.productService.cartProducts = this.productsInCart;
-          });
-      } else {
-        this.productsInCart[index].quantity = 1;
-        this.updateProduct(this.productsInCart[index]);
-        this.Total_Amount = 0;
-        this.MRP = 0;
-        this.productsInCart.forEach((item) => {
-          this.Total_Amount += item.price * item.quantity;
-          this.MRP += item.MRP * item.quantity;
+      this.dialog
+        .open(DialogComponent, {
+          data: {
+            heading: 'Remove Item',
+            msg: 'Do you want to remove this item from cart ?',
+            action: 'REMOVE',
+          },
+        })
+        .afterClosed()
+        .subscribe((res) => {
+          if (res) {
+            this.productService
+              .deleteCartProduct(this.productsInCart[index].id)
+              .subscribe((res) => {
+                console.log('removed');
+                this.Total_Amount -=
+                  this.productsInCart[index].price *
+                  this.productsInCart[index].quantity;
+                this.MRP -=
+                  this.productsInCart[index].MRP *
+                  this.productsInCart[index].quantity;
+                this.productsInCart.splice(index, 1);
+                this.productService.cartProducts = this.productsInCart;
+              });
+          } else {
+            this.productsInCart[index].quantity = 1;
+            this.updateProduct(this.productsInCart[index]);
+            this.Total_Amount = 0;
+            this.MRP = 0;
+            this.productsInCart.forEach((item) => {
+              this.Total_Amount += item.price * item.quantity;
+              this.MRP += item.MRP * item.quantity;
+            });
+          }
         });
-      }
     } else {
       this.updateProduct(this.productsInCart[index]);
       this.Total_Amount = 0;
