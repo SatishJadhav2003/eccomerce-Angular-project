@@ -3,6 +3,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { ProductService } from 'src/app/shared/product.service';
 import { Product } from 'src/app/shared/models/product.model';
 import { Router } from '@angular/router';
+import { Order } from 'src/app/shared/models/models';
 
 @Component({
   selector: 'app-order-confirmed',
@@ -16,7 +17,7 @@ import { Router } from '@angular/router';
   ],
 })
 export class OrderConfirmedComponent {
-  orderDetails: any;
+  orderDetails: Order;
   id: string;
   ordered_date: Date;
   arrival_date: Date;
@@ -38,11 +39,11 @@ export class OrderConfirmedComponent {
         this.productService.getProductById(item.product_id).subscribe((res) => {
           this.products.push(res);
           this.productsQty.push({
-            qty: item.qty,
+            qty: item.quantity,
             price: item.price,
           });
-          this.total += item.qty * item.price;
-          this.totalMRP += item.qty * res.MRP;
+          this.total += item.quantity * item.price;
+          this.totalMRP += item.quantity * res.MRP;
           console.log(this.totalMRP);
         }),
           (err) => {
@@ -50,23 +51,13 @@ export class OrderConfirmedComponent {
           };
       });
       this.id = this.orderDetails.id;
-      this.ordered_date = this.orderDetails.ordered_date;
-      // incrementing arrival date by 3 days
-      this.arrival_date = this.incrementDate(this.orderDetails.ordered_date,3);
-      this.shippingAdd = this.orderDetails.deliveryAdd;
-      this.paymentMode = this.orderDetails.payment;
+      this.ordered_date = this.orderDetails.order_date;
+      this.arrival_date = this.orderDetails.delivery_date
+      this.shippingAdd = this.orderDetails.shipping_add;
+      this.paymentMode = this.orderDetails.payment_mode;
     }
     else{
       this.router.navigate(['/home']);
     }
-  }
-
-
-  // logic for incrementing date
-  incrementDate(date:Date,days:number)
-  {
-    let result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result;
   }
 }

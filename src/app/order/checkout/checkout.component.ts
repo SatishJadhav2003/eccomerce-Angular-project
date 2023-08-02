@@ -3,7 +3,11 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
-import { CartProducts } from 'src/app/shared/models/models';
+import {
+  CartProducts,
+  Order,
+  orderProducts,
+} from 'src/app/shared/models/models';
 import { ProductService } from 'src/app/shared/product.service';
 
 @Component({
@@ -17,20 +21,20 @@ export class CheckoutComponent {
   products: CartProducts[] = [];
   total_amount: number = 0;
   total_MRP: number = 0;
-  productsInfo: any[] = [];
+  productsInfo: orderProducts[] = [];
   pattern = '[7-9]{1}[0-9]{9}';
   payment = 'cod';
   addressForm = this.fb.group({
     name: ['satish jadhav', Validators.required],
     mobile: [
-      '8390613529',
+      8390613529,
       [Validators.required, Validators.pattern(this.pattern)],
     ],
     address: ['palase mala khadakjamb Tal. chandwad ', Validators.required],
     city: ['nashik', Validators.required],
     state: ['', Validators.required],
     postalCode: [
-      '',
+      ,
       Validators.compose([
         Validators.required,
         Validators.minLength(6),
@@ -48,7 +52,6 @@ export class CheckoutComponent {
     private route: ActivatedRoute
   ) {
     this.route.params.subscribe((params) => {
-
       // if product from view component this code will execute
       if (params['id']) {
         this.productId = params['id'];
@@ -67,7 +70,6 @@ export class CheckoutComponent {
           this.total_amount = res.price;
         });
       } else {
-
         // if products from cart this code will wxecute
         if (productService.cartProducts) {
           console.log(productService.cartProducts);
@@ -158,31 +160,40 @@ export class CheckoutComponent {
 
   confirmOrder() {
     // getting user id
-    const user_id = 'satish123';
+    const user_id = '1';
     const date = new Date();
     // extracting necessary info from products
     this.products.forEach((item) => {
-      const info = {
+      const info: orderProducts = {
         product_id: item.product_id,
-        qty: item.quantity,
+        quantity: item.quantity,
         price: item.price,
       };
       this.productsInfo.push(info);
     });
-
-    const orderInfo = {
+    const order: Order = {
       id: null,
-      userId: user_id,
+      user_id: user_id,
+      status: 'Comfirm',
+      order_date: date,
+      delivery_date: this.incrementDate(date, 3),
+      payment_mode: this.payment,
       products: this.productsInfo,
-      deliveryAdd: this.addressForm.value,
-      payment: this.payment,
-      ordered_date: date,
+      shipping_add: {
+        name: this.addressForm.value.name,
+        mobile: this.addressForm.value.mobile,
+        address: this.addressForm.value.address,
+        city: this.addressForm.value.city,
+        state: this.addressForm.value.state,
+        postal_code: this.addressForm.value.postalCode,
+        shipping_at: this.addressForm.value.shipping,
+      },
     };
-    this.productService.orderProducts(orderInfo).subscribe((res) => {
+    this.productService.orderProducts(order).subscribe((res) => {
       console.log('product added Succefully', res);
       // getting auto generated order id from res
-      orderInfo.id = res.id;
-      this.productService.productOrdered = orderInfo;
+      order.id = res.id;
+      this.productService.productOrdered = order;
       // Removing all ordered products from cart
       if (!this.productId) {
         this.products.forEach((item) => {
@@ -230,5 +241,12 @@ export class CheckoutComponent {
       this.total_MRP = this.products[0].quantity * this.products[0].MRP;
       this.total_amount = this.products[0].quantity * this.products[0].price;
     }
+  }
+
+  // logic for incrementing date
+  incrementDate(date: Date, days: number) {
+    let result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
   }
 }
