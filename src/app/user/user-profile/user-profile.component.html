@@ -1,0 +1,97 @@
+<div class="mx-4">
+  <div class="row m-0">
+    <div class="col-md-3 pr-0">
+      <div class="user-profile">
+        <div class="row m-0">
+          <div class="col-md-4">
+            <div class="user-img-section">
+              <img src="https://sipl.ind.in/wp-content/uploads/2022/07/dummy-user.png" class="user-img" alt="">
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="user-name-section">
+              Satish Jadhav
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section mt-2">
+
+        <div class="box row mx-0" [routerLink]="['./personal-info']" routerLinkActive="is-active">
+          <img class="box-img" src="../../../../assets/images/icons/profile.png" alt="">
+          <div class="content">
+            <span class="headline">
+              Personal Information
+            </span>
+            <div class="description">
+              Edit personal information
+            </div>
+          </div>
+        </div>
+        <div class="box row mx-0" [routerLink]="['./my-orders']" routerLinkActive="is-active">
+          <img class="box-img" src="../../../../assets/images/icons/orders.png" alt="">
+          <div class="content">
+            <span class="headline">
+              My Orders
+            </span>
+            <div class="description">
+              View your all orders
+            </div>
+          </div>
+        </div>
+
+        <div class="box row mx-0" [routerLink]="['./my-wishlist']" routerLinkActive="is-active">
+          <img class="box-img" src="../../../../assets/images/icons/wishlist.png" alt="">
+          <div class="content">
+            <span class="headline">
+              My Wishlist
+            </span>
+            <div class="description">
+              View,Remove products
+            </div>
+          </div>
+        </div>
+        <div class="box row mx-0" [routerLink]="['./my-address']" routerLinkActive="is-active">
+          <img class="box-img" src="../../../../assets/images/icons/address.png" alt="">
+          <div class="content">
+            <span class="headline">
+              My Addresses
+            </span>
+            <div class="description">
+              View,Add,Remove address
+            </div>
+          </div>
+        </div>
+        <div class="box row mx-0" [routerLink]="['./rating-reviews']" routerLinkActive="is-active">
+          <img class="box-img" src="../../../../assets/images/icons/ratings.png" alt="">
+          <div class="content">
+            <span class="headline">
+              My ratings and reviews
+            </span>
+            <div class="description">
+              View,Remove products
+            </div>
+          </div>
+        </div>
+
+        <div class="box row mx-0" [routerLink]="['./login-security']" routerLinkActive="is-active">
+          <img class="box-img" src="../../../../assets/images/icons/security.png" alt="">
+          <div class="content">
+            <span class="headline">
+              Login & Security
+            </span>
+            <div class="description">
+              Manage login credentials
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-9 pr-0">
+      <div class="section">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

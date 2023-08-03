@@ -26,6 +26,13 @@ import { LoginComponent } from './user/login/login.component';
 import { CheckoutComponent } from './order/checkout/checkout.component';
 import { DialogComponent } from './shared/dialog/dialog.component';
 import { OrderConfirmedComponent } from './order/order-confirmed/order-confirmed.component';
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { MyOrdersComponent } from './user/user-profile/my-orders/my-orders.component';
+import { PersonalInfoComponent } from './user/user-profile/personal-info/personal-info.component';
+import { LoginSecurityComponent } from './user/user-profile/login-security/login-security.component';
+import { AddressComponent } from './user/user-profile/address/address.component';
+import { WishlistComponent } from './user/user-profile/wishlist/wishlist.component';
+import { RatingReviewsComponent } from './user/user-profile/rating-reviews/rating-reviews.component';
 
 
 @NgModule({
@@ -49,7 +56,14 @@ import { OrderConfirmedComponent } from './order/order-confirmed/order-confirmed
     LoginComponent,
     CheckoutComponent,
     DialogComponent,
-    OrderConfirmedComponent
+    OrderConfirmedComponent,
+    UserProfileComponent,
+    MyOrdersComponent,
+    PersonalInfoComponent,
+    LoginSecurityComponent,
+    AddressComponent,
+    WishlistComponent,
+    RatingReviewsComponent
   ],
   imports: [
     BrowserModule,

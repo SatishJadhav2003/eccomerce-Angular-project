@@ -1,0 +1,109 @@
+<div class="container">
+  <h2 class=""> My Orders History </h2>
+</div>
+<mat-accordion>
+  <mat-expansion-panel hideToggle *ngFor="let item of  orders" style="margin-bottom: 0px;box-shadow:none">
+    <mat-expansion-panel-header style="height: 100%;" class="py-3">
+      <div class="row product-row px-3">
+        <div class="col-md-2">
+          <div class="order-id">
+            {{item.id}}
+          </div>
+        </div>
+        <div class="col-md-2 img">
+          <img class="product-img" src="{{item.product.img}}" alt="">
+        </div>
+        <div class="col-md-4 p-0 title">
+          <div class="product-title">
+            {{item.product.title}}
+          </div>
+        </div>
+        <div class="col-md-2 product-price">
+          {{item.product.price | currency:'INR':'symbol':'1.0'}}
+        </div>
+        <div class="col-md-2 product-status">
+          <span class="point"
+            [ngClass]="item.status==='Cancelled'?'red-point':item.status==='Delivered'?'point':'orange-point'"></span>
+          {{item.status}}
+        </div>
+      </div>
+    </mat-expansion-panel-header>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card-body py-3 px-0">
+          <article class="card" [ngClass]="item.status==='Cancelled'?'red-border':''">
+            <div class="card-body row ">
+              <div class="col" *ngIf="item.status != 'Delivered' && item.status!='Cancelled'"> <strong
+                  style="color: green;">Estimated Delivery Date:</strong> <br>{{item.delivery_date|date:'EEEE, MMMM d'}} </div>
+              <div class="col" *ngIf="item.status === 'Delivered'"> <strong style="color: green;">Product Delivered
+                  on</strong> <br>{{item.delivery_date|date:'dd/MM/yyyy'}} </div>
+              <div class="col" *ngIf="item.status==='Cancelled'"> <strong
+                  style="color: red; font-size: 17px !important;align-items:center;">Order Cancelled</strong>
+              </div>
+              <div class="col"> <strong>Shipping BY:</strong> <br> VIPGroup, | <i class="fa fa-phone"></i> +918390613529
+              </div>
+              <div class="col"> <strong>Status:</strong> <br> <span
+                  [ngClass]="item.status==='Cancelled'?'red-color':item.status==='Delivered'?'green-color':'orange-color'">{{item.status}}
+                </span></div>
+              <div class="col"> <strong>Tracking #:</strong> <br> {{item.id}} </div>
+            </div>
+            <hr>
+            <div class="row m-0 py-4 desc-row">
+              <div class="col-md-4 address-box">
+                <div class="add-heading">
+                  Delivery Address
+                </div>
+                <div class="name">
+                  {{item.shippingAdd.name}}
+                </div>
+                <div class="address">
+                  {{item.shippingAdd.address}}
+                </div>
+                <div class="city">
+                  {{item.shippingAdd.city}} - {{item.shippingAdd.postal_code}}, {{item.shippingAdd.state}}
+                </div>
+                <div class="mobile-sec">
+                  <span class="mobile">Phone Number </span>
+                  {{item.shippingAdd.mobile}}
+                </div>
+              </div>
+              <div class="col-md-5 overiview-box ">
+                <div class="overview-heading">
+                  Overview
+                </div>
+                <div class="overiview-point">
+                  <span style="max-width: 68%;">Quantity </span>
+                  {{item.qty}}
+                </div>
+                <div class="overiview-point subtotal">
+                  <span style="width: 68%;">SubTotal </span>
+                  {{item.qty *item.product.price | currency:'INR':'symbol':'1.0'}}
+                </div>
+                <div class="overiview-point shipping">
+                  <span style="width: 68%;">Shipping & Handling Charges </span>
+                  {{"0"}}
+                </div>
+                <div class=" overiview-point total">
+                  <span style="width: 68%;">Total</span>
+                  {{item.qty *item.product.price| currency:'INR':'symbol':'1.0'}}
+                </div>
+              </div>
+              <div class="col-md-3 btn-box">
+                <div class="row mx-0 btn-1">
+                  <div class="col-md-12"><button routerLink="/product/{{item.product.id}}" mat-raised-button
+                      color="accent">View Product</button></div>
+                </div>
+                <div class="row m-0 btn-1">
+                  <div class="col-md-12">
+                    <button [disabled]="item.status!='Delivered'" mat-raised-button color="primary">Download
+                      Invoice</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

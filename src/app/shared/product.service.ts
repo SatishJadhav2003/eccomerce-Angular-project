@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from './models/product.model';
 import { Observable, Subject, map } from 'rxjs';
-import { CartProducts } from './models/models';
+import { CartProducts, Order } from './models/models';
 
 @Injectable({
   providedIn: 'root',
@@ -80,5 +80,11 @@ export class ProductService {
   // Order products
   orderProducts(products: any): Observable<any> {
     return this.http.post('http://localhost:3000/orders', products);
+  }
+
+
+  getAllOrders(user_id:string):Observable<Order[]>
+  {
+    return this.http.get<Order[]>(`http://localhost:3000/orders?user_id=${user_id}`);
   }
 }
