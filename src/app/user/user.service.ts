@@ -53,4 +53,9 @@ export class UserService {
   {
     return this.http.patch<User>(this.userApi+'/'+id,data);
   }
+
+  addToWishList(id:string,product_id:string):Observable<User>
+  {
+    return this.http.patch<User>(this.userApi+'/'+id,product_id);
+  }
 }

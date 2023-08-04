@@ -1,6 +1,9 @@
 <div class="section mb-3" *ngIf="product">
   <div class="row">
     <div class="col-md-6 mt-3">
+        <button class="wishlist-button" (click)="toggleWishlist()">
+          <i [class]="isInWishlist ? 'fas fa-heart' : 'far fa-heart'"></i>
+        </button>
       <img src="{{product.images}}" alt="{{product.name}}" class="product-img">
       <div class="action-button mt-5">
         <ul class="row m-0 p-0">

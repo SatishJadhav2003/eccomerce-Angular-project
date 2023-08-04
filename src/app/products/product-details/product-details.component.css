@@ -13,6 +13,37 @@
 }
 
 
+.wishlist-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  color: #ccc;
+  font-size: 31px;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.1);
+  padding: 10px;
+  border-radius: 50%;
+  height: auto;
+  width: auto;
+}
+
+.wishlist-button:hover {
+  cursor: pointer;
+}
+
+.wishlist-button i {
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.wishlist-button i.fas {
+  color: red;
+}
+button:focus {
+  outline: none;
+}
 
 .img-section {
 
@@ -250,6 +281,26 @@ li {
 
 
 @media only screen and (max-width: 600px) {
+
+  .section{
+    margin: 0px;
+  }
+
+  .wishlist-button {
+    position: absolute;
+    top: -19px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    color: #ccc;
+    font-size: 24px;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.1);
+    padding: 10px;
+    border-radius: 50%;
+    height: auto;
+    width: auto;
+  }
+
   .buy-now {
     padding: 9px 4px;
     border-radius: 2px;

@@ -4,6 +4,7 @@ import { CartProducts } from 'src/app/shared/models/models';
 import { Product } from 'src/app/shared/models/product.model';
 import { ProductService } from 'src/app/shared/product.service';
 import { SnackBarService } from 'src/app/shared/snack-bar.service';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-product-details',
@@ -19,11 +20,14 @@ export class ProductDetailsComponent implements OnInit {
   relatedProducts: Product[];
   cartItem: any[];
   existInCart: Boolean;
+  isInWishlist: boolean = false;
+  userWishList: any[];
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar:SnackBarService
+    private snackBar: SnackBarService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -61,6 +65,11 @@ export class ProductDetailsComponent implements OnInit {
         });
       });
     });
+
+    // this.userService.getUserInfo('1').subscribe((res) => {
+    //   console.log(res);
+    //   this.userWishList = res.wishlist;
+    // });
   }
 
   viewMoreDetails() {
@@ -94,8 +103,13 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.addToCart(data).subscribe((res) => {
       console.log(res);
       this.productService.cartProducts.push(res);
-      this.snackBar.greenSnackBar("Added to cart","ok","done");
+      this.snackBar.greenSnackBar('Added to cart', 'ok', 'done');
     });
     this.existInCart = true;
+  }
+
+  toggleWishlist(): void {
+    this.isInWishlist = !this.isInWishlist;
+    this.snackBar.greenSnackBar("Added to wishlist","ok","done");
   }
 }
