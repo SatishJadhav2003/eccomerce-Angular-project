@@ -1,0 +1,28 @@
+export class User
+{
+  id:string;
+  name:string;
+  mobile:number;
+  email:string;
+  gender?:string;
+  add?:{
+    name:string;
+    mobile:string;
+    address:string;
+    city:string;
+    state:string;
+    postal_code:number;
+  }
+  productsInCart?:[
+    {
+      id:string;
+      product_id:string;
+      quantity:string;
+    }
+  ]
+  wishlist?:[
+    {
+      product_id:string;
+    }
+  ]
+}

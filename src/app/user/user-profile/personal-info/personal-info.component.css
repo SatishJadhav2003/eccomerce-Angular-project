@@ -1,0 +1,62 @@
+.heading {
+  font-size: 24px;
+  font-weight: 500;
+  text-align: left;
+  padding: 24px 0px;
+  display: flex;
+  align-items: center;
+}
+
+.edit {
+  font-size: 14px;
+  font-weight: 500;
+  color: #2874f0;
+  cursor: pointer;
+  padding-left: 20px;
+  align-items: center;
+  display: flex;
+}
+
+.sub-heading
+{
+  /* display: flex;
+  align-items: center; */
+  margin: 30px 0px;
+}
+
+.name{
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.gender
+{
+  display: flex;
+  align-items: center;
+}
+
+.gender-option{
+  text-align:left;
+  cursor: pointer;
+}
+
+.btn1{
+  width: 100%;
+}
+
+.quetion{
+  font-size: 14px!important;
+  margin-bottom: 5px;
+  margin-top: 20px;
+  padding: 0;
+  line-height: 1.5;
+  font-weight: 500;
+  text-align: left;
+}
+
+.answer{
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 15px;
+  text-align: left;
+}

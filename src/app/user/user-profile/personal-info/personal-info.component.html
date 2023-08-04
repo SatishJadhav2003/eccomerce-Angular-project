@@ -1,1 +1,110 @@
-<p>personal-info works!</p>
+<div class="row m-0 pb-5">
+  <div class="col-md-6">
+    <div class="row m-0">
+      <div class="col-md-12">
+        <div class="heading">
+          Personal Information
+          <span class="edit">
+            <mat-icon (click)="toggleEdit()" *ngIf="!isEditing" class="edit-icon">edit</mat-icon>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row m-0">
+      <div class="col-md-12">
+        <form [formGroup]="userInfoForm">
+          <div class="row mx-0 sub-heading">
+            <div class="col-md-3">
+              <label for="exampleInputEmail1" class="pt-1 name">Name </label>
+            </div>
+            <div class="col-md-7">
+              <div class="form-group">
+                <input type="text" formControlName="name" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="row mx-0  sub-heading gender ">
+            <div class="col-md-3">
+              <label for="exampleInputEmail1" class="pt-1 name">Gender </label>
+            </div>
+            <div class="col-md-7 gender-option">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" formControlName="gender" type="radio" name="gender" value="male">
+                <label class="form-check-label">Male</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" formControlName="gender" type="radio" name="gender" value="female">
+                <label class="form-check-label">Female</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" formControlName="gender" type="radio" name="gender" value="other">
+                <label class="form-check-label">Other</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mx-0 sub-heading pt-2">
+            <div class="col-md-3">
+              <label for="exampleInputEmail1" class="pt-1 name">Mobile </label>
+            </div>
+            <div class="col-md-7">
+              <div class="form-group">
+                <input type="tel" formControlName="mobile" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="row mx-0 sub-heading pt-2">
+            <div class="col-md-3">
+              <label for="exampleInputEmail1" class="pt-1 name">Email </label>
+            </div>
+            <div class="col-md-7">
+              <div class="form-group">
+                <input type="email" formControlName="email" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="row mx-0 sub-heading">
+            <div class="col-md-5">
+              <button *ngIf="isEditing" class="btn1" mat-raised-button (click)="onSubmit()"
+                color="primary">Submit</button>
+            </div>
+            <div class="col-md-5 ">
+              <button *ngIf="isEditing" class="btn1" (click)="onCancle()" mat-raised-button
+                color="accent">Cancle</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="row mx-0 mb-2">
+      <div class="col-md-12">
+        <div class="heading">
+          FAQs
+        </div>
+      </div>
+    </div>
+    <div class="row mx-0">
+      <div class="col-md-12">
+        <h4 class="quetion">What happens when I update my email address (or mobile number)?</h4>
+        <p class="answer">
+          Your login email id (or mobile number) changes, likewise. You'll receive all your account related
+          communication on your updated email address (or mobile number).
+        </p>
+      </div>
+      <div class="col-md-12">
+        <h4 class="quetion">When will my account be updated with the new email address (or mobile number)?</h4>
+        <p class="answer">
+          It happens as soon as you confirm the verification code sent to your email (or mobile) and save the changes.
+        </p>
+      </div>
+      <div class="col-md-12">
+        <h4 class="quetion">What happens to my existing account when I update my email address (or mobile number)?</h4>
+        <p class="answer">
+          Updating your email address (or mobile number) doesn't invalidate your account. Your account remains fully
+          functional. You'll continue seeing your Order history, saved information and personal details.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

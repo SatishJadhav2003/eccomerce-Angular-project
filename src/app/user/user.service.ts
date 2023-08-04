@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SnackBarService } from '../shared/snack-bar.service';
+import { Observable, Subject } from 'rxjs';
+import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -38,5 +40,17 @@ export class UserService {
         this.snackbar.redSnackBar('User not found', 'ok', 'cancel');
       }
     });
+  }
+
+  //Getting user information
+  getUserInfo(id:string):Observable<User>
+  {
+    return this.http.get<User>(this.userApi+'/'+id);
+  }
+
+  // Updating user values
+  updateUserInfo(id:string,data:User):Observable<User>
+  {
+    return this.http.patch<User>(this.userApi+'/'+id,data);
   }
 }
