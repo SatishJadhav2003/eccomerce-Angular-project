@@ -1,7 +1,7 @@
 import { Component, DoCheck, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CommonService } from 'src/app/shared/common.service';
+import { CommonService } from 'src/app/shared/services/common.service';
 import { Category } from 'src/app/shared/models/models';
 
 @Component({

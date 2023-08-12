@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { ProductService } from 'src/app/shared/product.service';
+import { ProductService } from 'src/app/shared/services/product.service';
 import { Product } from 'src/app/shared/models/product.model';
 import { Router } from '@angular/router';
 import { Order } from 'src/app/shared/models/models';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-order-confirmed',
@@ -17,7 +18,7 @@ import { Order } from 'src/app/shared/models/models';
   ],
 })
 export class OrderConfirmedComponent {
-  orderDetails: Order;
+  orderDetails: any;
   id: string;
   ordered_date: Date;
   arrival_date: Date;
@@ -29,12 +30,12 @@ export class OrderConfirmedComponent {
   total: number = 0;
   totalSaved: number = 0;
   totalMRP: number = 0;
-  constructor(public productService: ProductService,private router:Router) {}
+  constructor(public productService: ProductService,private router:Router,public userService:UserService) {}
 
   ngOnInit() {
-    if (this.productService.productOrdered) {
-      console.log(this.productService.productOrdered);
-      this.orderDetails = this.productService.productOrdered;
+    if (this.userService.productOrdered) {
+      console.log(this.userService.productOrdered);
+      this.orderDetails = this.userService.productOrdered;
       this.orderDetails.products.forEach((item) => {
         this.productService.getProductById(item.product_id).subscribe((res) => {
           this.products.push(res);
@@ -50,7 +51,7 @@ export class OrderConfirmedComponent {
             console.log(err);
           };
       });
-      this.id = this.orderDetails.id;
+      this.id = this.orderDetails._id;
       this.ordered_date = this.orderDetails.order_date;
       this.arrival_date = this.orderDetails.delivery_date
       this.shippingAdd = this.orderDetails.shipping_add;

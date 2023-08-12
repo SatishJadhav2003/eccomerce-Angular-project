@@ -5,15 +5,11 @@
   <mat-expansion-panel hideToggle *ngFor="let item of  orders" style="margin-bottom: 0px;box-shadow:none">
     <mat-expansion-panel-header style="height: 100%;" class="py-3">
       <div class="row product-row px-3">
-        <div class="col-md-2">
-          <div class="order-id">
-            {{item.id}}
-          </div>
-        </div>
-        <div class="col-md-2 img">
+
+        <div class="col-md-3 img">
           <img class="product-img" src="{{item.product.img}}" alt="">
         </div>
-        <div class="col-md-4 p-0 title">
+        <div class="col-md-5 p-0 title">
           <div class="product-title">
             {{item.product.title}}
           </div>
@@ -45,7 +41,7 @@
               <div class="col"> <strong>Status:</strong> <br> <span
                   [ngClass]="item.status==='Cancelled'?'red-color':item.status==='Delivered'?'green-color':'orange-color'">{{item.status}}
                 </span></div>
-              <div class="col"> <strong>Tracking #:</strong> <br> {{item.id}} </div>
+              <div class="col"> <strong>Order Id #:</strong> <br> {{item.id}} </div>
             </div>
             <hr>
             <div class="row m-0 py-4 desc-row">

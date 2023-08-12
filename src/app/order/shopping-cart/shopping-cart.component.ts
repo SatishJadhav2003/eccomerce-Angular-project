@@ -3,8 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { CartProducts } from 'src/app/shared/models/models';
-import { ProductService } from 'src/app/shared/product.service';
-import { SnackBarService } from 'src/app/shared/snack-bar.service';
+import { ProductService } from 'src/app/shared/services/product.service';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -13,7 +14,7 @@ import { SnackBarService } from 'src/app/shared/snack-bar.service';
 })
 export class ShoppingCartComponent {
   quantity: number = 1;
-  productsInCart: CartProducts[];
+  productsInCart: any[] = [];
   MRP: number = 0;
   Total_Amount: number = 0;
   Total_discount: number = 0;
@@ -21,16 +22,46 @@ export class ShoppingCartComponent {
 
   constructor(
     private productService: ProductService,
+    private userService: UserService,
     private router: Router,
     public snackbar: SnackBarService,
     public dialog: MatDialog
   ) {
     // getting carts all products
-    this.productService.getCartProducts().subscribe((res) => {
-      this.productsInCart = res;
-      this.productsInCart.forEach((item) => {
-        this.Total_Amount += item.price * item.quantity;
-        this.MRP += item.MRP * item.quantity;
+    // if (this.userService.cartProducts.length > 0) {
+    //   const products: any = this.userService.cartProducts;
+    //   console.log("from stored ",products);
+    //   products.forEach((item)=>{
+    //     this.productsInCart.push(item);
+    //     this.Total_Amount += products.price * products.quantity;
+    //     this.MRP += products.MRP * products.quantity;
+    //   })
+    // } else {
+
+    // removing all cartproduct stored in service
+    this.userService.cartProducts = [];
+
+    // Getting all cart products
+    this.userService.getCartProducts().subscribe((res) => {
+      console.log(res);
+      res.forEach((item) => {
+        console.log(item.product_id);
+        this.productService
+          .getProductById(item.product_id)
+          .subscribe((product) => {
+            const temp = {
+              product_id: item.product_id,
+              image: product.images[0],
+              title: product.title,
+              quantity: item.quantity,
+              price: product.price,
+              MRP: product.MRP,
+            };
+            this.userService.cartProducts.push(temp);
+            this.productsInCart.push(temp);
+            this.Total_Amount += temp.price * temp.quantity;
+            this.MRP += temp.MRP * temp.quantity;
+          });
       });
     });
   }
@@ -67,14 +98,14 @@ export class ShoppingCartComponent {
         .afterClosed()
         .subscribe((res) => {
           if (res) {
-            this.productService
+            this.userService
               .deleteCartProduct(this.productsInCart[i].id)
               .subscribe((res) => {
                 console.log('removed');
                 this.MRP -= this.productsInCart[i].MRP;
                 this.Total_Amount -= this.productsInCart[i].price;
                 this.productsInCart.splice(i, 1);
-                this.productService.cartProducts = this.productsInCart;
+                this.userService.cartProducts = this.productsInCart;
               });
           } else {
             this.productsInCart[i].quantity++;
@@ -101,11 +132,16 @@ export class ShoppingCartComponent {
       .afterClosed()
       .subscribe((res) => {
         if (res) {
-          this.productService
-            .deleteCartProduct(this.productsInCart[index].id)
+          this.userService
+            .deleteCartProduct(this.productsInCart[index].product_id)
             .subscribe((res) => {
               console.log('removed');
-              this.snackbar.redSnackBar('Deleted successfully', 'ok', 'delete');
+              this.snackbar.redSnackBar(
+                'Item Removed from cart',
+                'ok',
+                'delete_forever'
+              );
+              this.userService.cartProducts.splice(index, 1);
               // calculating total price after removed item
               this.Total_Amount -=
                 this.productsInCart[index].price *
@@ -114,7 +150,7 @@ export class ShoppingCartComponent {
                 this.productsInCart[index].MRP *
                 this.productsInCart[index].quantity;
               this.productsInCart.splice(index, 1);
-              this.productService.cartProducts = this.productsInCart;
+              this.userService.cartProducts = this.productsInCart;
             });
         }
       });
@@ -134,7 +170,7 @@ export class ShoppingCartComponent {
         .afterClosed()
         .subscribe((res) => {
           if (res) {
-            this.productService
+            this.userService
               .deleteCartProduct(this.productsInCart[index].id)
               .subscribe((res) => {
                 console.log('removed');
@@ -145,7 +181,7 @@ export class ShoppingCartComponent {
                   this.productsInCart[index].MRP *
                   this.productsInCart[index].quantity;
                 this.productsInCart.splice(index, 1);
-                this.productService.cartProducts = this.productsInCart;
+                this.userService.cartProducts = this.productsInCart;
               });
           } else {
             this.productsInCart[index].quantity = 1;
@@ -177,9 +213,13 @@ export class ShoppingCartComponent {
 
   // updating cart item
   updateProduct(product: CartProducts) {
-    this.productService.updateCart(product).subscribe((res) => {
+    const data = {
+      product_id: product.product_id,
+      quantity: product.quantity,
+    };
+    this.userService.updateCart(data).subscribe((res) => {
       console.log(res);
-      this.productService.cartProducts = this.productsInCart;
+      this.userService.cartProducts = this.productsInCart;
     });
   }
 }

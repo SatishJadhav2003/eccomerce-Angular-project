@@ -12,9 +12,9 @@
               </mat-expansion-panel-header>
               <div class="col-md-12 a-sorting mb-3"  *ngFor="let categories of category; let i = index">
                 <a
-                (click)="onChangeCategory(categories.id)"
+                (click)="onChangeCategory(categories._id)"
                 class="side-nav-item"
-                [ngClass]="{ highlighted: currentCate === categories.id }"
+                [ngClass]="{ highlighted: currentCate === categories._id }"
               >
                 {{ categories.name }}
               </a>
@@ -26,9 +26,9 @@
           <mat-list>
             <mat-list-item *ngFor="let categories of category; let i = index">
               <a
-                (click)="onChangeCategory(categories.id)"
+                (click)="onChangeCategory(categories._id)"
                 class="side-nav-item"
-                [ngClass]="{ highlighted: currentCate === categories.id }"
+                [ngClass]="{ highlighted: currentCate === categories._id }"
               >
                 {{ categories.name }}
               </a>

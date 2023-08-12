@@ -10,9 +10,9 @@ import { User } from '../user.model';
 export class UserProfileComponent {
   user:User;
   constructor(private userService: UserService) {
-    this.userService.getUserInfo('1').subscribe((res)=>{
-      console.log(res);
+    this.userService.getUserInfo().subscribe((res) => {
       this.user = res;
-    })
+      console.log('value fetched', res);
+    });
   }
 }

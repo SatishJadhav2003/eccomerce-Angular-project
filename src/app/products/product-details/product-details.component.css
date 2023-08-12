@@ -152,7 +152,8 @@ button:focus {
   text-decoration: none;
   color: inherit;
   border: none;
-  height: auto;
+  max-height: 500px;
+  object-fit: contain;
   max-width: 80%;
   transition: transform .2s;
 }

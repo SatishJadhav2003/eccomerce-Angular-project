@@ -1,12 +1,11 @@
 
 export class Product {
-  id: string;
+  _id:string;
   name: string;
   title:string;
   description: string;
   price: number;
   MRP:number;
-  discount?:any;
   images: string; // Assuming an array of image URLs
   category_id:string ;
   brand: string;

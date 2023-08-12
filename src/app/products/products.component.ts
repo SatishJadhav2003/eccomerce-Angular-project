@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ProductService } from '../shared/product.service';
+import { ProductService } from '../shared/services/product.service';
 import { Product } from '../shared/models/product.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommonService } from '../shared/common.service';
+import { CommonService } from '../shared/services/common.service';
 import { Subcategory } from '../shared/models/models';
 
 @Component({

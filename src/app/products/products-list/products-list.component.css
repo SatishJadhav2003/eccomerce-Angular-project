@@ -14,6 +14,8 @@
   font-weight: 500;
   font-size: 18px;
   margin: 0;
+  padding: 5px 0px;
+
 }
 
 .pcount {
@@ -26,7 +28,8 @@ a,
   text-decoration: none;
   color: inherit;
   border: none;
-  height: auto;
+  height: 200px;
+  object-fit: contain;
   max-width: 180px;
   transition: transform .2s;
 }
@@ -114,6 +117,7 @@ a {
   font-weight: 500;
   margin-left: 8px;
   display: inline-block;
+  text-decoration: none!important;
 }
 
 .delivery {
@@ -192,11 +196,12 @@ a {
   }
 
   .actual-price {
-    display: inline-flex;
+    display:inline-block;
   }
 
   .available {
     display: inline-flex;
+    padding-left: 8px;
   }
 
   .offer-text {
@@ -208,5 +213,9 @@ a {
     font-size: 13px;
     font-weight: 500;
     color: #878787;
+  }
+
+  .delivery{
+    display: none;
   }
 }

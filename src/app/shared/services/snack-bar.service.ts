@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { GreenSnackbarComponent } from './snackbar/green-snackbar.component';
+import { GreenSnackbarComponent } from '../snackbar/green-snackbar.component';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class SnackBarService {
         icon:icon,
         snackbar:this.snackBar
       },
-      duration:2000,
+      duration:5000,
       panelClass: 'error-snackbar',
     });
   }

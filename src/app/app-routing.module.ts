@@ -16,6 +16,7 @@ import { LoginSecurityComponent } from './user/user-profile/login-security/login
 import { AddressComponent } from './user/user-profile/address/address.component';
 import { WishlistComponent } from './user/user-profile/wishlist/wishlist.component';
 import { RatingReviewsComponent } from './user/user-profile/rating-reviews/rating-reviews.component';
+import { AuthGuard } from './authentication/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -51,7 +52,7 @@ const routes: Routes = [
         component: LoginComponent,
       },
       {
-        path:'profile', component:UserProfileComponent,
+        path:'profile', component:UserProfileComponent, canActivate: [AuthGuard],
         children:[
           {
             path:'my-orders',component:MyOrdersComponent
@@ -76,14 +77,15 @@ const routes: Routes = [
 
     ],
   },
-  { path: 'cart', component: ShoppingCartComponent },
+  { path: 'cart', component: ShoppingCartComponent,canActivate: [AuthGuard] },
   {
     path: 'checkout',
-    component: CheckoutComponent
+    component: CheckoutComponent,
+    canActivate: [AuthGuard],
   },
-  { path: 'checkout/:id', component: CheckoutComponent },
-  { path: 'order-confirmed', component: OrderConfirmedComponent },
-  { path: '**', redirectTo: '/user/profile', pathMatch: 'full' },
+  { path: 'checkout/:id', component: CheckoutComponent,canActivate: [AuthGuard], },
+  { path: 'order-confirmed', component: OrderConfirmedComponent,canActivate: [AuthGuard], },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({

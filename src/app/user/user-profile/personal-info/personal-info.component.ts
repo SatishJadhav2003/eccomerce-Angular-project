@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { User } from '../../user.model';
 import { UserService } from '../../user.service';
-import { SnackBarService } from 'src/app/shared/snack-bar.service';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-personal-info',
@@ -27,10 +27,9 @@ export class PersonalInfoComponent {
   ) {}
 
   ngOnInit(): void {
-    this.userService.getUserInfo('2').subscribe((res) => {
+    this.userService.getUserInfo().subscribe((res) => {
       this.user = res;
       this.userInfoForm.patchValue(res);
-      console.log('value fetched', res);
     });
 
     this.userInfoForm = this.fb.group({
@@ -60,11 +59,12 @@ export class PersonalInfoComponent {
       this.isEditing = false;
       this.userInfoForm.disable();
       this.userService
-        .updateUserInfo(this.user.id, this.userInfoForm.value)
+        .updateUserInfo( this.userInfoForm.value)
         .subscribe(
           (res) => {
             console.log('updated success', res);
             this.snackbar.greenSnackBar('Profile Updated', 'ok', 'done');
+            localStorage.setItem('userData', JSON.stringify(res));
           },
           (err) => {
             console.error(err);

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Order } from 'src/app/shared/models/models';
-import { ProductService } from 'src/app/shared/product.service';
+import { ProductService } from 'src/app/shared/services/product.service';
 import { OrderHistory } from '../interfaces';
+import { UserService } from '../../user.service';
 
 @Component({
   selector: 'app-my-orders',
@@ -12,10 +13,11 @@ export class MyOrdersComponent {
   userOrders: Order[];
   orders: OrderHistory[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService,
+    private userService:UserService,) {}
 
   ngOnInit() {
-    this.productService.getAllOrders('1').subscribe(
+    this.userService.getAllOrders().subscribe(
       (res) => {
         console.log(res);
         this.userOrders = res;
@@ -42,7 +44,7 @@ export class MyOrdersComponent {
           .toPromise()
           .then((productInfo) => {
             const temp: OrderHistory = {
-              id: item.id,
+              id: item._id,
               qty: product.quantity,
               status: item.status,
               shippingAdd: {
@@ -55,7 +57,7 @@ export class MyOrdersComponent {
                 shipping: item.shipping_add.shipping_at,
               },
               product: {
-                id: productInfo.id,
+                id: productInfo._id,
                 title: productInfo.title,
                 img: productInfo.images,
                 price: product.price,

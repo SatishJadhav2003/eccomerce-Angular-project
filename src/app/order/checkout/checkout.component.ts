@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
@@ -8,7 +8,8 @@ import {
   Order,
   orderProducts,
 } from 'src/app/shared/models/models';
-import { ProductService } from 'src/app/shared/product.service';
+import { ProductService } from 'src/app/shared/services/product.service';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-checkout',
@@ -16,6 +17,13 @@ import { ProductService } from 'src/app/shared/product.service';
   styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent {
+  userName: string = '';
+  userMobile: number = 0;
+  address1:string;
+  city:string;
+  state:string;
+  postal_code:number;
+
   productId: string;
   address = false;
   products: CartProducts[] = [];
@@ -24,40 +32,25 @@ export class CheckoutComponent {
   productsInfo: orderProducts[] = [];
   pattern = '[7-9]{1}[0-9]{9}';
   payment = 'cod';
-  addressForm = this.fb.group({
-    name: ['satish jadhav', Validators.required],
-    mobile: [
-      8390613529,
-      [Validators.required, Validators.pattern(this.pattern)],
-    ],
-    address: ['palase mala khadakjamb Tal. chandwad ', Validators.required],
-    city: ['nashik', Validators.required],
-    state: ['', Validators.required],
-    postalCode: [
-      ,
-      Validators.compose([
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(6),
-      ]),
-    ],
-    shipping: ['home', Validators.required],
-  });
+
+  // Shipping address form
+  addressForm: FormGroup;
 
   constructor(
     private productService: ProductService,
     public dialog: MatDialog,
     private fb: FormBuilder,
     public router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService
   ) {
+
     this.route.params.subscribe((params) => {
       // if product from view component this code will execute
       if (params['id']) {
         this.productId = params['id'];
         this.productService.getProductById(this.productId).subscribe((res) => {
           const product: CartProducts = {
-            id: null,
             product_id: this.productId,
             quantity: 1,
             title: res.title,
@@ -70,16 +63,16 @@ export class CheckoutComponent {
           this.total_amount = res.price;
         });
       } else {
-        // if products from cart this code will wxecute
-        if (productService.cartProducts) {
-          console.log(productService.cartProducts);
-          this.products = productService.cartProducts;
+        // if products from cart this code will execute
+        if (userService.cartProducts) {
+          console.log(userService.cartProducts);
+          this.products = userService.cartProducts;
           this.products.forEach((item) => {
             this.total_MRP += item.MRP * item.quantity;
             this.total_amount += item.price * item.quantity;
           });
         } else {
-          this.productService.getCartProducts().subscribe((res) => {
+          this.userService.getCartProducts().subscribe((res) => {
             console.log('getting from server ', res);
             this.products = res;
             this.products.forEach((item) => {
@@ -90,11 +83,48 @@ export class CheckoutComponent {
         }
       }
     });
+
+
+
+    // Get user information stored in local storage
+     const user = JSON.parse(localStorage.getItem('userData'));
+     this.userName = user.name;
+     this.userMobile = user.mobile;
+     if(user.address)
+     {
+       this.address1 = user.address.address1;
+       this.city = user.address.city;
+       this.state = user.address.state;
+       this.postal_code = user.address.postal_code;
+     }
+     console.log(user);
+
+
+
+     // Shipping address form
+    this.addressForm = this.fb.group({
+      name: [this.userName, Validators.required],
+      mobile: [
+        this.userMobile,
+        [Validators.required, Validators.pattern(this.pattern)],
+      ],
+      address: [this.address1, Validators.required],
+      city: [this.city, Validators.required],
+      state: [this.state, Validators.required],
+      postalCode: [
+        this.postal_code
+        ,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(6),
+        ]),
+      ],
+      shipping: ['home', Validators.required],
+    });
   }
 
   removeProduct(index: number) {
-    console.log(this.productService.cartProducts);
-
     this.dialog
       .open(DialogComponent, {
         data: {
@@ -112,7 +142,7 @@ export class CheckoutComponent {
             this.products[index].price * this.products[index].quantity;
           this.products.splice(index, 1);
           console.log(this.products);
-          console.log(this.productService.cartProducts);
+          console.log(this.userService.cartProducts);
         }
       });
   }
@@ -158,10 +188,9 @@ export class CheckoutComponent {
     { name: 'Puducherry', abbreviation: 'PY' },
   ];
 
-  confirmOrder() {
+  async confirmOrder() {
     // getting user id
-    const user_id = '1';
-    const date = new Date();
+    const userInfo = JSON.parse(localStorage.getItem('userData'));
     // extracting necessary info from products
     this.products.forEach((item) => {
       const info: orderProducts = {
@@ -171,12 +200,8 @@ export class CheckoutComponent {
       };
       this.productsInfo.push(info);
     });
-    const order: Order = {
-      id: null,
-      user_id: user_id,
-      status: 'Comfirm',
-      order_date: date,
-      delivery_date: this.incrementDate(date, 3),
+    const order: any = {
+      user_id: userInfo._id,
       payment_mode: this.payment,
       products: this.productsInfo,
       shipping_add: {
@@ -189,17 +214,18 @@ export class CheckoutComponent {
         shipping_at: this.addressForm.value.shipping,
       },
     };
-    this.productService.orderProducts(order).subscribe((res) => {
+    console.log(order);
+    this.userService.orderProducts(order).subscribe(async (res) => {
       console.log('product added Succefully', res);
-      // getting auto generated order id from res
-      order.id = res.id;
-      this.productService.productOrdered = order;
+      this.userService.productOrdered = res;
       // Removing all ordered products from cart
       if (!this.productId) {
-        this.products.forEach((item) => {
-          this.productService.deleteCartProduct(item.id).subscribe((res) => {
-            console.log('product removed', res);
-          });
+        await res.products.forEach((item) => {
+          this.userService
+            .deleteCartProduct(item.product_id)
+            .subscribe((res) => {
+              console.log(res);
+            });
         });
       }
       this.router.navigate(['/order-confirmed']);
@@ -248,5 +274,9 @@ export class CheckoutComponent {
     let result = new Date(date);
     result.setDate(result.getDate() + days);
     return result;
+  }
+
+  ngOnDestroy() {
+    this.products = [];
   }
 }

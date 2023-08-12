@@ -48,7 +48,7 @@
     <mat-icon>account_circle</mat-icon>
   </button>
   <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
-    <button mat-menu-item routerLink="/user/profile" >
+    <button mat-menu-item routerLink="/user/profile/personal-info" >
       <mat-icon>person</mat-icon><span>My Account</span>
     </button>
     <button mat-menu-item routerLink="#">
@@ -97,7 +97,7 @@
     </mat-nav-list>
     <mat-divider></mat-divider>
 
-    <button mat-menu-item routerLink="/user/profile" (click)="sidenav.toggle() && top()">
+    <button mat-menu-item routerLink="/user/profile/personal-info" (click)="sidenav.toggle() && top()">
       <mat-icon>person</mat-icon><span>My Account</span>
     </button>
     <mat-divider></mat-divider>

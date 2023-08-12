@@ -7,57 +7,47 @@
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Sign Up</h3>
             <form [formGroup]="signUpForm" (ngSubmit)="onSubmit(signUpForm)">
               <div class="row">
-                <div class="col-md-12 mb-4">
-                  <div class="form-outline">
-                    <input formControlName="name" type="text" placeholder="Name" class="form-control form-control-lg" />
-                  </div>
-                  <span *ngIf="!signUpForm.controls['name'].valid && signUpForm.controls['name'].touched"
-                    class="error px-1">Name is required.</span>
+                <div class="col-md-6 mb-4">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Name</mat-label>
+                    <input formControlName="name" type="text" matInput placeholder="Ex. Satish Jadhav" name="name"
+                      required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Email</mat-label>
+                    <input formControlName="email" type="text" matInput placeholder="Ex. user@gmail.com" name="email"
+                      required>
+                  </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 mb-4 pb-2">
-                  <div class="form-outline">
-                    <input formControlName="email" type="email" class="form-control form-control-lg"
-                      placeholder="Email" />
-                  </div>
-                  <span *ngIf="!signUpForm.controls['email'].valid && signUpForm.controls['email']?.touched"
-                    class="error px-1">Please Enter valid email.</span>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Password</mat-label>
+                    <input  formControlName="password" type="password" minlength="4" matInput  name="password"   required>
+                    <!-- [type]="hide ? 'password' : 'text'" -->
+                    <!-- <ion-icon style="font-size: 20px; font-weight: bold;" matSuffix (click)="hide = !hide" *ngIf="!hide" name="eye-outline"></ion-icon>
+                    <ion-icon style="font-size: 20px; font-weight: bold;"matSuffix (click)="hide = !hide" *ngIf="hide" name="eye-off-outline"></ion-icon> -->
+                </mat-form-field>
+
                 </div>
                 <div class="col-md-6 mb-4 pb-2">
-                  <div class="form-outline">
-                    <input formControlName="mobile" type="tel" class="form-control form-control-lg"
-                      placeholder="Phone Number" pattern="[7-9]{1}[0-9]{9}" />
-                      <span *ngIf="!signUpForm.controls['mobile'].valid && signUpForm.controls['mobile']?.touched"
-                  class="error px-1">Please Enter valid number </span>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 mb-4 pb-2">
-                  <div class="form-outline">
-                    <input formControlName="address" type="text" class="form-control form-control-lg"
-                      placeholder="Address" />
-                  </div>
-                  <span *ngIf="!signUpForm.controls['address'].valid && signUpForm.controls['address'].touched"
-                  class="error px-1">Address is required.</span>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6 mb-4 pb-2">
-                  <div class="form-outline">
-                    <input formControlName="password" type="password" class="form-control form-control-lg"
-                      placeholder="Password" minlength="4" />
-                  </div>
-                  <span *ngIf="!signUpForm.controls['password'].valid && signUpForm.controls['password'].touched"
-                  class="error px-1">Password is required.</span>
-                </div>
-                <div class="col-md-6 mb-4 pb-2">
-                  <div class="form-outline">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Confirm Password</mat-label>
+                    <input  formControlName="confirmPassword" type="password" minlength="4" matInput  name="password"   required>
+                    <!-- [type]="hide ? 'password' : 'text'" -->
+                    <!-- <ion-icon style="font-size: 20px; font-weight: bold;" matSuffix (click)="hide = !hide" *ngIf="!hide" name="eye-outline"></ion-icon>
+                    <ion-icon style="font-size: 20px; font-weight: bold;"matSuffix (click)="hide = !hide" *ngIf="hide" name="eye-off-outline"></ion-icon> -->
+                </mat-form-field>
+                  <!-- <div class="form-outline">
                     <input formControlName="confirmPassword" type="password" class="form-control form-control-lg"
                       placeholder="Confirm Password" minlength="4" />
                   </div>
-                  <span *ngIf="!signUpForm.controls['confirmPassword'].valid && signUpForm.controls['confirmPassword'].touched" class="error px-1">Password and Confirm Password must be match.</span>
+                  <span
+                    *ngIf="!signUpForm.controls['confirmPassword'].valid && signUpForm.controls['confirmPassword'].touched"
+                    class="error px-1">Password and Confirm Password must be match.</span> -->
                 </div>
               </div>
               <div class="row">

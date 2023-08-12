@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonService } from '../shared/common.service';
+import { CommonService } from '../shared/services/common.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../shared/models/models';
 

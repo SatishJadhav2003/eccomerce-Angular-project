@@ -36,8 +36,8 @@
                 </mat-expansion-panel-header>
 
                 <div class="col-md-12 a-sorting mb-3" *ngFor="let subCategory of subCategories">
-                  <div [ngClass]="{highlighted: currSubCate==subCategory.id}">
-                    <a (click)="onChangeSubCate(subCategory.id)">{{subCategory.name}}</a>
+                  <div [ngClass]="{highlighted: currSubCate==subCategory._id}">
+                    <a (click)="onChangeSubCate(subCategory._id)">{{subCategory.name}}</a>
                   </div>
                 </div>
               </mat-expansion-panel>

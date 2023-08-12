@@ -1,6 +1,6 @@
 <div *ngFor="let product of products">
   <div class="section product-row">
-    <a (click)="product_info(product.id)">
+    <a (click)="product_info(product._id)">
       <div class="row">
         <!-- image -->
         <div class="col-md-3">
@@ -15,7 +15,7 @@
 
           <!-- Displaying rating and review count -->
           <div *ngIf="product.reviews.length > 0">
-            <span style="position: relative">
+            <span style="position: relative;padding-top:8px">
               <div class="rating" [ngClass]="
                   product.rating > 3
                     ? 'rating-background-green'
@@ -37,6 +37,9 @@
           <!-- Main points -->
           <div style="margin-top: 13px; font-size: 14px">
             <span class="decription">
+              <li class="description-row pr-1">
+                {{product.description}}
+              </li>
               <li *ngFor="let highlights of product.highlights.slice(0, 3)" class="description-row">
                 {{ highlights }}
               </li>

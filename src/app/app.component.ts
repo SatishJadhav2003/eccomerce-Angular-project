@@ -1,5 +1,5 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
-import { CommonService } from './shared/common.service';
+import { CommonService } from './shared/services/common.service';
 
 @Component({
   selector: 'app-root',

@@ -1,9 +1,8 @@
 export class Subcategory {
-  id: string;
-  parentCategory: string;
+  _id: string;
   name: string;
   description: string;
-  img: string;
+  image: string;
   highlightMsg: string;
   types: [
     {
@@ -12,14 +11,13 @@ export class Subcategory {
   ];
 }
 export class Category {
-  id: string;
+  _id: string;
   name: string;
   image: string;
   subCategories: Subcategory[];
 }
 
 export class CartProducts {
-  id: string;
   product_id: string;
   quantity: number;
   title: string;
@@ -29,7 +27,7 @@ export class CartProducts {
 }
 
 export class Order {
-  id: string;
+  _id: string;
   user_id: string;
   status: string;
   order_date: Date;

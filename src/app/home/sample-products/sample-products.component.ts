@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommonService } from 'src/app/shared/common.service';
+import { CommonService } from 'src/app/shared/services/common.service';
 import { Category } from 'src/app/shared/models/models';
 
 @Component({
@@ -18,12 +18,16 @@ export class SampleProductsComponent implements OnInit {
     if (!this.service.category) {
       this.service.getCategoriesFromServer();
       this.service.categories.subscribe((cate) => {
-        this.category = cate;
-        console.log(this.category);
+        this.category = cate.slice(0,8);
       });
     } else {
       this.category = this.service.category;
       console.log('from else in sample products');
     }
+  }
+
+  onSubcate(category:string,subCate:string)
+  {
+    console.log(category,subCate);
   }
 }

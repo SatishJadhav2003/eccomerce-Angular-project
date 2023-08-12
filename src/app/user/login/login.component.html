@@ -1,11 +1,11 @@
-<section class="gradient-custom ">
+<!-- <section class="gradient-custom ">
   <div class="container py-2">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
         <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
           <div class="card-body p-4 p-md-5">
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Login</h3>
-            <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm)">
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
               <div class="row">
                 <div class="col-md-6 mb-4 pb-2">
                   <div class="form-outline">
@@ -38,4 +38,47 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
+
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+  <div class="container-fluid px-4 px-md-4 py-5 mx-auto">
+      <div class="row d-flex justify-content-center align">
+          <div class="card p-0 border-0 rounded-0 mb-5">
+              <div class="card border-0 rounded-0 card0">
+                  <h2 class="mb-0  text-center">Login</h2>
+                <!-- <p>Please login with your account</p> -->
+                  <!-- <mat-tab-group  mat-align-tabs="center">
+                      <mat-tab label="Login"> </mat-tab>
+                      <mat-tab label="Create Account"> </mat-tab>
+                  </mat-tab-group> -->
+                  <!-- {{loginUser}} -->
+                  <br>
+                  <mat-form-field appearance="outline">
+                      <mat-label>Email</mat-label>
+                      <input  formControlName="email" type="text" matInput placeholder="Ex. user@gmail.com" name="email" required>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline">
+                      <mat-label>Password</mat-label>
+                      <input  formControlName="password" type="text" matInput  name="password"  [type]="hide ? 'password' : 'text'"  required>
+                      <ion-icon style="font-size: 20px; font-weight: bold;" matSuffix (click)="hide = !hide" *ngIf="!hide" name="eye-outline"></ion-icon>
+                      <ion-icon style="font-size: 20px; font-weight: bold;"matSuffix (click)="hide = !hide" *ngIf="hide" name="eye-off-outline"></ion-icon>
+                  </mat-form-field>
+                  <!-- <a routerLink="/forogotPassword" data-toggle="modal" class="text-sm ml-auto text-dim">Forgot
+                      Password?</a> -->
+                  <div class="row justify-content-center mt-4">
+                      <button  mat-flat-button color="primary" [disabled]="spinner" [disabled]="!loginForm.valid">
+                          <mat-spinner style="margin: 5px;" color="primary" [diameter]="25" *ngIf="spinner">
+                          </mat-spinner>
+                          <span *ngIf="!spinner">Login</span>
+                      </button>
+                  </div>
+                  <div class="col-md-12 pt-5 login ">
+                    <a routerLink="/user/signup" style="color: black;">Don't have an account <span
+                        style="color: blue;">Create Here</span> </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</form>

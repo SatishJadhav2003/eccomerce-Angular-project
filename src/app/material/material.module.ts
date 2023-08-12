@@ -20,6 +20,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -45,6 +47,8 @@ import { MatInputModule } from '@angular/material/input';
     MatRadioModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTabsModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatSlideToggleModule,
@@ -67,6 +71,8 @@ import { MatInputModule } from '@angular/material/input';
     MatRadioModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTabsModule,
+    MatProgressSpinnerModule
   ],
 })
 export class MaterialModule {}

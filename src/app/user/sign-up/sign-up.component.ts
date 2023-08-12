@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmedValidator } from '../confirm-password.validator';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
+import { AuthService } from 'src/app/authentication/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,15 +12,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent {
-  signUpForm: FormGroup= new FormGroup({});
+  signUpForm: FormGroup = new FormGroup({});
 
-  constructor(public fb: FormBuilder,private userService:UserService,private router:Router) {
+  constructor(
+    public fb: FormBuilder,
+    private userService: UserService,
+    private router: Router,
+    private snackbar: SnackBarService,
+    private authService:AuthService
+  ) {
     this.signUpForm = fb.group(
       {
-        name: ['satish', Validators.required],
-        email: ['satish@gmail.com', [Validators.required,Validators.email]],
-        mobile: ['8390613529', [Validators.required]],
-        address: ['nashik', Validators.required],
+        name: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required],
       },
@@ -46,15 +48,21 @@ export class SignUpComponent {
 
   onSubmit(form: FormGroup) {
     const userData = {
-      id:null,
-      name:form.value.name,
-      email:form.value.email,
-      mobile:form.value.mobile,
-      address:form.value.address,
-      password:form.value.password,
-    }
-    this.userService.signUp(userData);
-    this.signUpForm.reset();
-    this.router.navigate(['/user/login']);
+      name: form.value.name,
+      email: form.value.email,
+      password: form.value.password,
+    };
+    this.authService.signUp(userData).subscribe(
+      (res) => {
+        console.log(res);
+        this.snackbar.greenSnackBar('Account created', 'ok', 'done');
+        this.signUpForm.reset();
+        this.router.navigate(['/login']);
+      },
+      (err) => {
+        console.error(err);
+        this.snackbar.redSnackBar(err.error, 'ok', 'error');
+      }
+    );
   }
 }
