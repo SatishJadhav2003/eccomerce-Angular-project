@@ -23,9 +23,16 @@ export class UserService {
   }
 
   // Updating user values
-  updateUserInfo(data: User): Observable<User> {
+  updateUserInfo(data: any): Observable<User> {
     const headers = this.getHeaders();
     return this.http.patch<User>(this.userApi + 'user', data, { headers });
+  }
+
+  // Deliting user account
+  deleteUser():Observable<any>
+  {
+    const headers = this.getHeaders();
+    return this.http.delete(this.userApi +'user/delete',{headers});
   }
   //Cart section
 

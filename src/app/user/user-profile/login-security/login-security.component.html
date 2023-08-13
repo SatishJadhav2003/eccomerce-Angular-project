@@ -1,1 +1,69 @@
-<p>login-security works!</p>
+<div class="row mx-0">
+  <div class="col-md-12 heading">
+    Login and Security
+  </div>
+</div>
+<div class="row m-0">
+  <div class="col-md-12">
+    <div class="row mx-0 sub-heading pt-2">
+      <div class="col-md-2">
+        <label for="exampleInputEmail1" class="pt-1 name"> Email </label>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <input [disabled]="!isEditingEmail" type="email"  [(ngModel)]="email" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="edit" (click)="editEmail()" *ngIf="!isEditingEmail">
+          <mat-icon class="edit-icon">edit</mat-icon>
+        </div>
+        <div class="row" *ngIf="isEditingEmail">
+          <div class="col-md-6">
+            <button class="btn1" (click)="updateEmail()" mat-raised-button color="primary">Submit</button>
+          </div>
+          <div class="col-md-6 ">
+            <button class="btn1" mat-raised-button color="accent" (click)="onCancle()">Cancle</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mx-0 sub-heading pt-2">
+      <div class="col-md-2">
+        <label class="pt-1 name"> Password </label>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group" *ngIf="!isEditingPassword">
+          <input [disabled]="!isEditingPassword"   placeholder="change password" type="password" [(ngModel)]="password" class="form-control">
+        </div>
+        <div class="form-group" *ngIf="isEditingPassword" >
+          <input  placeholder="Current password" type="password" [(ngModel)]="password" class="form-control">
+        </div>
+        <div class="form-group" *ngIf="isEditingPassword" >
+          <input  placeholder="new password" type="password" [(ngModel)]="password" class="form-control">
+        </div>
+        <div class="form-group" *ngIf="isEditingPassword" >
+          <input  placeholder="Confirm new password" type="password" [(ngModel)]="password" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="edit" (click)="editPassword()" *ngIf="!isEditingPassword">
+          <mat-icon class="edit-icon">edit</mat-icon>
+        </div>
+        <div class="row" *ngIf="isEditingPassword">
+          <div class="col-md-6">
+            <button class="btn1" mat-raised-button color="primary">Submit</button>
+          </div>
+          <div class="col-md-6 ">
+            <button class="btn1" mat-raised-button color="accent" (click)="onCancle()">Cancle</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mx-0 sub-heading pt-2">
+      <div class="delete col-md-12" (click)="deleteAccount()">
+        Delete my account
+      </div>
+    </div>
+  </div>
+</div>
