@@ -1,1 +1,32 @@
-<p>wishlist works!</p>
+<div class="col-md-12" *ngIf="!product">
+  No products in wishlist !!
+</div>
+<div class="row mx-0 product-section" *ngIf="product">
+  <div class="col-md-3 product" *ngFor="let product of product" routerLink="/product/{{product._id}}">
+    <img class="product-img" src="{{product.images}}" alt="">
+    <div class="product-title">
+      {{product.title}}
+    </div>
+    <div class="price-rating">
+      <span class="price">{{product.price | currency : "INR" : 'symbol' : "2.0" }}</span>
+      <span class="rating" *ngIf="product.rating">
+        <div>
+          <span style="position: relative;padding-top:8px">
+            <div class="rating" [ngClass]="
+              product.rating > 3
+                ? 'rating-background-green'
+                : product.rating > 1
+                ? 'rating-background-yellow'
+                : 'rating-background-red'
+            ">
+              {{ product.rating }}
+              <img
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg=="
+                alt="*" class="star" />
+            </div>
+          </span>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

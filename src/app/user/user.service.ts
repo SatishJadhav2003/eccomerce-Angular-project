@@ -12,7 +12,7 @@ export class UserService {
   userApi: string = 'http://localhost:3001/';
   cartProducts: CartProducts[] = [];
   productOrdered: any;
-  user:User;
+  user: User;
 
   constructor(public http: HttpClient) {}
 
@@ -76,14 +76,47 @@ export class UserService {
     return this.http.post(this.userApi + 'orders', products);
   }
 
+  // get all orders of user
   getAllOrders(): Observable<any[]> {
     const headers = this.getHeaders();
     return this.http.get<any>(this.userApi + 'orders', { headers });
   }
 
-  // addToWishList(id: string, product_id: string): Observable<User> {
-  //   return this.http.patch<User>(this.userApi + '/' + id, product_id);
-  // }
+  // add product to wishlist
+  addToWishList(product_id: string): Observable<{ product_id: string }> {
+    const headers = this.getHeaders();
+    const data = {
+      product_id: product_id,
+    };
+    return this.http.post<{ product_id: string }>(
+      this.userApi + 'wishlist',
+      data,
+      { headers }
+    );
+  }
+
+  // Get wishlist products of user
+  getWishlist(): Observable<[{ product_id: string }]> {
+    const headers = this.getHeaders();
+    return this.http.get<[{ product_id: string }]>(this.userApi + 'wishlist', {
+      headers,
+    });
+  }
+
+  // Search product in wishlist
+  searchWishlistProduct(id: string): Observable<{ product_id: string }> {
+    const headers = this.getHeaders();
+    return this.http.get<{ product_id: string }>(
+      this.userApi + 'wishlist/' + id,
+      { headers }
+    );
+  }
+
+  // delete product from wishlist
+  deleteWishlistProduct(id: string):Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.delete(this.userApi + 'wishlist/'+ id, { headers });
+  }
 
   // Logic to create header with jwt token which we will send with api request to verify user
   private getHeaders(): HttpHeaders {

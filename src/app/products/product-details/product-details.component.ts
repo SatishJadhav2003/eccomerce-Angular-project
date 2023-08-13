@@ -36,6 +36,7 @@ export class ProductDetailsComponent implements OnInit {
       this.viewMore = false;
       this.viewAllComments = false;
       this.existInCart = false;
+      this. isInWishlist = false;
 
       // getting params
       this.category = res.get('category');
@@ -54,12 +55,29 @@ export class ProductDetailsComponent implements OnInit {
       });
 
       // Checking whether product is present in cart or not
-      this.userService.searchCartProduct(this.id).subscribe((res) => {
-        console.log(res);
-        if (res) {
-          this.existInCart = true;
+      this.userService.searchCartProduct(this.id).subscribe(
+        (res) => {
+          console.log(res);
+          if (res) {
+            this.existInCart = true;
+          }
+        },
+        (err) => {
+          console.log(err);
         }
-      });
+      );
+
+      // Checking whether product is present in wishlist or not
+      this.userService.searchWishlistProduct(this.id).subscribe(
+        (res) => {
+          if (res) {
+            this.isInWishlist = true;
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     });
   }
 
@@ -95,7 +113,28 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   toggleWishlist(): void {
-    this.isInWishlist = !this.isInWishlist;
-    this.snackBar.greenSnackBar('Added to wishlist', 'ok', 'done');
+    if (!this.isInWishlist) {
+      this.userService.addToWishList(this.id).subscribe(
+        (res) => {
+          console.log(res);
+          this.snackBar.greenSnackBar('Added to wishlist', 'ok', 'done');
+          this.isInWishlist = !this.isInWishlist;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.userService.deleteWishlistProduct(this.id).subscribe(
+        (res) => {
+          console.log(res);
+          this.snackBar.redSnackBar('Removed from wishlist', 'ok', 'delete_outline');
+          this.isInWishlist = !this.isInWishlist;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
   }
 }

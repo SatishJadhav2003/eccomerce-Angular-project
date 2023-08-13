@@ -8,11 +8,9 @@ import { User } from '../user.model';
   styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent {
-  user:User;
-  constructor(private userService: UserService) {
-    this.userService.getUserInfo().subscribe((res) => {
-      this.user = res;
-      console.log('value fetched', res);
-    });
+  username:string;
+  constructor() {
+    const user = JSON.parse(localStorage.getItem('userData'));
+    this.username = user.name;
   }
 }
