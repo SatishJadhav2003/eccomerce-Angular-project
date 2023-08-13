@@ -12,7 +12,7 @@
 
 
 .user-img-section {
-  height: 4rem;
+  height: 3rem;
   width: 100%;
 }
 
@@ -29,7 +29,7 @@
   justify-content: center;
   display: flex;
   align-items: center;
-  font-size: 25px;
+  font-size: 21px;
 
 }
 
@@ -78,4 +78,61 @@
 .is-active{
   border-color: crimson;
   /* background-color: #d5d2d0; */
+}
+
+
+
+@media only screen and (max-width: 900px)
+{
+  .mx-4
+  {
+    margin: 0px!important;
+  }
+
+  .pr-0
+  {
+    padding-left: 0px;
+  }
+
+  .col-md-4{
+    width: 20%;
+  }
+  .col-md-8
+  {
+    width: 80%;
+  }
+
+  .user-img-section{
+    height: 2rem;
+  }
+
+  .user-name-section{
+    font-size: 19px;
+  }
+  .options
+  {
+    padding-top: 10px;
+  }
+
+  .options>.row
+  {
+    justify-content: space-evenly;
+    width: 100%;
+    margin-bottom: 10px!important;
+  }
+  .col-md-6
+  {
+    width: 45%;
+  }
+
+  .cart
+  {
+    border: 1px solid gray;
+    padding: 5px;
+  }
+
+  .is-active
+  {
+    border: 1px solid crimson;
+  }
 }

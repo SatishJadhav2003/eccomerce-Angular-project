@@ -60,3 +60,33 @@
   margin-top: 15px;
   text-align: left;
 }
+
+@media only screen and (max-width:1000px)
+{
+  .heading
+  {
+    font-weight: 500;
+    font-size: 21px;
+    border-bottom: 1px dotted gray;
+    padding: 0px 0px 10px 0px;
+    justify-content: center;
+  }
+
+  .col-md-6
+  {
+    padding: 0px;
+  }
+
+  .col-md-3
+  {
+    width: 40%;
+  }
+  .col-md-7
+  {
+    width: 60%;
+  }
+  .col-md-5
+  {
+    width: 50%;
+  }
+}

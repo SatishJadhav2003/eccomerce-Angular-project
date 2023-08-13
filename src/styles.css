@@ -77,3 +77,7 @@ body {
     color: darkred;
   }
 } */
+
+.mat-expansion-panel-content > .mat-expansion-panel-body {
+  padding: 0 !important;
+}

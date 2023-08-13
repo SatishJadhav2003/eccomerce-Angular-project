@@ -66,3 +66,23 @@
   font-weight: 500 ;
 }
 
+@media only screen and (max-width:1000px)
+{
+  .product
+  {
+    width: 47%;
+  }
+
+  .product-img
+  {
+    height: 7rem;
+  }
+  .product-title
+  {
+    font-size: 14px;
+  }
+  .rating
+  {
+    font-size: 14px;
+  }
+}

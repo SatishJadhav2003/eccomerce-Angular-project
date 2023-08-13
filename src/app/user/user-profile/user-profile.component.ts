@@ -8,8 +8,13 @@ import { User } from '../user.model';
   styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent {
+  isMobile:boolean = false;
   username:string;
   constructor() {
+    if(window.innerWidth < 850)
+    {
+    this.isMobile = true;
+    }
     const user = JSON.parse(localStorage.getItem('userData'));
     this.username = user.name;
   }

@@ -5,12 +5,19 @@ body {
   font-family: 'Open Sans', serif
 }
 
-.container {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding-bottom: 15px;
-  border-bottom: 1px dotted black;
+.section{
+  font-weight: 500;
+  justify-content: center;
 }
+
+
+.heading {
+  font-weight: 500;
+  font-size: 21px;
+  border-bottom: 1px dotted gray;
+  padding-bottom: 10px;
+}
+
 
 
 .products {
@@ -202,4 +209,76 @@ body {
 
 .red-border {
   border: 1px solid red !important;
+}
+
+
+@media only screen and (max-width:1000px) {
+
+  .row{
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .px-3 {
+    padding: 0px!important;
+  }
+
+  .mat-expansion-panel-header{
+    padding: 0px;
+  }
+
+
+  .img {
+    width: 24.33%;
+    padding: 0px;
+  }
+
+  .title {
+    width: 43%;
+    padding: 0px;
+  }
+  .product-title
+  {
+    font-size: 14px!important;
+  }
+
+  .product-price {
+    display: none;
+  }
+
+  .product-status {
+    width: 32.66%;
+    padding: 0px;
+    padding-left: 15px;
+  }
+
+
+  /* Body */
+
+  .col-md-12
+  {
+    padding:0px;
+  }
+
+  .col{
+    padding: 0px;
+  }
+  .order-id{
+    padding-top: 10px;
+  }
+
+  .desc-row{
+    padding-top: 0px!important;
+  }
+
+  .address-box
+  {
+    border: none;
+  }
+  .overiview-box
+  {
+    padding: 20px 15px 0px 15px;
+    border: none;
+  }
+
+
 }

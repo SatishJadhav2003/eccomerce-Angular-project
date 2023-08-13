@@ -10,12 +10,32 @@
           </div>
           <div class="col-md-8">
             <div class="user-name-section">
-              {{username}}
+              Hey! {{username}}
             </div>
           </div>
         </div>
       </div>
-      <div class="section mt-2">
+      <div class="section" *ngIf="isMobile">
+        <div class="options">
+          <div class="row m-0">
+            <div class="col-md-6 cart" [routerLink]="['./personal-info']" routerLinkActive="is-active">
+              Personal Info
+            </div>
+            <div class="col-md-6 cart" [routerLink]="['./my-orders']" routerLinkActive="is-active">
+              Orders
+            </div>
+          </div>
+          <div class="row m-0">
+            <div class="col-md-6 cart" [routerLink]="['./my-wishlist']" routerLinkActive="is-active">
+              Wishlist
+            </div>
+            <div class="col-md-6 cart" [routerLink]="['./login-security']" routerLinkActive="is-active">
+              Login & Security
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section mt-2" *ngIf="!isMobile">
         <div class="box row mx-0" [routerLink]="['./personal-info']" routerLinkActive="is-active">
           <img class="box-img" src="../../../../assets/images/icons/profile.png" alt="">
           <div class="content">

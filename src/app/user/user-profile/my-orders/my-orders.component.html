@@ -1,11 +1,12 @@
-<div class="container">
-  <h2 class=""> My Orders History </h2>
+<div class="row m-0">
+  <div class="col-md-12">
+    <div class="heading"> My Orders History </div>
+  </div>
 </div>
-<mat-accordion>
+<mat-accordion *ngIf="orders && orders.length>0">
   <mat-expansion-panel hideToggle *ngFor="let item of  orders" style="margin-bottom: 0px;box-shadow:none">
     <mat-expansion-panel-header style="height: 100%;" class="py-3">
       <div class="row product-row px-3">
-
         <div class="col-md-3 img">
           <img class="product-img" src="{{item.product.img}}" alt="">
         </div>
@@ -30,7 +31,8 @@
           <article class="card" [ngClass]="item.status==='Cancelled'?'red-border':''">
             <div class="card-body row ">
               <div class="col" *ngIf="item.status != 'Delivered' && item.status!='Cancelled'"> <strong
-                  style="color: green;">Estimated Delivery Date:</strong> <br>{{item.delivery_date|date:'EEEE, MMMM d'}} </div>
+                  style="color: green;">Estimated Delivery Date:</strong> <br>{{item.delivery_date|date:'EEEE, MMMM d'}}
+              </div>
               <div class="col" *ngIf="item.status === 'Delivered'"> <strong style="color: green;">Product Delivered
                   on</strong> <br>{{item.delivery_date|date:'dd/MM/yyyy'}} </div>
               <div class="col" *ngIf="item.status==='Cancelled'"> <strong
@@ -38,10 +40,10 @@
               </div>
               <div class="col"> <strong>Shipping BY:</strong> <br> VIPGroup, | <i class="fa fa-phone"></i> +918390613529
               </div>
-              <div class="col"> <strong>Status:</strong> <br> <span
+              <div class="col status"> <strong>Status:</strong> <br> <span
                   [ngClass]="item.status==='Cancelled'?'red-color':item.status==='Delivered'?'green-color':'orange-color'">{{item.status}}
                 </span></div>
-              <div class="col"> <strong>Order Id #:</strong> <br> {{item.id}} </div>
+              <div class="col order-id"> <strong>Order Id </strong> <br> {{item.id}} </div>
             </div>
             <hr>
             <div class="row m-0 py-4 desc-row">
@@ -103,3 +105,10 @@
     </div>
   </mat-expansion-panel>
 </mat-accordion>
+<div class="section" *ngIf="!orders && orders.length<=0">
+  <div class="row">
+    <div class="col-md-12">
+      No Orders..... <a routerLink="/home" > Shop now </a>
+    </div>
+  </div>
+</div>
