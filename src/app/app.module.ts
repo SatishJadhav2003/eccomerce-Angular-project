@@ -8,12 +8,11 @@ import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home/home.component';
-import { SideNavComponent } from './navbar/side-nav/side-nav.component';
 import { HomeBannerComponent } from './home/home-banner/home-banner.component';
 import { MobileViewNavbarComponent } from './navbar/mobile-view-navbar/mobile-view-navbar.component';
 import { MainCategoriesComponent } from './main-categories/main-categories.component';
 import { SubcategoriesComponent } from './main-categories/subcategories/subcategories.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SampleProductsComponent } from './home/sample-products/sample-products.component';
 import { ProductsListComponent } from './products/products-list/products-list.component';
 import { BrandsComponent } from './products/brands/brands.component';
@@ -34,14 +33,13 @@ import { AddressComponent } from './user/user-profile/address/address.component'
 import { WishlistComponent } from './user/user-profile/wishlist/wishlist.component';
 import { RatingReviewsComponent } from './user/user-profile/rating-reviews/rating-reviews.component';
 import { SubNavbarComponent } from './navbar/sub-navbar/sub-navbar.component';
-
+import { AuthInterceptor } from './authentication/auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    SideNavComponent,
     HomeBannerComponent,
     MobileViewNavbarComponent,
     MainCategoriesComponent,
@@ -65,7 +63,7 @@ import { SubNavbarComponent } from './navbar/sub-navbar/sub-navbar.component';
     AddressComponent,
     WishlistComponent,
     RatingReviewsComponent,
-    SubNavbarComponent
+    SubNavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,9 +72,11 @@ import { SubNavbarComponent } from './navbar/sub-navbar/sub-navbar.component';
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

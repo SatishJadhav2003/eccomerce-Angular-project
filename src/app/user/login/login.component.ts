@@ -50,6 +50,7 @@ export class LoginComponent {
           this.loginForm.reset();
           this.spinner = false;
           this.authService.isLoggedIn = true;
+          this.authService.user.next(res.user);
           // redirecticting from where user comes in login page
           this.router.navigateByUrl(this.returnUrl);
         },

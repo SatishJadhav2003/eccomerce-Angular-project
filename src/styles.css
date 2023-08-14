@@ -86,3 +86,10 @@ body {
 .mat-expansion-panel-content > .mat-expansion-panel-body {
   padding: 0 !important;
 }
+
+
+.cdk-overlay-connected-position-bounding-box
+{
+  height: auto!important;
+  width: 200px!important;
+}

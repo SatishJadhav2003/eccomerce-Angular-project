@@ -33,6 +33,7 @@ export class LoginSecurityComponent {
     this.isEditingPassword = false;
   }
 
+  // Delete Account
   deleteAccount() {
     this.dialog
       .open(DialogComponent, {
@@ -52,12 +53,14 @@ export class LoginSecurityComponent {
             localStorage.removeItem('userData') ;
             this.snackbar.redSnackBar("Account Deleted !!",'ok','delete_forever');
             this.authService.isLoggedIn = false;
+            this.authService.logOut();
             this.router.navigateByUrl('/home');
           });
         }
       });
   }
 
+  // Update email id
   updateEmail()
   {
     const data={

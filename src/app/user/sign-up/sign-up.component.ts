@@ -57,7 +57,7 @@ export class SignUpComponent {
         console.log(res);
         this.snackbar.greenSnackBar('Account created', 'ok', 'done');
         this.signUpForm.reset();
-        this.router.navigate(['/login']);
+        this.router.navigateByUrl('/user/login')
       },
       (err) => {
         console.error(err);

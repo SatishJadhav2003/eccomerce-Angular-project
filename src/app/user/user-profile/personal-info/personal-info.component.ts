@@ -8,6 +8,7 @@ import {
 import { User } from '../../user.model';
 import { UserService } from '../../user.service';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
+import { AuthService } from 'src/app/authentication/auth.service';
 
 @Component({
   selector: 'app-personal-info',
@@ -23,7 +24,8 @@ export class PersonalInfoComponent {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private snackbar: SnackBarService
+    private snackbar: SnackBarService,
+    private authService:AuthService
   ) {}
 
   ngOnInit(): void {
@@ -65,6 +67,7 @@ export class PersonalInfoComponent {
             console.log('updated success', res);
             this.snackbar.greenSnackBar('Profile Updated', 'ok', 'done');
             localStorage.setItem('userData', JSON.stringify(res));
+            this.authService.user.next(res);
           },
           (err) => {
             console.error(err);
