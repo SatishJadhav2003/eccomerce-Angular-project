@@ -1,9 +1,5 @@
 import {
   Component,
-  DoCheck,
-  EventEmitter,
-  OnInit,
-  Output,
 } from '@angular/core';
 
 @Component({
@@ -15,13 +11,16 @@ export class HomeBannerComponent {
 
   banner_img: any = [
     {
-      img: '../../../assets/images/big-billion-days.jpeg',
+      img: 'https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/84ae27f93c14a4e3.jpg?q=20',
     },
     {
-      img: '../../../assets/images/sale.jpeg',
+      img: '.../../../assets/images/banner/banner1.jpg',
     },
     {
-      img: '../../../assets/images/final-sale.jpeg',
+      img: '../../../assets/images/banner/banner2.jpg',
     },
+    {
+      img:'https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/d417c02a9cc69fda.jpg?q=20'
+    }
   ];
 }

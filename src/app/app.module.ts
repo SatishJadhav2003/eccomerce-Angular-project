@@ -33,6 +33,7 @@ import { LoginSecurityComponent } from './user/user-profile/login-security/login
 import { AddressComponent } from './user/user-profile/address/address.component';
 import { WishlistComponent } from './user/user-profile/wishlist/wishlist.component';
 import { RatingReviewsComponent } from './user/user-profile/rating-reviews/rating-reviews.component';
+import { SubNavbarComponent } from './navbar/sub-navbar/sub-navbar.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { RatingReviewsComponent } from './user/user-profile/rating-reviews/ratin
     LoginSecurityComponent,
     AddressComponent,
     WishlistComponent,
-    RatingReviewsComponent
+    RatingReviewsComponent,
+    SubNavbarComponent
   ],
   imports: [
     BrowserModule,

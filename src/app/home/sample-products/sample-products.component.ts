@@ -18,16 +18,12 @@ export class SampleProductsComponent implements OnInit {
     if (!this.service.category) {
       this.service.getCategoriesFromServer();
       this.service.categories.subscribe((cate) => {
-        this.category = cate.slice(0,8);
+        this.category = cate.slice(0,6);
       });
     } else {
-      this.category = this.service.category;
+      this.category = this.service.category.slice(0,6);
       console.log('from else in sample products');
     }
   }
 
-  onSubcate(category:string,subCate:string)
-  {
-    console.log(category,subCate);
-  }
 }

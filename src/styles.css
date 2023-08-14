@@ -17,6 +17,11 @@ body {
   margin: 0;
 }
 
+.row
+{
+  margin-left: 0px;
+  margin-right: 0px;
+}
 .mat-drawer-container{
   background-color: #f1f3f6;
 

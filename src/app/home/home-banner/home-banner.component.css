@@ -3,3 +3,9 @@ img {
   width: auto;
   height: 100%;
 }
+
+.carousel-inner
+{
+  height: 270px;
+  width: 100%;
+}

@@ -1,0 +1,12 @@
+<div class="section">
+  <div class="categories-row row">
+    <a class="category" *ngFor="let cate of category" routerLink="/main-categories/{{ cate._id }}">
+      <div class="img-section">
+        <img src="{{cate.image}}" alt="" class="img">
+      </div>
+      <div class="cate-heading">
+        {{cate.name}}
+      </div>
+    </a>
+  </div>
+</div>

@@ -1,65 +1,24 @@
-<div *ngFor="let categories of category">
-  <div class="section p-2 mb-1">
-    <div class="row">
-      <!-- <div style="width: 20%;" >
-        <mat-grid-list cols="1"  class="products-header">
-          <mat-grid-tile>
-            <div class="cards">
-              <a href="#">
-                <div class="text">
-                  <h1>{{ categories.name }}</h1>
-                  <a routerLink="/main-categories/{{ categories.id }}" class="view-all">View All</a>
-                </div>
-              </a>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div> -->
-      <!-- <div
-        class="col-md-2 my-1"
-        *ngFor="let subcategories of categories.subCategories.slice(0, 5)"
-      >
-        <mat-grid-list cols="1" rowHeight="1:1">
-          <mat-grid-tile>
-            <div class="cards">
-              <a href="#">
-                <img
-                  class="product-img"
-                  src="{{ subcategories.img }}"
-                  alt="{{ subcategories.name }}"
-                />
-                <div class="info">
-                  <p style="font-weight: bold">
-                    {{ subcategories.name | titlecase }}
-                  </p>
-                  <p style="color: #388e3c">{{ subcategories.highlightMsg }}</p>
-                </div>
-              </a>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div> -->
-      <div class="pl-2 pb-0 my-1" style="width: 20%;text-align:center;align-items:center;vertical-align:middle">
-        <a class="p-0" routerLink="/main-categories/{{ categories._id }}">
-          <div class="cat-header">
-            <img class="category-img rounded" src="../../../{{categories.image}}" alt="img" />
-            <p class="cate-title mt-0">{{ categories.name }}</p>
-            <a routerLink="/main-categories/{{ categories._id }}" class="view-all">View All</a>
-          </div>
-        </a>
+<div class="row mx-0 main-row" *ngFor="let cate of category">
+  <div class="col-md-12">
+    <div class="row mx-0 cate-title" routerLink="/main-categories/{{cate._id}}" >
+      <div class="title">
+        {{cate.name}}
       </div>
-      <div class="px-1 pb-0 my-1" style="width: 16%;" *ngFor="let subcategories of categories.subCategories.slice(0, 5)">
-        <div class="cards">
-          <a (click)="onSubcate(categories.name,subcategories._id)" routerLink="/products/{{categories.name}}/{{subcategories._id}}">
-            <img class="product-img" src="../../../{{ subcategories.image }}" alt="{{ subcategories.name }}" />
-            <div class="info">
-              <p class="product-heading">
-                {{ subcategories.name | titlecase }}
-              </p>
-              <p class="subcate-headline">{{ subcategories.highlightMsg }}</p>
-              <!-- <p>{{ "1999" | currency : "INR" }}</p> -->
-            </div>
-          </a>
+      <div class="arrow ml-auto">
+        <svg width="16" height="16" viewbox="0 0 17 17" fill="none" style="margin: 4px;">
+          <path d="m6.627 3.749 5 5-5 5" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" ></path>
+        </svg>
+      </div>
+    </div>
+    <div class="row subcate mx-0 pb-3 px-0">
+      <div class="card" *ngFor="let subcate of cate.subCategories.slice(0,5)"
+        routerLink="/products/{{cate.name}}/{{subcate._id}}">
+        <img class="product-img" src="{{subcate.image}}" />
+        <div class="info px-2">
+          <p class="product-heading">
+            {{ subcate.name }}
+          </p>
+          <p class="subcate-headline">{{ subcate.highlightMsg }}</p>
         </div>
       </div>
     </div>
