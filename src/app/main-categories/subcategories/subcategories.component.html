@@ -7,7 +7,7 @@
 </div>
 <div class="p-2 pt-2">
   <div class="row">
-    <div class="col-md-3 mt-5" *ngFor="let subcategory of subCategories" (click)="onSubcategory(category.name,subcategory._id)" >
+    <div class="col-md-3 mt-5 product" *ngFor="let subcategory of subCategories" (click)="onSubcategory(category.name,subcategory._id)" >
       <img src="../../../{{subcategory.image}}" alt="{{subcategory.name}}" class="product-img">
       <div class="info">
         <p style="font-weight: bold">

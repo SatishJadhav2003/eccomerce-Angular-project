@@ -82,7 +82,44 @@ a{
     border: none;
     height: 7rem;
     max-width: 80%;
+    object-fit: contain;
     transition: transform .2s;
     cursor: pointer;
+  }
+  .col-md-12
+  {
+    padding: 0px;
+  }
+  .col-md-3
+  {
+    padding: 0px 10px;
+  }
+
+  .heading
+  {
+    padding-top: 10px;
+  }
+  .pcount
+  {
+    margin: 0px;
+  }
+  .product{
+    width: 50%;
+  }
+
+  .mt-5{
+    margin-top: 10px!important;
+  }
+  .my-5
+  {
+    margin-top: 10px!important;
+    margin-bottom: 10px!important;
+
+  }
+
+  .info
+  {
+    padding-top: 10px;
+    overflow: hidden;
   }
 }
