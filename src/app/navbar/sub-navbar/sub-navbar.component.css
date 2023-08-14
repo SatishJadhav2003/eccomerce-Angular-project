@@ -5,6 +5,7 @@
 
 .categories-row {
   justify-content: center;
+  text-align: center;
 }
 
 .category {
@@ -45,4 +46,27 @@
   justify-content: center;
   color: #111112;
   font-weight: 600;
+}
+
+
+@media only screen and (max-width:900px)
+{
+  .category
+  {
+    min-width: 0px;
+    width: 18%;
+    padding: 12px;
+    height: 85px;
+    overflow: hidden;
+  }
+
+  .categories-row {
+    justify-content: none;
+  }
+
+  .cate-heading
+  {
+    font-size: 12px;
+    font-weight: 500;
+  }
 }

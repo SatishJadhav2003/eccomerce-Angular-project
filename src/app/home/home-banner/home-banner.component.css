@@ -4,8 +4,25 @@ img {
   height: 100%;
 }
 
-.carousel-inner
-{
+.carousel-inner {
   height: 270px;
   width: 100%;
+}
+
+@media only screen and (max-width:900px) {
+  .carousel-inner {
+    height: 70px;
+    width: 100%;
+  }
+
+  .carousel-control-next-icon, .carousel-control-prev-icon {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: no-repeat 50%/100% 100%;
+}
+dl, ol, ul
+{
+  margin-bottom: 0px;
+}
 }

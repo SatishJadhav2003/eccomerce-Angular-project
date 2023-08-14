@@ -14,10 +14,10 @@ export class HomeBannerComponent {
       img: 'https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/84ae27f93c14a4e3.jpg?q=20',
     },
     {
-      img: '.../../../assets/images/banner/banner1.jpg',
+      img: 'https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/d417c02a9cc69fda.jpg?q=20',
     },
     {
-      img: '../../../assets/images/banner/banner2.jpg',
+      img: 'https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/84ae27f93c14a4e3.jpg?q=20',
     },
     {
       img:'https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/d417c02a9cc69fda.jpg?q=20'

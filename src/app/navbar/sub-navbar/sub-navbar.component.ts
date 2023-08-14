@@ -5,18 +5,30 @@ import { CommonService } from 'src/app/shared/services/common.service';
 @Component({
   selector: 'app-sub-navbar',
   templateUrl: './sub-navbar.component.html',
-  styleUrls: ['./sub-navbar.component.css']
+  styleUrls: ['./sub-navbar.component.css'],
 })
 export class SubNavbarComponent {
-  category:Category[];
-  constructor(private commonService:CommonService){
+  category: Category[];
+  isMobile:boolean = false;
+  constructor(private commonService: CommonService) {
+    if (window.innerWidth < 900) {
+      this.isMobile = true;
+    }
     if (!this.commonService.category) {
       this.commonService.getCategoriesFromServer();
       this.commonService.categories.subscribe((cate) => {
-        this.category = cate.slice(0,7);
+        if (this.isMobile) {
+          this.category = cate.slice(0, 4);
+        } else {
+          this.category = cate.slice(0, 7);
+        }
       });
     } else {
-      this.category = this.commonService.category.slice(0,7);;
+      if (this.isMobile) {
+        this.category = this.commonService.category.slice(0, 4);
+      } else {
+        this.category = this.commonService.category.slice(0, 7);
+      }
       console.log('from else in sample products');
     }
   }

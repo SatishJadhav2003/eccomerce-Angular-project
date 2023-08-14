@@ -36,11 +36,11 @@
   letter-spacing: -.02px;
 }
 
-.subcate{
+.subcate {
   justify-content: space-evenly;
 }
 
-.arrow{
+.arrow {
   display: flex;
   flex-basis: auto;
   flex-direction: column;
@@ -56,8 +56,7 @@
   background-color: #FF4081;
 }
 
-.card
-{
+.card {
   width: 250px;
   height: auto;
   padding-top: 16px;
@@ -105,6 +104,17 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .cate-title {
+    padding: 12px;
+    margin: 0px;
+  }
 
+  .card {
+    width: 50%;
+  }
+  .product-img
+  {
+    height: 8rem;
+  }
 
 }

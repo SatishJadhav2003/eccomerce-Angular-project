@@ -11,19 +11,21 @@ import { Category } from 'src/app/shared/models/models';
 export class SampleProductsComponent implements OnInit {
   category: Category[];
   index: string;
-
+  isMobile: boolean = false;
   constructor(private service: CommonService) {}
 
   ngOnInit(): void {
+    if (window.innerWidth < 900) {
+      this.isMobile = true;
+    }
     if (!this.service.category) {
       this.service.getCategoriesFromServer();
       this.service.categories.subscribe((cate) => {
-        this.category = cate.slice(0,6);
+        this.category = cate.slice(0, 6);
       });
     } else {
-      this.category = this.service.category.slice(0,6);
+      this.category = this.service.category.slice(0, 6);
       console.log('from else in sample products');
     }
   }
-
 }

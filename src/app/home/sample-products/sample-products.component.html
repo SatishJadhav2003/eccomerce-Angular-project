@@ -10,7 +10,22 @@
         </svg>
       </div>
     </div>
-    <div class="row subcate mx-0 pb-3 px-0">
+    <!-- If device is mobile then show only 4 subcate on home screen -->
+    <!-- If device is mobile then show only 4 subcate on home screen -->
+    <div class="row subcate mx-0 pb-3 px-0" *ngIf="isMobile">
+      <div class="card" *ngFor="let subcate of cate.subCategories.slice(0,4)"
+        routerLink="/products/{{cate.name}}/{{subcate._id}}">
+        <img class="product-img" src="{{subcate.image}}" />
+        <div class="info px-2">
+          <p class="product-heading">
+            {{ subcate.name }}
+          </p>
+          <p class="subcate-headline">{{ subcate.highlightMsg }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- If device is mobile then show only 5 subcate on home screen -->
+    <div class="row subcate mx-0 pb-3 px-0" *ngIf="!isMobile">
       <div class="card" *ngFor="let subcate of cate.subCategories.slice(0,5)"
         routerLink="/products/{{cate.name}}/{{subcate._id}}">
         <img class="product-img" src="{{subcate.image}}" />
