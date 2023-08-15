@@ -2,11 +2,15 @@
   <button class="btn " style="color: white" (click)="sidenav.toggle() && top()" matTooltip="Menu">
     <mat-icon class="mat-button">menu</mat-icon>
   </button>
-  <span routerLink="/home" style="cursor: pointer;">MR. Shopkeeper</span>
+  <span routerLink="/home" style="cursor: pointer;font-size:17px;">MR. Shopkeeper</span>
   <!-- <span class="toolbar-item-spacer"></span> -->
-  <button class="btn ml-auto"  style="color: white;">
-    <mat-icon>search</mat-icon>
-  </button>
+  <form class="form" >
+    <div class="InputContainer ml-3">
+      <input  type="text" name="text" [(ngModel)]="searchText" class="input" id="input" placeholder="Search " />
+     <button type="submit" (click)="searchProducts()" class="labelforsearch" type="submit" >
+     </button>
+    </div>
+  </form>
   <div *ngIf="user" style="display: flex;" >
     <button class="btn" routerLink="/cart" style="color: white">
       <mat-icon>add_shopping_cart</mat-icon>

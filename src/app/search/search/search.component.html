@@ -1,0 +1,47 @@
+
+<div class="section" *ngIf=" !product ">
+  <div class="col-md-12">
+    Sorry , no products found for {{searchquery}} !!
+  </div>
+</div>
+
+<div class="row mx-0 product-section" *ngIf=" product && product.length >0 " >
+  <div class="col-md-2 product" *ngFor="let product of product" routerLink="/product/{{product._id}}" >
+    <img class="product-img" src="{{product.images}}" alt="" >
+    <div class="product-title">
+     {{product.title}}
+    </div>
+    <div class="price-rating">
+      <span class="price">
+        {{product.price | currency:'INR':'symbol':'1.0-0'}}
+      </span>
+      <span class="price mrp">
+       <s> {{product.MRP | currency:'INR':'symbol':'1.0-0'}}</s>
+      </span>
+      <span class="rating" *ngIf="product.rating" >
+        <div>
+          <span style="position: relative;padding-top:8px">
+            <div class="rating" [ngClass]="
+              product.rating > 3
+                ? 'rating-background-green'
+                : product.rating > 1
+                ? 'rating-background-yellow'
+                : 'rating-background-red'
+            ">
+              {{ product.rating }}
+              <img
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg=="
+                alt="*" class="star" />
+            </div>
+          </span>
+        </div>
+      </span>
+      <span class="discount"  *ngIf="!product.rating" >
+        {{
+          100 - (product.price / product.MRP) * 100
+          | number : "1.0-2"
+          }}% off
+      </span>
+    </div>
+  </div>
+</div>

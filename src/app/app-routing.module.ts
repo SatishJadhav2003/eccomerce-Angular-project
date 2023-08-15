@@ -17,6 +17,7 @@ import { AddressComponent } from './user/user-profile/address/address.component'
 import { WishlistComponent } from './user/user-profile/wishlist/wishlist.component';
 import { RatingReviewsComponent } from './user/user-profile/rating-reviews/rating-reviews.component';
 import { AuthGuard } from './authentication/auth.guard';
+import { SearchComponent } from './search/search/search.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -85,6 +86,7 @@ const routes: Routes = [
   },
   { path: 'checkout/:id', component: CheckoutComponent,canActivate: [AuthGuard], },
   { path: 'order-confirmed', component: OrderConfirmedComponent,canActivate: [AuthGuard], },
+  {path:'search/:searchquery',component:SearchComponent},
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 

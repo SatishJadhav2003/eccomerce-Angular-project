@@ -35,5 +35,11 @@ export class ProductService {
     );
   }
 
+  // Searching products
+  searchProducts(query: string): Observable<any[]> {
+    const url = "http://localhost:3001/product/search/"
+    return this.http.get<any[]>(url+query);
+  }
+
 
 }

@@ -34,6 +34,7 @@ import { WishlistComponent } from './user/user-profile/wishlist/wishlist.compone
 import { RatingReviewsComponent } from './user/user-profile/rating-reviews/rating-reviews.component';
 import { SubNavbarComponent } from './navbar/sub-navbar/sub-navbar.component';
 import { AuthInterceptor } from './authentication/auth.interceptor';
+import { SearchComponent } from './search/search/search.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { AuthInterceptor } from './authentication/auth.interceptor';
     WishlistComponent,
     RatingReviewsComponent,
     SubNavbarComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
