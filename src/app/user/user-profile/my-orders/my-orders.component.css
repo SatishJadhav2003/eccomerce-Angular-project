@@ -5,11 +5,21 @@ body {
   font-family: 'Open Sans', serif
 }
 
-.section{
+.section {
   font-weight: 500;
   justify-content: center;
 }
 
+
+.example-margin {
+  margin: 8px;
+}
+
+
+.mat-mdc-slider {
+  max-width: 300px;
+  width: 100%;
+}
 
 .heading {
   font-weight: 500;
@@ -157,17 +167,31 @@ body {
 
 
 .btn-box {
-  align-items: center;
   text-align: center;
-  padding-top: 30px;
+  align-items: center;
+  display: grid;
 }
 
 .btn-1 {
   width: 100%;
   text-align: center;
   margin-bottom: 20px;
+  display: contents;
+
 }
 
+.rating-box {
+  border-top: 1px dotted gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.comment{
+  font-size: 18px;
+  font-weight: 600;
+}
 
 /* color points */
 
@@ -214,15 +238,16 @@ body {
 
 @media only screen and (max-width:1000px) {
 
-  .row{
+  .row {
     margin-left: 0px;
     margin-right: 0px;
   }
+
   .px-3 {
-    padding: 0px!important;
+    padding: 0px !important;
   }
 
-  .mat-expansion-panel-header{
+  .mat-expansion-panel-header {
     padding: 0px;
   }
 
@@ -236,9 +261,9 @@ body {
     width: 43%;
     padding: 0px;
   }
-  .product-title
-  {
-    font-size: 14px!important;
+
+  .product-title {
+    font-size: 14px !important;
   }
 
   .product-price {
@@ -254,31 +279,42 @@ body {
 
   /* Body */
 
-  .col-md-12
-  {
-    padding:0px;
-  }
-
-  .col{
+  .col-md-12 {
     padding: 0px;
   }
-  .order-id{
+
+  .col {
+    padding: 0px;
+  }
+
+  .order-id {
     padding-top: 10px;
   }
 
-  .desc-row{
-    padding-top: 0px!important;
+  .desc-row {
+    padding-top: 0px !important;
   }
 
-  .address-box
-  {
+  .address-box {
     border: none;
   }
-  .overiview-box
-  {
+
+  .overiview-box {
     padding: 20px 15px 0px 15px;
     border: none;
   }
 
+  .btn-box {
+    align-items: inherit;
+  }
+
+  .btn-1 {
+    display: contents;
+  }
+
+  .view {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 
 }

@@ -6,7 +6,7 @@
 <mat-accordion *ngIf="orders && orders.length>0">
   <mat-expansion-panel hideToggle *ngFor="let item of  orders" style="margin-bottom: 0px;box-shadow:none">
     <mat-expansion-panel-header style="height: 100%;" class="py-3">
-      <div class="row product-row px-3">
+      <div class="row product-row px-3" (click)="rateProduct= false" >
         <div class="col-md-3 img">
           <img class="product-img" src="{{item.product.img}}" alt="">
         </div>
@@ -86,8 +86,8 @@
                   {{item.qty *item.product.price| currency:'INR':'symbol':'1.0'}}
                 </div>
               </div>
-              <div class="col-md-3 btn-box">
-                <div class="row mx-0 btn-1">
+              <span class="col-md-3 btn-box">
+                <!-- <div class="row mx-0 btn-1">
                   <div class="col-md-12"><button routerLink="/product/{{item.product.id}}" mat-raised-button
                       color="accent">View Product</button></div>
                 </div>
@@ -96,7 +96,33 @@
                     <button [disabled]="item.status!='Delivered'" mat-raised-button color="primary">Download
                       Invoice</button>
                   </div>
+                </div> -->
+
+                <div class="col-md-12 btn-1">
+                  <button [disabled]="item.status!='Delivered'" mat-raised-button color="primary">Download
+                    Invoice</button>
                 </div>
+                <div class="col-md-12 btn-1 "><button class="view" routerLink="/product/{{item.product.id}}"
+                    mat-raised-button color="accent">View Product</button>
+                </div>
+                <div class="col-md-12 btn-1">
+                  <button [disabled]="item.status!='Delivered'" (click)="toggeleRateProduct(item.product.id)" mat-raised-button>Rate Product</button>
+                </div>
+              </span>
+
+            </div>
+            <div class="row mx-0 rating-box" *ngIf="rateProduct && item.status==='Delivered'">
+              <div class="form-group col-md-8">
+                <label class="comment">Review:</label>
+                <textarea [(ngModel)]="review" matInput class="form-control" rows="3" id="comment"></textarea>
+              </div>
+              <div class="col-md-4">
+                <label class="comment">Rating:</label>
+                <mat-slider class="example-margin" [max]="5" [min]="0" [step]="1" [discrete]="true"
+                  [showTickMarks]="true">
+                  <input matSliderThumb [(ngModel)]="ratingValue" #slider>
+                </mat-slider>
+                <button class="view mb-3" [disabled]="ratingValue===0 && review" (click)="rating(item.product.id)" mat-raised-button color="accent">Submit</button>
               </div>
             </div>
           </article>
@@ -108,7 +134,7 @@
 <div class="section" *ngIf="!orders && orders.length<=0">
   <div class="row">
     <div class="col-md-12">
-      No Orders..... <a routerLink="/home" > Shop now </a>
+      No Orders..... <a routerLink="/home"> Shop now </a>
     </div>
   </div>
 </div>

@@ -3,6 +3,7 @@ import { Order } from 'src/app/shared/models/models';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { OrderHistory } from '../interfaces';
 import { UserService } from '../../user.service';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-my-orders',
@@ -12,9 +13,15 @@ import { UserService } from '../../user.service';
 export class MyOrdersComponent {
   userOrders: Order[];
   orders: OrderHistory[] = [];
+  ratingValue: number = 0;
+  review: string = '';
+  rateProduct: boolean = false;
 
-  constructor(private productService: ProductService,
-    private userService:UserService,) {}
+  constructor(
+    private productService: ProductService,
+    private userService: UserService,
+    private snackbar:SnackBarService
+  ) {}
 
   ngOnInit() {
     this.userService.getAllOrders().subscribe(
@@ -27,7 +34,7 @@ export class MyOrdersComponent {
           });
         });
 
-        console.log(this.orders)
+        console.log(this.orders);
       },
       (error) => {
         console.error('Error fetching user orders:', error);
@@ -39,7 +46,7 @@ export class MyOrdersComponent {
     const promises: Promise<void>[] = [];
     this.userOrders.forEach((item) => {
       item.products.forEach((product) => {
-        const promise =   this.productService
+        const promise = this.productService
           .getProductById(product.product_id)
           .toPromise()
           .then((productInfo) => {
@@ -64,13 +71,47 @@ export class MyOrdersComponent {
               },
               payment_mode: item.payment_mode,
               ordered_date: new Date(item.order_date),
-              delivery_date:new Date( item.delivery_date),
+              delivery_date: new Date(item.delivery_date),
             };
             this.orders.push(temp);
           });
-          promises.push(promise);
+        promises.push(promise);
       });
     });
     return Promise.all(promises);
+  }
+
+  toggeleRateProduct(id:string) {
+    this.rateProduct = !this.rateProduct;
+    this.productService.searchReview(id).subscribe((reviewed)=>{
+      console.log(reviewed);
+      this.ratingValue = reviewed.rating;
+      this.review = reviewed.comment;
+    })
+  }
+
+  rating(id: string) {
+    console.log(id);
+    const user = JSON.parse(localStorage.getItem('userData'));
+    const data = {
+      // product_id, rating, comment, user_name
+      product_id: id,
+      rating: this.ratingValue,
+      comment: this.review,
+      user_name: user.name,
+    };
+    this.productService.rateProduct(data).subscribe((res) => {
+      if (res) {
+        this.snackbar.greenSnackBar("Thank you for your review",'ok','done');
+      }
+      else
+      {
+        this.snackbar.redSnackBar(res,'ok','close');
+      }
+    },err =>{
+      console.log(err)
+      this.snackbar.redSnackBar(err.error,'ok','close');
+    });
+    this.rateProduct = false;
   }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
 import { Observable, Subject, map } from 'rxjs';
@@ -15,12 +15,12 @@ export class ProductService {
 
   //Getting products based on category id
   getProductsBasedOnSubcategory(subCategory: string): Observable<Product[]> {
-    return this.http.get<any>(this.api+'/'+subCategory);
+    return this.http.get<any>(this.api + '/' + subCategory);
   }
 
   //get Product by id
   getProductById(id: string): Observable<Product> {
-    return this.http.get<any>("http://localhost:3001/product/"+id);
+    return this.http.get<any>('http://localhost:3001/product/' + id);
   }
 
   // to get random 5 products from server
@@ -37,9 +37,28 @@ export class ProductService {
 
   // Searching products
   searchProducts(query: string): Observable<any[]> {
-    const url = "http://localhost:3001/product/search/"
-    return this.http.get<any[]>(url+query);
+    const url = 'http://localhost:3001/product/search/';
+    return this.http.get<any[]>(url + query);
   }
 
+  // rating products
+  rateProduct(data: any): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.post('http://localhost:3001/product/review',data,{headers});
+  }
 
+  // search user with review of product
+  searchReview(id:string):Observable<any>
+  {
+    const headers = this.getHeaders();
+    return this.http.get('http://localhost:3001/product/review/'+id,{headers});
+  }
+
+  // Creating headers
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: `${token}`,
+    });
+  }
 }
