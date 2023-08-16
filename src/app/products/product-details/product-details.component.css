@@ -245,9 +245,17 @@ li {
 
 .heading {
   font-weight: 500;
-  font-size: 24px;
+  font-size: 21px;
+  color: crimson;
+  text-align: left;
+  padding-left: inherit;
 }
 
+.product-row
+{
+  justify-content: space-evenly;
+
+}
 .related-product-img
 {
   max-width: 80%;
@@ -279,6 +287,7 @@ li {
 {
   transform: scale(1.05);
 }
+
 
 
 @media only screen and (max-width: 600px) {
@@ -365,5 +374,9 @@ li {
 
   .username {
     font-size: 12px;
+  }
+
+  .related-product-card{
+    width: 45%;
   }
 }

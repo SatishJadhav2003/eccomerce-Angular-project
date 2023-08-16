@@ -272,13 +272,54 @@
   </div>
 </div>
 
+<!-- Recently viewed products -->
+<div class="section mb-3" *ngIf="relatedProducts">
+  <div class="heading  py-2">
+    <p class="mb-0" >Recently Viewed</p>
+  </div>
+  <div class="row p-1 product-scroll-container product-row">
+    <div class="col-md-2 related-product-card m-2" *ngFor="let recetly of recentlyViewed.slice(1)">
+      <a (click)="viewProduct(recetly.category_id,recetly._id)">
+        <div class="py-3">
+          <img class="related-product-img" src="{{recetly.images}}" alt="img">
+          <h4 class="related-product-headline pt-3">
+            {{recetly.title}}
+          </h4>
+          <div class="related-product-rating">
+            <div *ngIf="recetly.rating" class="rating" [ngClass]="
+                  recetly.rating > 3
+                    ? 'rating-background-green'
+                    : recetly.rating > 1
+                    ? 'rating-background-yellow'
+                    : 'rating-background-red'
+                ">
+              {{ recetly.rating }}
+              <img
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg=="
+                alt="*" style="height: 12px; vertical-align: top" />
+            </div>
+            <div class="discount" >
+              {{
+              100 - (recetly.price / recetly.MRP) * 100
+              | number : "1.0-2"
+              }}% off
+            </div>
+          </div>
+          <div class="related-product-price">
+            {{ recetly.price | currency : "INR" : 'symbol' : "2.0" }}
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
 <!-- Related products -->
 <div class="section mb-3" *ngIf="relatedProducts">
-  <div class="heading py-2" style="color:crimson">
-    <p>You might be interested in
-    <p>
+  <div class="heading  py-2">
+    <p class="mb-0" >You might be interested in</p>
   </div>
-  <div class="row p-1 justify-content-center">
+  <div class="row p-1 product-row">
     <div class="col-md-2 related-product-card m-2" *ngFor="let related of relatedProducts">
       <a (click)="viewProduct(related.category_id,related._id)">
         <div class="py-3">

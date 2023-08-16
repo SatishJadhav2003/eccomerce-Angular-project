@@ -12,12 +12,14 @@ import { UserService } from 'src/app/user/user.service';
   styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent implements OnInit {
+  isMobile: boolean = false;
   id: string;
   category: string;
   product: Product;
   viewMore: Boolean;
   viewAllComments: Boolean;
   relatedProducts: Product[];
+  recentlyViewed: Product[] = [];
   cartItem: any[];
   existInCart: Boolean;
   isInWishlist: boolean = false;
@@ -31,12 +33,15 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (window.innerWidth < 900) {
+      this.isMobile = true;
+    }
     this.route.firstChild.paramMap.subscribe((res) => {
       // view more disabled
       this.viewMore = false;
       this.viewAllComments = false;
       this.existInCart = false;
-      this. isInWishlist = false;
+      this.isInWishlist = false;
 
       // getting params
       this.category = res.get('category');
@@ -78,6 +83,9 @@ export class ProductDetailsComponent implements OnInit {
           console.log(err);
         }
       );
+
+      // Adding to recently viewed
+      this.addToRecentlyViewed(this.id);
     });
   }
 
@@ -128,7 +136,11 @@ export class ProductDetailsComponent implements OnInit {
       this.userService.deleteWishlistProduct(this.id).subscribe(
         (res) => {
           console.log(res);
-          this.snackBar.redSnackBar('Removed from wishlist', 'ok', 'delete_outline');
+          this.snackBar.redSnackBar(
+            'Removed from wishlist',
+            'ok',
+            'delete_outline'
+          );
           this.isInWishlist = !this.isInWishlist;
         },
         (err) => {
@@ -136,5 +148,48 @@ export class ProductDetailsComponent implements OnInit {
         }
       );
     }
+  }
+
+  async addToRecentlyViewed(productId: string): Promise<void> {
+    const recentlyViewed = this.getRecentlyViewedProducts();
+    // Check if the product ID already exists in the list
+    const index = recentlyViewed.indexOf(productId);
+    if (index !== -1) {
+      recentlyViewed.splice(index, 1); // Remove the existing occurrence
+    }
+    // Add the new product ID to the beginning
+    recentlyViewed.unshift(productId);
+    // Ensure the list does not exceed the maximum items
+    if(this.isMobile)
+    {
+      if (recentlyViewed.length > 5) {
+        recentlyViewed.pop(); // Remove the oldest item
+      }
+    }
+    else
+    {
+      if (recentlyViewed.length > 6) {
+        recentlyViewed.pop(); // Remove the oldest item
+      }
+    }
+    localStorage.setItem('recetlyViewed', JSON.stringify(recentlyViewed));
+
+    // Fetch product data for recently viewed products
+    const productPromises = recentlyViewed.map((recent) =>
+      this.productService.getProductById(recent).toPromise()
+    );
+
+    try {
+      const recentlyViewedProducts = await Promise.all(productPromises);
+      this.recentlyViewed = recentlyViewedProducts;
+    } catch (error) {
+      console.error('Error fetching recently viewed products:', error);
+      this.recentlyViewed = [];
+    }
+  }
+
+  getRecentlyViewedProducts(): string[] {
+    const recentlyViewed = localStorage.getItem('recetlyViewed');
+    return recentlyViewed ? JSON.parse(recentlyViewed) : [];
   }
 }
