@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/authentication/auth.service';
 import { CartProducts } from 'src/app/shared/models/models';
 import { Product } from 'src/app/shared/models/product.model';
 import { ProductService } from 'src/app/shared/services/product.service';
@@ -29,7 +30,8 @@ export class ProductDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: SnackBarService,
-    private userService: UserService
+    private userService: UserService,
+    private authService:AuthService
   ) {}
 
   ngOnInit() {
@@ -59,6 +61,8 @@ export class ProductDetailsComponent implements OnInit {
           });
       });
 
+      if (this.authService.isLoggedIn) {
+
       // Checking whether product is present in cart or not
       this.userService.searchCartProduct(this.id).subscribe(
         (res) => {
@@ -83,6 +87,8 @@ export class ProductDetailsComponent implements OnInit {
           console.log(err);
         }
       );
+      }
+
 
       // Adding to recently viewed
       this.addToRecentlyViewed(this.id);

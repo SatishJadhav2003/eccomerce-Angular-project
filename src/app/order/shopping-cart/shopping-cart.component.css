@@ -141,10 +141,12 @@
 
 @media only screen and (max-width: 1000px) {
 
+
   .title {
     width: 70%;
     margin-bottom: 10px;
     margin-top: 10px;
+    padding-left: 5px;
   }
 
   .image {
@@ -181,5 +183,11 @@
 
   .heading {
     margin-bottom: 0px;
+  }
+
+  .col-md-8,.col-md-4
+  {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 }

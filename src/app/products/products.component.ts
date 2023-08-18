@@ -13,7 +13,7 @@ import { Subcategory } from '../shared/models/models';
 export class ProductsComponent {
   panelOpenState= false;
   panelOpenState2=false;
-  totalProducts: Number;
+  totalProducts: number;
   products: Product[];
   subCategories:Subcategory[];
   sortingMethods = [

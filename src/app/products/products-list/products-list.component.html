@@ -40,10 +40,10 @@
               <li class="description-row pr-1">
                 {{product.description}}
               </li>
-              <li *ngFor="let highlights of product.highlights.slice(0, 3)" class="description-row">
+              <li *ngFor="let highlights of product.highlights.slice(0, 3)" class="description-row highlights">
                 {{ highlights }}
               </li>
-              <li *ngIf="product.variants.length > 0" class="description-row">
+              <li *ngIf="product.variants.length > 0" class="description-row highlights" >
                 colors - {{ product.variants.length }}
               </li>
             </span>

@@ -175,6 +175,7 @@
 @media only screen and (max-width:1000px) {
   .section {
     margin: 0;
+    padding: 0px;
   }
 
   .section-pricedetails {
@@ -223,8 +224,27 @@
     margin-right: 0px;
     padding-top: 0px;
   }
+
   :host ::ng-deep .mat-horizontal-content-container {
-    padding:0 !important;
-}
+    padding: 0 !important;
+  }
+
+  .col-md-1,
+  .col-md-10,
+  .col-md-11,
+  .col-md-12,
+  .col-md-2,
+  .col-md-3,
+  .col-md-4,
+  .col-md-5,
+  .col-md-6,
+  .col-md-7,
+  .col-md-8,
+  .col-md-9,
+  .px-3 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
 
 }

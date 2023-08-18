@@ -218,4 +218,8 @@ a {
   .delivery{
     display: none;
   }
+
+  .highlights{
+    display: none;
+  }
 }

@@ -27,6 +27,8 @@ export class MobileViewNavbarComponent {
   searchProducts()
   {
     this.router.navigateByUrl('/search/'+this.searchText);
+    this.searchText = '';
+
   }
 
   logOut()

@@ -36,4 +36,22 @@ a{
     margin-top: 4px;
     opacity: .5;
   }
+
+  .options
+  {
+    justify-content: space-evenly;
+    display: inline-flex;
+  }
+
+  .mw-100{
+    width: 46%!important;
+    margin: 0px!important;
+
+  }
+
+  .col-md-10,.col-md-6,.col-md-2,.col-md-12
+  {
+    padding: 0px!important;
+  }
+
 }
