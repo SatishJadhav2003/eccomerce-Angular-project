@@ -14,6 +14,7 @@ export class SubcategoriesComponent implements OnInit, DoCheck, OnDestroy {
   public category: Category;
   index: number;
   subcription: Subscription;
+  isLoading = false;
 
   constructor(private service: CommonService, private route: ActivatedRoute,private router:Router) {
     this.subcription = this.service.currCateChanged.subscribe((cate) => {
@@ -26,10 +27,12 @@ export class SubcategoriesComponent implements OnInit, DoCheck, OnDestroy {
   ngOnInit(): void {}
 
   extractSubCategories() {
+    this.isLoading = true;
     this.subCategories = [];
     for (const subCategory of this.category.subCategories) {
       this.subCategories.push(subCategory);
     }
+    this.isLoading = false;
   }
 
   onSubcategory(parent: string,sub:string) {

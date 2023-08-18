@@ -25,6 +25,7 @@ export class ProductDetailsComponent implements OnInit {
   existInCart: Boolean;
   isInWishlist: boolean = false;
   userWishList: any[];
+  isLoading = false;
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
@@ -35,6 +36,7 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+this.isLoading = true;
     if (window.innerWidth < 900) {
       this.isMobile = true;
     }
@@ -52,6 +54,7 @@ export class ProductDetailsComponent implements OnInit {
       // get product by id
       this.productService.getProductById(this.id).subscribe((product) => {
         this.product = product;
+        this.isLoading = false;
         // getting related products
         this.productService
           .getRelatedProducts(this.product.category_id)

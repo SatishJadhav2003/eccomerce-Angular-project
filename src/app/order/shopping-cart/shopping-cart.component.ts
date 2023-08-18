@@ -19,7 +19,7 @@ export class ShoppingCartComponent {
   Total_Amount: number = 0;
   Total_discount: number = 0;
   isMobile: Boolean = false;
-
+isLoading = false;
   constructor(
     private productService: ProductService,
     private userService: UserService,
@@ -27,6 +27,7 @@ export class ShoppingCartComponent {
     public snackbar: SnackBarService,
     public dialog: MatDialog
   ) {
+this.isLoading = true;
     // getting carts all products
     // if (this.userService.cartProducts.length > 0) {
     //   const products: any = this.userService.cartProducts;
@@ -63,6 +64,7 @@ export class ShoppingCartComponent {
             this.MRP += temp.MRP * temp.quantity;
           });
       });
+      this.isLoading = false;
     });
   }
 

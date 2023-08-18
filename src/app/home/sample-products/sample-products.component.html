@@ -1,41 +1,52 @@
-<div class="row mx-0 main-row" *ngFor="let cate of category">
-  <div class="col-md-12">
-    <div class="row mx-0 cate-title" routerLink="/main-categories/{{cate._id}}" >
-      <div class="title">
-        {{cate.name}}
-      </div>
-      <div class="arrow ml-auto">
-        <svg width="16" height="16" viewbox="0 0 17 17" fill="none" style="margin: 4px;">
-          <path d="m6.627 3.749 5 5-5 5" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" ></path>
-        </svg>
-      </div>
+<div class="spinner-class" *ngIf="isLoading; else content">
+  <!-- Show loading spinner here -->
+  <div class="row-mx-0">
+    <div class="col-md-12">
+            <mat-spinner class="spinner" color="accent" diameter="50"  ></mat-spinner>
     </div>
-    <!-- If device is mobile then show only 4 subcate on home screen -->
-    <!-- If device is mobile then show only 4 subcate on home screen -->
-    <div class="row subcate mx-0 pb-3 px-0" *ngIf="isMobile">
-      <div class="card" *ngFor="let subcate of cate.subCategories.slice(0,4)"
-        routerLink="/products/{{cate.name}}/{{subcate._id}}">
-        <img class="product-img" src="{{subcate.image}}" />
-        <div class="info px-2">
-          <p class="product-heading">
-            {{ subcate.name }}
-          </p>
-          <p class="subcate-headline">{{ subcate.highlightMsg }}</p>
+  </div>
+</div>
+<ng-template #content>
+  <div class="row mx-0 main-row" *ngFor="let cate of category">
+    <div class="col-md-12">
+      <div class="row mx-0 cate-title" routerLink="/main-categories/{{cate._id}}">
+        <div class="title">
+          {{cate.name}}
+        </div>
+        <div class="arrow ml-auto">
+          <svg width="16" height="16" viewbox="0 0 17 17" fill="none" style="margin: 4px;">
+            <path d="m6.627 3.749 5 5-5 5" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
         </div>
       </div>
-    </div>
-    <!-- If device is mobile then show only 5 subcate on home screen -->
-    <div class="row subcate mx-0 pb-3 px-0" *ngIf="!isMobile">
-      <div class="card" *ngFor="let subcate of cate.subCategories.slice(0,5)"
-        routerLink="/products/{{cate.name}}/{{subcate._id}}">
-        <img class="product-img" src="{{subcate.image}}" />
-        <div class="info px-2">
-          <p class="product-heading">
-            {{ subcate.name }}
-          </p>
-          <p class="subcate-headline">{{ subcate.highlightMsg }}</p>
+      <!-- If device is mobile then show only 4 subcate on home screen -->
+      <!-- If device is mobile then show only 4 subcate on home screen -->
+      <div class="row subcate mx-0 pb-3 px-0" *ngIf="isMobile">
+        <div class="card" *ngFor="let subcate of cate.subCategories.slice(0,4)"
+          routerLink="/products/{{cate.name}}/{{subcate._id}}">
+          <img class="product-img" src="{{subcate.image}}" />
+          <div class="info px-2">
+            <p class="product-heading">
+              {{ subcate.name }}
+            </p>
+            <p class="subcate-headline">{{ subcate.highlightMsg }}</p>
+          </div>
+        </div>
+      </div>
+      <!-- If device is mobile then show only 5 subcate on home screen -->
+      <div class="row subcate mx-0 pb-3 px-0" *ngIf="!isMobile">
+        <div class="card" *ngFor="let subcate of cate.subCategories.slice(0,5)"
+          routerLink="/products/{{cate.name}}/{{subcate._id}}">
+          <img class="product-img" src="{{subcate.image}}" />
+          <div class="info px-2">
+            <p class="product-heading">
+              {{ subcate.name }}
+            </p>
+            <p class="subcate-headline">{{ subcate.highlightMsg }}</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</ng-template>

@@ -42,12 +42,14 @@ export class ProductsComponent {
   currSort: string = "popularity"
   currCate:string;
   currSubCate:string;
+  isLoading = false;
   constructor(private prodctService: ProductService,private route:ActivatedRoute,private service:CommonService,private router:Router) {
 
-
+this.isLoading = true;
     //Getting products from service
     this.prodctService.products.subscribe((res) => {
       this.products = res;
+      this.isLoading = false;
     });
 
     //getting count of products
@@ -62,8 +64,8 @@ export class ProductsComponent {
       this.service.getSubcategories(params.get('category')).subscribe
       ((res)=>{
         console.log(res);
-
         this.subCategories = res;
+        this.isLoading = false;
       });
     })
   }

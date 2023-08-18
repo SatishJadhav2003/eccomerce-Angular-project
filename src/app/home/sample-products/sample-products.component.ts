@@ -12,9 +12,11 @@ export class SampleProductsComponent implements OnInit {
   category: Category[];
   index: string;
   isMobile: boolean = false;
+  isLoading: boolean = false;
   constructor(private service: CommonService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     if (window.innerWidth < 900) {
       this.isMobile = true;
     }
@@ -22,10 +24,12 @@ export class SampleProductsComponent implements OnInit {
       this.service.getCategoriesFromServer();
       this.service.categories.subscribe((cate) => {
         this.category = cate.slice(0, 6);
+        this.isLoading = false;
       });
     } else {
       this.category = this.service.category.slice(0, 6);
       console.log('from else in sample products');
+      this.isLoading = false;
     }
   }
 }

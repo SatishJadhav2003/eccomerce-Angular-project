@@ -11,7 +11,9 @@ import { ProductService } from 'src/app/shared/services/product.service';
 export class SearchComponent {
   searchquery:string = '';
   product:Product[];
+  isLoading = false;
   constructor(private route:ActivatedRoute,private productService:ProductService) {
+    this.isLoading = true;
     this.route.params.subscribe((res)=>{
       console.log(res['searchquery']);
       this.searchquery = res['searchquery'];
@@ -22,6 +24,7 @@ export class SearchComponent {
         } else {
           this.product = null;
         }
+        this.isLoading = false
       })
     })
 

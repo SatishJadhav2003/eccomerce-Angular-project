@@ -1,3 +1,13 @@
+<div class="spinner-class" *ngIf="isLoading; else content">
+  <!-- Show loading spinner here -->
+  <div class="row-mx-0">
+    <div class="col-md-12">
+            <mat-spinner class="spinner" color="accent" diameter="50"  ></mat-spinner>
+    </div>
+  </div>
+</div>
+<ng-template #content>
+
 <div *ngFor="let product of products">
   <div class="section product-row">
     <a (click)="product_info(product._id)">
@@ -91,3 +101,4 @@
     Sorry , no products found !!
   </div>
 </div>
+</ng-template>

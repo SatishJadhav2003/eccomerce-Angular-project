@@ -14,6 +14,7 @@ export class ProductsListComponent implements OnInit {
   category: string;
   subCategoryName: string;
   productsCount: number;
+  isLoading =false;
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
@@ -23,11 +24,13 @@ export class ProductsListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.route.firstChild.params.subscribe((params) => {
       this.category = params['category'];
       this.subCategoryName = params['subcategory'];
       this.productService.getProductsBasedOnSubcategory(this.subCategoryName).subscribe
       ((res)=>{
+        this.isLoading = false;
         console.log('from products list component', res);
         this.products = res.sort((a,b)=>b.sellUnit-a.sellUnit);
         this.productsCount = this.products.length;
