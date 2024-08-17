@@ -28,7 +28,8 @@
               <button [disabled]="quantity<=0" (click)="decrement(i)" class="btn btn-outline-primary"
                 type="button">-</button>
             </div>
-            <input type="text" class="form-control" [(ngModel)]="product.quantity" min="0" (change)="valueChanged(i)" />
+            <input style="    text-align: center;
+            " type="text" class="form-control" [(ngModel)]="product.quantity" min="0" (change)="valueChanged(i)" />
             <div class="input-group-prepend">
               <button class="btn btn-outline-primary" (click)="increment(i)" type="button">+</button>
             </div>

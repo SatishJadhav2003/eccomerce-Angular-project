@@ -8,9 +8,9 @@
 </div>
 <ng-template #content>
 
-<div class="section mb-3" *ngIf="product">
+<div class="section mb-3 p-0" *ngIf="product">
   <div class="row">
-    <div class="col-md-6 mt-3">
+    <div class="col-md-6 mt-3 p-0">
       <button class="wishlist-button" (click)="toggleWishlist()">
         <i [class]="isInWishlist ? 'fas fa-heart' : 'far fa-heart'"></i>
       </button>
@@ -35,7 +35,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-6 mt-3">
+    <div class="col-md-6 mt-3 p-0">
       <div style="text-align: left;">
         <div class="col-md-12">
           <h4 class="title text-dark">

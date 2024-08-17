@@ -13,7 +13,7 @@ export class CommonService {
   category: Category[];
   temp: Category;
 
-  api: string = 'https://backend-for-ecommerce-uywp.onrender.com/categories';
+  api: string = 'http://localhost:3001/categories';
 
   constructor(private http: HttpClient) {}
 

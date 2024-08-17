@@ -108,10 +108,11 @@
                         </mat-form-field>
                       </div>
                       <div class="col">
-                        <mat-form-field class="full-width">
-                          <mat-select placeholder="State" formControlName="state">
-                            <mat-option *ngFor="let state of states" [value]="state.name">
-                              {{ state.name }}
+                        <mat-form-field class="full-width" >
+                          <mat-label>State</mat-label>
+                          <mat-select formControlName="state">
+                            <mat-option *ngFor="let food of states" [value]="food.name">
+                              {{food.name}}
                             </mat-option>
                           </mat-select>
                           <mat-error *ngIf="addressForm.controls['state'].hasError('required')">
@@ -213,7 +214,7 @@
             </div>
           </div>
           <div class="row continue-button">
-            <button class="btn btn-primary" (click)="onSubmitAddressForm()" [disabled]="!addressForm.valid"
+            <button class="btn btn-primary" (click)="onSubmitAddressForm()" 
               matStepperNext>DELIVER HERE</button>
           </div>
         </mat-step>

@@ -109,7 +109,7 @@ export class CheckoutComponent {
         [Validators.required, Validators.pattern(this.pattern)],
       ],
       address: [this.address1, Validators.required],
-      city: [this.city, Validators.required],
+      city: [this.city],
       state: [this.state, Validators.required],
       postalCode: [
         this.postal_code

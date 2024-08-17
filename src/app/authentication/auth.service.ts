@@ -17,7 +17,7 @@ export class AuthService {
       this.isLoggedIn = true;
     }
   }
-  api = 'https://backend-for-ecommerce-uywp.onrender.com/';
+  api = 'http://localhost:3001/';
 
 
   // Login Function

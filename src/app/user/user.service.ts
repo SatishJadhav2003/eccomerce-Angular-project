@@ -9,7 +9,7 @@ import { CartProducts, Order } from '../shared/models/models';
   providedIn: 'root',
 })
 export class UserService {
-  userApi: string = 'https://backend-for-ecommerce-uywp.onrender.com/';
+  userApi: string = 'http://localhost:3001/';
   cartProducts: CartProducts[] = [];
   productOrdered: any;
   user: User;
