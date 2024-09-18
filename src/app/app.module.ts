@@ -66,6 +66,7 @@ import { SearchComponent } from './search/search/search.component';
     RatingReviewsComponent,
     SubNavbarComponent,
     SearchComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -75,6 +76,7 @@ import { SearchComponent } from './search/search/search.component';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
